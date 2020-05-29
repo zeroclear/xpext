@@ -1,5 +1,5 @@
 # Windows XP API补全计划
-目前可以解决的问题：  
+可以解决的问题：  
 GetCurrentProcessorNumber  
 InitializeCriticalSectionEx  
 ws2_32.inet_ntop  
@@ -15,6 +15,7 @@ GetTickCount64
 运行时TLS动态分配槽的问题  
 advapi.RegGetValueW  
 IoConnectInterruptEx和MSIX  
+CreateRemoteThreadEx  
   
 有生之年可能都无法解决的问题：  
 Core Audio系列API  
