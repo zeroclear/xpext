@@ -465,7 +465,7 @@ void NTAPI RtlReleaseSRWLockShared(SRWLOCK* pSRWLock)
 		{
 			dwNewStatus|=SRWST_Link;
 			DWORD dwCurStatus=InterlockedCompareExchange((DWORD*)pSRWLock,dwNewStatus,dwStatus);
-			if (dwCurStatus==dwStatus)
+			if (dwCurStatus!=dwStatus)
 			{
 				dwStatus=dwCurStatus;
 				continue;
