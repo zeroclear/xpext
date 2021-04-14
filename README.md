@@ -9,14 +9,16 @@ ws2_32.inet_pton
 RaiseFailFastException  
 CreateEventExA  
 GetFinalPathNameByHandleW  
-  
+导出GetErrorMode  
+
 目前还有些难度的问题：  
 GetTickCount64  
 运行时TLS动态分配槽的问题  
 advapi.RegGetValueW  
 IoConnectInterruptEx和MSIX  
 CreateRemoteThreadEx  
-  
+FlsAlloc/FlsFree/FlsSetValue/FlsGetValue/IsThreadAFiber  
+
 有生之年可能都无法解决的问题：  
 Core Audio系列API  
 NTFS的transacted  
