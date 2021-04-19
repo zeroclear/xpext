@@ -74,7 +74,7 @@ NtQueryObject用在某些对象上会卡死
 完成端口的CloseHandle可以直接唤醒线程并返回-1  
 CancelIoEx  
 GetOverlappedResultEx  
-normalize.dll
+normaliz.dll
 
 ### 其它说明
 代码是开源出来参考的，希望能得到反馈，更正错误  
