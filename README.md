@@ -82,5 +82,5 @@ normaliz.dll
 某些功能需要内核驱动辅助实现，请使用reg文件将驱动设为开机启动  
 
 ### 有什么用？
-![Entry Point Not Found](https://github.com/zeroclear/ntext/raw/master/introduce.png)
 The procedure entry point XXX could not be located in the dynamic link library XXX.dll  
+![Entry Point Not Found](https://github.com/zeroclear/ntext/raw/master/introduce.png)
