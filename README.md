@@ -76,7 +76,11 @@ CancelIoEx
 GetOverlappedResultEx  
 normaliz.dll
 
-### 其它说明
+### 其它说明：
 代码是开源出来参考的，希望能得到反馈，更正错误  
 将来会通过私人工具修改PE文件，重定向API调用，在release里提供    
 某些功能需要内核驱动辅助实现，请使用reg文件将驱动设为开机启动  
+
+### 有什么用？
+![Entry Point Not Found](https://github.com/zeroclear/ntext/raw/master/introduce.png)
+The procedure entry point XXX could not be located in the dynamic link library XXX.dll  
