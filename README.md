@@ -1,37 +1,53 @@
-## Windows XP API补全计划
+## xpext - Windows XP API补全计划
 ### 已完成：
-#### cs.cpp
+#### nk_criticalsection.cpp
 InitializeCriticalSectionEx  
-#### srw.cpp
-RtlInitializeSRWLock  
-RtlAcquireSRWLockExclusive  
-RtlAcquireSRWLockShared  
-RtlReleaseSRWLockExclusive  
-RtlReleaseSRWLockShared  
-RtlTryAcquireSRWLockExclusive  
-RtlTryAcquireSRWLockShared  
-#### cv.cpp
-RtlInitializeConditionVariable  
-RtlSleepConditionVariableCS  
-RtlSleepConditionVariableSRW  
-RtlWakeConditionVariable  
-RtlWakeAllConditionVariable  
-#### ps.cpp
+#### nt_srwlock.cpp
+InitializeSRWLock  
+AcquireSRWLockExclusive  
+AcquireSRWLockShared  
+ReleaseSRWLockExclusive  
+ReleaseSRWLockShared  
+TryAcquireSRWLockExclusive  
+TryAcquireSRWLockShared  
+#### nk_conditionvariable.cpp
+InitializeConditionVariable  
+SleepConditionVariableCS  
+SleepConditionVariableSRW  
+WakeConditionVariable  
+WakeAllConditionVariable  
+#### nk_runonce.cpp
+InitOnceInitialize  
+InitOnceBeginInitialize  
+InitOnceComplete  
+InitOnceExecuteOnce  
+#### k32_processthread.cpp
 GetThreadId  
 GetProcessId  
 GetProcessIdOfThread
+#### k32_processor.cpp
+GetCurrentProcessorNumber  
+GetCurrentProcessorNumberEx  
+GetActiveProcessorGroupCount  
+GetMaximumProcessorGroupCount  
+GetActiveProcessorCount  
+GetMaximumProcessorCount  
+#### k32_miscellaneous.cpp
+GetTickCount64  
+RaiseFailFastException  
 
 ### 即将完成：
-#### processor.cpp
-GetCurrentProcessorNumber  
-GetCurrentProcessorNumberEx
-#### runonce.cpp
-RtlRunOnceInitialize  
-RtlRunOnceBeginInitialize  
-RtlRunOnceComplete  
-RtlRunOnceExecuteOnce  
 #### misc.cpp
 GetErrorMode 
+#### k32_processthread.cpp
+InitializeProcThreadAttributeList  
+UpdateProcThreadAttribute  
+DeleteProcThreadAttributeList  
+#### k32_file.cpp
+GetFinalPathNameByHandleA/W  
+GetFileInformationByHandleEx  
+SetFileInformationByHandle  
+CreateSymbolicLinkA/W  
 
 ### 分析中：
 FlsAlloc  
@@ -43,23 +59,11 @@ ConvertThreadToFiberEx
 ws2_32.inet_ntop  
 ws2_32.inet_pton  
 ws2_32.WSAPoll  
-RaiseFailFastException  
 CreateEventExA/W  
 CreateMutexExA/W  
 CreateSemaphoreExA/W  
-GetFinalPathNameByHandleA/W  
-GetFileInformationByHandleEx  
-InitializeProcThreadAttributeList  
-UpdateProcThreadAttribute  
-DeleteProcThreadAttributeList  
-CreateSymbolicLinkA/W  
-GetTickCount64  
 PathCchCanonicalizeEx(Win8+)  
 PathCchCombineEx(Win8+)  
-GetActiveProcessorCount  
-GetActiveProcessorGroupCount  
-GetMaximumProcessorCount  
-GetMaximumProcessorGroupCount  
 advapi32.RegGetValueA/W  
 advapi32.RegSetKeyValueA/W  
 advapi32.RegDeleteKeyValueA/W  
@@ -86,3 +90,12 @@ normaliz.dll
 ### 有什么用？
 The procedure entry point XXX could not be located in the dynamic link library XXX.dll  
 ![Entry Point Not Found](https://github.com/zeroclear/ntext/raw/master/introduce.png)
+
+### 类似项目
+[SharedReadWriteLock](https://github.com/anydream/SharedReadWriteLock)
+[YY-Thunks - 让兼容 Windows 更轻松](https://github.com/Chuyu-Team/YY-Thunks)
+[PHP 7 and PHP 5.6 for Windows XP/2003](https://github.com/source-power/php7-for-windows2003)
+[win7lib](https://github.com/TheDeadFish/win7lib)
+[wine](https://github.com/wine-mirror/wine)
+[ReactOS](https://github.com/reactos/reactos)
+[NTOSKRNL Emu_Extender](https://github.com/MovAX0xDEAD/NTOSKRNL_Emu)
