@@ -375,38 +375,38 @@ void NTAPI RtlWakeAllConditionVariable(RTL_CONDITION_VARIABLE* ConditionVariable
 
 typedef struct _SYNCITEM
 {
-	_SYNCITEM* back;	//ÉÏ¸ö²åÈëµÄ½Úµã
-	_SYNCITEM* first;	//µÚÒ»¸ö²åÈëµÄ½Úµã
-	_SYNCITEM* next;	//ÏÂ¸ö²åÈëµÄ½Úµã
-	DWORD count;		//¹²Ïí¼ÆÊı
-	DWORD attr;			//½ÚµãÊôĞÔ
+	_SYNCITEM* back;	//ä¸Šä¸ªæ’å…¥çš„èŠ‚ç‚¹
+	_SYNCITEM* first;	//ç¬¬ä¸€ä¸ªæ’å…¥çš„èŠ‚ç‚¹
+	_SYNCITEM* next;	//ä¸‹ä¸ªæ’å…¥çš„èŠ‚ç‚¹
+	DWORD count;		//å…±äº«è®¡æ•°
+	DWORD attr;			//èŠ‚ç‚¹å±æ€§
 	RTL_SRWLOCK* lock;
 } SYNCITEM;
 
 typedef size_t SYNCSTATUS;
 
 //M-mask F-flag SYNC-common
-#define SYNC_Exclusive	1	//µ±Ç°ÊÇ¶ÀÕ¼ËøÔÚµÈ´ı£¬¶ø²»ÊÇ¹²ÏíËø
-#define SYNC_Spinning	2	//µ±Ç°Ïß³Ì¼´½«ĞİÃß£¬¶ø²»ÊÇĞİÃßÖĞ»ò»½ĞÑºó
-#define SYNC_SharedLock	4	//Ìõ¼ş±äÁ¿Ê¹ÓÃ¹²ÏíËøµÈ´ı£¬¶ø²»ÊÇ¶ÀÕ¼Ëø
+#define SYNC_Exclusive	1	//å½“å‰æ˜¯ç‹¬å é”åœ¨ç­‰å¾…ï¼Œè€Œä¸æ˜¯å…±äº«é”
+#define SYNC_Spinning	2	//å½“å‰çº¿ç¨‹å³å°†ä¼‘çœ ï¼Œè€Œä¸æ˜¯ä¼‘çœ ä¸­æˆ–å”¤é†’å
+#define SYNC_SharedLock	4	//æ¡ä»¶å˜é‡ä½¿ç”¨å…±äº«é”ç­‰å¾…ï¼Œè€Œä¸æ˜¯ç‹¬å é”
 
 #define SRWM_FLAG	0x0000000F
-#define SRWM_ITEM	0xFFFFFFF0	//64Î»ÏµÍ³Ó¦¸Ã¸Ä³É0xFFFFFFFFFFFFFFF0
+#define SRWM_ITEM	0xFFFFFFF0	//64ä½ç³»ç»Ÿåº”è¯¥æ”¹æˆ0xFFFFFFFFFFFFFFF0
 #define SRWM_COUNT	SRWM_ITEM
 
-#define SRWF_Free	0	//¿ÕÏĞ
-#define SRWF_Hold	1	//ÓĞÏß³ÌÓµÓĞÁËËø
-#define SRWF_Wait	2	//ÓĞÏß³ÌÕıÔÚµÈ´ı
-#define SRWF_Link	4	//ĞŞ¸ÄÁ´±íµÄ²Ù×÷½øĞĞÖĞ
-#define SRWF_Many	8	//¶ÀÕ¼ÇëÇóÖ®Ç°ÓĞ¶à¸ö¹²ÏíËø²¢´æ
+#define SRWF_Free	0	//ç©ºé—²
+#define SRWF_Hold	1	//æœ‰çº¿ç¨‹æ‹¥æœ‰äº†é”
+#define SRWF_Wait	2	//æœ‰çº¿ç¨‹æ­£åœ¨ç­‰å¾…
+#define SRWF_Link	4	//ä¿®æ”¹é“¾è¡¨çš„æ“ä½œè¿›è¡Œä¸­
+#define SRWF_Many	8	//ç‹¬å è¯·æ±‚ä¹‹å‰æœ‰å¤šä¸ªå…±äº«é”å¹¶å­˜
 
 #define CVM_COUNT	0x00000007
 #define CVM_FLAG	0x0000000F
 #define CVM_ITEM	0xFFFFFFF0
 
-#define CVF_Full	7	//»½ĞÑÉêÇëÒÑÂú£¬È«²¿»½ĞÑ
-#define CVF_Link	8	//ĞŞ¸ÄÁ´±íµÄ²Ù×÷½øĞĞÖĞ
+#define CVF_Full	7	//å”¤é†’ç”³è¯·å·²æ»¡ï¼Œå…¨éƒ¨å”¤é†’
+#define CVF_Link	8	//ä¿®æ”¹é“¾è¡¨çš„æ“ä½œè¿›è¡Œä¸­
 
 #define SRW_COUNT_BIT	4
 #define SRW_HOLD_BIT	0
-#define SYNC_SPIN_BIT	1	//´Ó0¿ªÊ¼Êı
+#define SYNC_SPIN_BIT	1	//ä»0å¼€å§‹æ•°
