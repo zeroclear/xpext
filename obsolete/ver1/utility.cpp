@@ -2,32 +2,32 @@
 #include "common.h"
 
 /*
-ÔÚXPÏÂ£¬ÄÚºË»áµ÷ÓÃExpKeyedEventInitialization´´½¨KeyedEvent¶ÔÏó¡£
-Ã¿´Î½ø³ÌÆô¶¯Ê±£¬»áµ÷ÓÃRtlInitializeCriticalSectionAndSpinCount£¬
-¶ÔRtlCriticalSectionLock½øĞĞ³õÊ¼»¯£¬Õâ¸öº¯Êı»¹»áË³´øµ÷ÓÃNtOpenKeyedEvent£¬
-´ò¿ªKeyedEvent¶ÔÏóµÄ¾ä±ú¡£
+åœ¨XPä¸‹ï¼Œå†…æ ¸ä¼šè°ƒç”¨ExpKeyedEventInitializationåˆ›å»ºKeyedEventå¯¹è±¡ã€‚
+æ¯æ¬¡è¿›ç¨‹å¯åŠ¨æ—¶ï¼Œä¼šè°ƒç”¨RtlInitializeCriticalSectionAndSpinCountï¼Œ
+å¯¹RtlCriticalSectionLockè¿›è¡Œåˆå§‹åŒ–ï¼Œè¿™ä¸ªå‡½æ•°è¿˜ä¼šé¡ºå¸¦è°ƒç”¨NtOpenKeyedEventï¼Œ
+æ‰“å¼€KeyedEventå¯¹è±¡çš„å¥æŸ„ã€‚
 
-µ«ÊÇVistaÒÔºóµÄÏµÍ³¶ÔKeyedEvent×öÁË¸Ä½ø£¬NtWaitForKeyedEventºÍ
-NtReleaseKeyedEvent²»ÔÙĞèÒª¾ä±ú£¬Ö±½Ó´«µİNULL¾ÍÄÜÉúĞ§¡£Òò´Ë½ø³ÌÆô¶¯Ê±£¬
-²»ÔÙĞèÒª´ò¿ªKeyedEvent¶ÔÏóµÄ¾ä±ú¡£
+ä½†æ˜¯Vistaä»¥åçš„ç³»ç»Ÿå¯¹KeyedEventåšäº†æ”¹è¿›ï¼ŒNtWaitForKeyedEventå’Œ
+NtReleaseKeyedEventä¸å†éœ€è¦å¥æŸ„ï¼Œç›´æ¥ä¼ é€’NULLå°±èƒ½ç”Ÿæ•ˆã€‚å› æ­¤è¿›ç¨‹å¯åŠ¨æ—¶ï¼Œ
+ä¸å†éœ€è¦æ‰“å¼€KeyedEventå¯¹è±¡çš„å¥æŸ„ã€‚
 
 NTSTATUS ExpKeyedEventInitialization()
 {
 	...
 	HANDLE Handle;
 	UNICODE_STRING DestinationString;
-	//Ç°Ãæ±ØĞëÓĞ\\KernelObjects\\£¬·ñÔò·µ»ØSTATUS_OBJECT_PATH_SYNTAX_BAD
+	//å‰é¢å¿…é¡»æœ‰\\KernelObjects\\ï¼Œå¦åˆ™è¿”å›STATUS_OBJECT_PATH_SYNTAX_BAD
 	RtlInitUnicodeString(&DestinationString,L"\\KernelObjects\\CritSecOutOfMemoryEvent");
 	OBJECT_ATTRIBUTES oa;
 	oa.Length=0x18;
 	oa.RootDirectory=NULL;
 	oa.ObjectName=&DestinationString;
-	oa.Attributes=0x10;	//OBJ_PERMANENT£¬Èç¹ûÔÚring3£¬»á·µ»ØSTATUS_PRIVILEGE_NOT_HELD
+	oa.Attributes=0x10;	//OBJ_PERMANENTï¼Œå¦‚æœåœ¨ring3ï¼Œä¼šè¿”å›STATUS_PRIVILEGE_NOT_HELD
 	oa.SecurityDescriptor=NULL;
 	oa.SecurityQualityOfService=NULL;
 	NTSTATUS Error=ZwCreateKeyedEvent(&Handle,0xF0003,&oa,0);	//EVENT_ALL_ACCESS&(~SYNCHRONIZE)
 	if (NT_SUCCESS(Error))
-		Error=ZwClose(Handle);	//´ó¸ÅÊÇÓÀ¾Ã¶ÔÏóµÄ´æÔÚºÍÒıÓÃ¼ÆÊıÎŞ¹ØÁË
+		Error=ZwClose(Handle);	//å¤§æ¦‚æ˜¯æ°¸ä¹…å¯¹è±¡çš„å­˜åœ¨å’Œå¼•ç”¨è®¡æ•°æ— å…³äº†
 	return Error;
 }*/
 
@@ -72,12 +72,12 @@ PVOID WINAPI FindDllBase(WCHAR* szName)
 
 BOOL NTAPI RtlpWaitCouldDeadlock()
 {
-	//byte_77F978A8¼«ÓĞ¿ÉÄÜÊÇLdrpShutdownInProgress
-	//½ø³ÌÍË³öÊ±£¬¸÷ÖÖ×ÊÔ´¼´½«±»Ïú»Ù£¬¼ÌĞøµÈ´ı½«»á³öÏÖ´íÎóµÄ½á¹û
+	//byte_77F978A8ææœ‰å¯èƒ½æ˜¯LdrpShutdownInProgress
+	//è¿›ç¨‹é€€å‡ºæ—¶ï¼Œå„ç§èµ„æºå³å°†è¢«é”€æ¯ï¼Œç»§ç»­ç­‰å¾…å°†ä¼šå‡ºç°é”™è¯¯çš„ç»“æœ
 	return *LdrpShutdownInProgress!=0;
 }
 
-//Í¨¹ıÑÓÊ±À´ÔİÊ±ÍË±Ü¾ºÕù
+//é€šè¿‡å»¶æ—¶æ¥æš‚æ—¶é€€é¿ç«äº‰
 void NTAPI RtlBackoff(DWORD* pCount)
 {
 	DWORD nBackCount=*pCount;
@@ -94,7 +94,7 @@ void NTAPI RtlBackoff(DWORD* pCount)
 			nBackCount=nBackCount+nBackCount;
 	}
 	nBackCount=(__rdtsc()&(nBackCount-1))+nBackCount;
-	//Win7Ô­´úÂë½èÓÃ²ÎÊıÀ´¼ÆÊı£¬Ê¡È¥¾Ö²¿±äÁ¿
+	//Win7åŸä»£ç å€Ÿç”¨å‚æ•°æ¥è®¡æ•°ï¼Œçœå»å±€éƒ¨å˜é‡
 	pCount=0;
 	while ((DWORD)pCount<nBackCount)
 	{
@@ -107,16 +107,16 @@ void WINAPI K32SetLastError(DWORD dwErrCode)
 {
 	if (*g_dwLastErrorToBreakOn!=ERROR_SUCCESS && *g_dwLastErrorToBreakOn==dwErrCode)
 		DbgBreakPoint();
-	//Ô­´úÂëÏÈÅĞ¶ÏLastErrorValue!=dwErrCode£¬µ«ÕâÃ»ÓĞÒâÒå
+	//åŸä»£ç å…ˆåˆ¤æ–­LastErrorValue!=dwErrCodeï¼Œä½†è¿™æ²¡æœ‰æ„ä¹‰
 	NtCurrentTeb()->LastErrorValue=dwErrCode;
 }
 
 DWORD WINAPI BaseSetLastNTError(NTSTATUS NtStatus)
 {
 	DWORD dwErrCode=RtlNtStatusToDosError(NtStatus);
-	//ÔÚWin7ÉÏ£¬µ÷ÓÃNTDLL.RtlSetLastWin32Error
-	//XPÉÏÒ²ÓĞÀàËÆµÄNTDLL.RtlSetLastWin32ErrorAndNtStatusFromNtStatus
-	//µ«ÊÇÃ»ÓĞÊ¹ÓÃg_dwLastErrorToBreakOn£¬»¹ÊÇKernel32.SetLastError¸üºÃ
+	//åœ¨Win7ä¸Šï¼Œè°ƒç”¨NTDLL.RtlSetLastWin32Error
+	//XPä¸Šä¹Ÿæœ‰ç±»ä¼¼çš„NTDLL.RtlSetLastWin32ErrorAndNtStatusFromNtStatus
+	//ä½†æ˜¯æ²¡æœ‰ä½¿ç”¨g_dwLastErrorToBreakOnï¼Œè¿˜æ˜¯Kernel32.SetLastErroræ›´å¥½
 	K32SetLastError(dwErrCode);
 	return dwErrCode;
 }
