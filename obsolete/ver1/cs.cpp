@@ -25,7 +25,7 @@ NTSTATUS NTAPI RtlInitializeCriticalSectionExW7(LPCRITICAL_SECTION lpCriticalSec
 	{
 		if (Flags&RTL_CRITICAL_SECTION_FLAG_DYNAMIC_SPIN)
 			lpCriticalSection->SpinCount=dwSpinCount&0x00FFFFFF;
-		//��Win7�CRITICAL_SECTION::SpinCountǰ�漸λ���Դ�����ı�ǣ���XP��֧��
+		//在Win7里，CRITICAL_SECTION::SpinCount前面几位可以带额外的标记，但XP不支持
 		else
 			lpCriticalSection->SpinCount=0x020007D0;
 	}
@@ -68,7 +68,7 @@ NTSTATUS NTAPI RtlInitializeCriticalSectionExW7(LPCRITICAL_SECTION lpCriticalSec
 		}
 	}
 
-	//��δ��벻��XP��û�У���Win7����Ҳ��֪������ʲô��˼
+	//这段代码不仅XP里没有，在Win7里我也不知道它是什么意思
 	//KUSER_SHARED_DATA::UserModeGlobalLogger[1]
 	HANDLE TraceHandle=(HANDLE)*(BYTE*)0x7FFE0382;
 	if (TraceHandle!=NULL)
@@ -122,7 +122,7 @@ NTSTATUS NTAPI RtlInitializeCriticalSectionAndSpinCountXP(LPCRITICAL_SECTION lpC
 		oa.Attributes=0;
 		oa.SecurityDescriptor=NULL;
 		oa.SecurityQualityOfService=NULL;
-		//����ջ�ϵĿռ��ݴ淵��ֵ
+		//借用栈上的空间暂存返回值
 		NTSTATUS result=NtOpenKeyedEvent((PHANDLE)&lpCriticalSection,0x02000000,&oa);
 		if (!NT_SUCCESS(result))
 			return result;
@@ -154,8 +154,8 @@ NTSTATUS NTAPI RtlInitializeCriticalSectionAndSpinCountXP(LPCRITICAL_SECTION lpC
 	}
 	else
 	{
-		//��������ʱ�������RtlInitializeCriticalSectionAndSpinCount��ʼ��RtlCriticalSectionLock
-		//���Ǵ�ʱRtlCriticalSectionLock��û�г�ʼ���ɹ������Ǿ�������β������Ĵ���
+		//进程启动时，会调用RtlInitializeCriticalSectionAndSpinCount初始化RtlCriticalSectionLock
+		//但是此时RtlCriticalSectionLock还没有初始化成功，于是就有了这段不加锁的代码
 		LIST_ENTRY* pCur=&info->ProcessLocksList;
 		pCur->Flink=&RtlCriticalSectionList;
 		pCur->Blink=RtlCriticalSectionList.Blink;
@@ -180,9 +180,9 @@ BOOL WINAPI K32InitializeCriticalSectionEx(LPCRITICAL_SECTION lpCriticalSection,
 			dwSpinCount=dwSpinCount&0x00FFFFFF;
 		else
 			dwSpinCount=2000;
-		//RTL_CRITICAL_SECTION_FLAG_STATIC_INIT��Ч���ǲ���ʼ��ֱ�ӷ���
-		//RTL_CRITICAL_SECTION_FLAG_NO_DEBUG_INFO��Ч���ǲ�����DebugInfo���ڴ�
-		//���ڲ�֪��XP�Ƿ�֧����Щ��Ϊ�����������Ӧ�ñ��
+		//RTL_CRITICAL_SECTION_FLAG_STATIC_INIT的效果是不初始化直接返回
+		//RTL_CRITICAL_SECTION_FLAG_NO_DEBUG_INFO的效果是不分配DebugInfo的内存
+		//由于不知道XP是否支持这些行为，稳妥起见不应用标记
 		RtlStatus=RtlInitializeCriticalSectionAndSpinCount(lpCriticalSection,dwSpinCount);
 	}
 	if (NT_SUCCESS(RtlStatus))
