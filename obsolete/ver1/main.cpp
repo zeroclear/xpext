@@ -16,7 +16,7 @@ void NTEXT_Init()
 	LdrpShutdownInProgress=(BYTE*)(0x7C99B0C4-BASE_NT+dwNtBaseNow);
 	DWORD dwK32BaseNow=(DWORD)FindDllBase(L"kernel32.dll");
 	g_dwLastErrorToBreakOn=(DWORD*)(0x7C8856C4-BASE_K32+dwK32BaseNow);
-	//出于各种考虑，使用新句柄
+	//鍑轰簬鍚勭鑰冭檻锛屼娇鐢ㄦ柊鍙ユ焺
 	GlobalKeyedEventHandle=OpenGlobalKeyedEvent();
 }
 
