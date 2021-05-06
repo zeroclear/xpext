@@ -71,6 +71,7 @@ mpr.WNetRestoreConnectionA
 运行时TLS动态分配槽的问题  
 
 ### 暂时无法实现：
+CreateProcess应用AttributeList  
 NtXXXKeyedEvent允许句柄传入NULL  
 IoConnectInterruptEx和MSIX  
 CreateRemoteThreadEx  
