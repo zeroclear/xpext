@@ -4,17 +4,17 @@
 typedef unsigned __int64 QWORD;
 
 /*
-ÏµÍ³¿ª»úµ½ÏÖÔÚµÄÊ±¼ä=ÏµÍ³¿ª»úµ½ÏÖÔÚµÄtickÊı*Ò»¸ötick³ÖĞøµÄÊ±¼ä
-Ò»¸ötick³ÖĞøµÄÊ±¼ä¿ÉÄÜ²»ÊÇÕûÊı£¬ËùÒÔÓÃTickCountMultiplierºÍDivisorÁªºÏ±íÊ¾
-ÔÚÎÒµÄXPÉÏ£¬TickCountMultiplierÎª0x0FA00000£¬DivisorÔòÎª¹Ì¶¨µÄ0x01000000£¬¼´15.625ms
-Òò´ËGetTickCountµÄ·µ»ØÖµ×ÜÊÇ15.625µÄ±¶Êı£¬Õâ¾ÍÊÇMSDNÉÏËµµÄÎó²îµÄÔ­Òò
+ç³»ç»Ÿå¼€æœºåˆ°ç°åœ¨çš„æ—¶é—´=ç³»ç»Ÿå¼€æœºåˆ°ç°åœ¨çš„tickæ•°*ä¸€ä¸ªtickæŒç»­çš„æ—¶é—´
+ä¸€ä¸ªtickæŒç»­çš„æ—¶é—´å¯èƒ½ä¸æ˜¯æ•´æ•°ï¼Œæ‰€ä»¥ç”¨TickCountMultiplierå’ŒDivisorè”åˆè¡¨ç¤º
+åœ¨æˆ‘çš„XPä¸Šï¼ŒTickCountMultiplierä¸º0x0FA00000ï¼ŒDivisoråˆ™ä¸ºå›ºå®šçš„0x01000000ï¼Œå³15.625ms
+å› æ­¤GetTickCountçš„è¿”å›å€¼æ€»æ˜¯15.625çš„å€æ•°ï¼Œè¿™å°±æ˜¯MSDNä¸Šè¯´çš„è¯¯å·®çš„åŸå› 
 
-GetTickCount·µ»ØµÄºÁÃëÊıÉÏÏŞÎª0xFFFFFFFF£¬Ô¼µÈÓÚ49.7Ìì£¬µ«Êµ¼ÊµÄ¼ÆËã½á¹û¿ÉÒÔ¶àÒ»Ğ©
-ÒÔÃ¿¸ötick³ÖĞø15.625ºÁÃëÎªÀı£¬¿ÉÒÔËã³ö×î´ó776.7Ìì£¬½Ó½ü36Î»£¬°ÑÕâ¸öÖµ°´__int64·µ»Ø£¬¿ÉÒÔÂú×ã´ó¶àÊıĞèÇó
-Êµ¼ÊÉÏ£¬Ò»¸ötick³ÖĞøµÄÊ±¼äÀíÂÛÉÏÊÇ8Î»£¨MultiplierÎª32Î»£¬DivisorÎª24Î»£©
-¼ÙÈçWindows°ÑÒ»¸ötickµÄ³ÖĞøÊ±¼äÀ­Âú£¨ÎÒÊÇËµ¼ÙÈç£¬ÕâÖÖÇé¿ö²»¿ÉÄÜ³öÏÖ£©£¬Ëã³öÀ´µÄÊ±¼äÉÏÏŞÊÇ40Î»
+GetTickCountè¿”å›çš„æ¯«ç§’æ•°ä¸Šé™ä¸º0xFFFFFFFFï¼Œçº¦ç­‰äº49.7å¤©ï¼Œä½†å®é™…çš„è®¡ç®—ç»“æœå¯ä»¥å¤šä¸€äº›
+ä»¥æ¯ä¸ªtickæŒç»­15.625æ¯«ç§’ä¸ºä¾‹ï¼Œå¯ä»¥ç®—å‡ºæœ€å¤§776.7å¤©ï¼Œæ¥è¿‘36ä½ï¼ŒæŠŠè¿™ä¸ªå€¼æŒ‰__int64è¿”å›ï¼Œå¯ä»¥æ»¡è¶³å¤§å¤šæ•°éœ€æ±‚
+å®é™…ä¸Šï¼Œä¸€ä¸ªtickæŒç»­çš„æ—¶é—´ç†è®ºä¸Šæ˜¯8ä½ï¼ˆMultiplierä¸º32ä½ï¼ŒDivisorä¸º24ä½ï¼‰
+å‡å¦‚WindowsæŠŠä¸€ä¸ªtickçš„æŒç»­æ—¶é—´æ‹‰æ»¡ï¼ˆæˆ‘æ˜¯è¯´å‡å¦‚ï¼Œè¿™ç§æƒ…å†µä¸å¯èƒ½å‡ºç°ï¼‰ï¼Œç®—å‡ºæ¥çš„æ—¶é—´ä¸Šé™æ˜¯40ä½
 
-¾¡¹ÜÈç´Ë£¬ÎÒ»¹ÊÇÃ»Ñ¡ÔñÕâ¸ö·½°¸£¬¶øÊÇÔÚxpextk.sysÀïÄ£·ÂWin7µÄ×ö·¨£¬ÕæÕı¸üĞÂÁËKUserSharedData::TickCount
+å°½ç®¡å¦‚æ­¤ï¼Œæˆ‘è¿˜æ˜¯æ²¡é€‰æ‹©è¿™ä¸ªæ–¹æ¡ˆï¼Œè€Œæ˜¯åœ¨xpextk.sysé‡Œæ¨¡ä»¿Win7çš„åšæ³•ï¼ŒçœŸæ­£æ›´æ–°äº†KUserSharedData::TickCount
 
 DWORD WINAPI GetTickCount_XP()
 {
@@ -26,10 +26,10 @@ DWORD WINAPI GetTickCount_XP()
 DWORD WINAPI GetTickCount_Win7x32()
 {
 	KUSER_SHARED_DATA* KUserSharedData=(KUSER_SHARED_DATA*)0x7FFE0000;
-	while (KUserSharedData->TickCount.High1Time!=KUserSharedData->TickCount.High2Time)		//Í¬²½
+	while (KUserSharedData->TickCount.High1Time!=KUserSharedData->TickCount.High2Time)		//åŒæ­¥
 		_mm_pause();
 	QWORD LowPart=(KUserSharedData->TickCount.LowPart*KUserSharedData->TickCountMultiplier)>>24;
-	//High1TimeÊÇ¸ß32Î»£¬¼ÆËãÇ°Ó¦¸ÃÏÈ×óÒÆ32Î»£¬µ«ÊÇºóÃætick×ªµ¥Î»ÒªÓÒÒÆ24Î»£¬ºÏÆğÀ´¾ÍÊÇ×óÒÆ8Î»
+	//High1Timeæ˜¯é«˜32ä½ï¼Œè®¡ç®—å‰åº”è¯¥å…ˆå·¦ç§»32ä½ï¼Œä½†æ˜¯åé¢tickè½¬å•ä½è¦å³ç§»24ä½ï¼Œåˆèµ·æ¥å°±æ˜¯å·¦ç§»8ä½
 	//DWORD HighPart=(KUserSharedData->TickCount.High1Time<<32)*KUserSharedData->TickCountMultiplier>>24;
 	DWORD HighPart=(KUserSharedData->TickCount.High1Time<<8)*KUserSharedData->TickCountMultiplier;
 	return (DWORD)LowPart+HighPart;
@@ -42,7 +42,7 @@ ULONGLONG WINAPI GetTickCount64_Win7x32()
 		_mm_pause();
 	QWORD LowPart=(KUserSharedData->TickCount.LowPart*KUserSharedData->TickCountMultiplier)>>24;
 	QWORD HighPart=KUserSharedData->TickCount.High1Time*KUserSharedData->TickCountMultiplier;
-	HighPart=HighPart*0x100;	//³Ë0x100µÈ¼ÛÓÚ×óÒÆ8Î»£¬Ô­»ã±àµ÷ÓÃÁËntdll._allmul()
+	HighPart=HighPart*0x100;	//ä¹˜0x100ç­‰ä»·äºå·¦ç§»8ä½ï¼ŒåŸæ±‡ç¼–è°ƒç”¨äº†ntdll._allmul()
 	return HighPart+LowPart;
 }
 
@@ -56,7 +56,7 @@ ULONGLONG WINAPI GetTickCount64_Win7x64()
 }
 */
 
-//ĞèÒªxpextk.sysÖ§³Ö
+//éœ€è¦xpextk.sysæ”¯æŒ
 ULONGLONG WINAPI K32GetTickCount64()
 {
 	KUSER_SHARED_DATA* KUserSharedData=(KUSER_SHARED_DATA*)0x7FFE0000;
@@ -66,7 +66,7 @@ ULONGLONG WINAPI K32GetTickCount64()
 }
 
 //GetErrorMode=0x7C80ACDD
-//µ¼³ö¾Í¿ÉÒÔÁË
+//å¯¼å‡ºå°±å¯ä»¥äº†
 
 VOID WINAPI K32RaiseFailFastException(PEXCEPTION_RECORD pExceptionRecord,PCONTEXT pContextRecord,DWORD dwFlags)
 {
@@ -74,7 +74,7 @@ VOID WINAPI K32RaiseFailFastException(PEXCEPTION_RECORD pExceptionRecord,PCONTEX
 	CONTEXT ContextRecord;
 	DWORD MessageBoxResult;
 	DWORD ReturnAddress;
-	//²ÎÊı1ÔÚÕ»ÉÏµÄµØÖ·ÊÇebp+8£¬Õâ¸öÎ»ÖÃÔÙ-4¾ÍÊÇº¯Êı·µ»ØµØÖ·ÔÚÕ»ÖĞµÄÎ»ÖÃ
+	//å‚æ•°1åœ¨æ ˆä¸Šçš„åœ°å€æ˜¯ebp+8ï¼Œè¿™ä¸ªä½ç½®å†-4å°±æ˜¯å‡½æ•°è¿”å›åœ°å€åœ¨æ ˆä¸­çš„ä½ç½®
 	ReturnAddress=*((DWORD*)&pExceptionRecord-1);
 
 	if (pExceptionRecord==NULL)
@@ -100,11 +100,11 @@ VOID WINAPI K32RaiseFailFastException(PEXCEPTION_RECORD pExceptionRecord,PCONTEX
 	}
 
 	/*
-	//Õâ¸öº¯Êıµ÷ÓÃÁËEtwEventWriteNoRegistration£¬GUIDÊÇ{E46EEAD8-0C54-4489-9898-8FA79D059E0E}
+	//è¿™ä¸ªå‡½æ•°è°ƒç”¨äº†EtwEventWriteNoRegistrationï¼ŒGUIDæ˜¯{E46EEAD8-0C54-4489-9898-8FA79D059E0E}
 	NTSTATUS Result=SignalStartWerSvc();
 	if (NT_SUCCESS(Result))
 	{
-		//Õâ¸öº¯Êıµ÷ÓÃÁËNtWaitForSingleObject£¬EventÊÇ"\\KernelObjects\\SystemErrorPortReady"
+		//è¿™ä¸ªå‡½æ•°è°ƒç”¨äº†NtWaitForSingleObjectï¼ŒEventæ˜¯"\\KernelObjects\\SystemErrorPortReady"
 		Result=WaitForWerSvc();
 		if (NT_SUCCESS(Result) && Result!=STATUS_TIMEOUT)
 		{
@@ -125,11 +125,11 @@ VOID WINAPI K32RaiseFailFastException(PEXCEPTION_RECORD pExceptionRecord,PCONTEX
 
 DWORD WINAPI BaseSetLastNTError(NTSTATUS NtStatus)
 {
-	//xpextµÄËùÓĞº¯ÊıÊ¹ÓÃxpext.BaseSetLastNTError
-	//Ïà±Èkernel32.BaseSetLastNTError£¬¿ÉÒÔ×ª»»µÄStatus¸üÈ«
+	//xpextçš„æ‰€æœ‰å‡½æ•°ä½¿ç”¨xpext.BaseSetLastNTError
+	//ç›¸æ¯”kernel32.BaseSetLastNTErrorï¼Œå¯ä»¥è½¬æ¢çš„Statusæ›´å…¨
 	DWORD dwWin32Error=RtlNtStatusToDosError(NtStatus);
-	//XPÔÚ´Ë´¦Ê¹ÓÃKERNEL32.SetLastError£¬¶øWin7Ê¹ÓÃNTDLL.RtlSetLastWin32Error
-	//Ô­Òò²Î¼ûxpext.RtlSetLastWin32Error£¬ÕâÀïÍ³Ò»Ê¹ÓÃxpext.RtlSetLastWin32Error
+	//XPåœ¨æ­¤å¤„ä½¿ç”¨KERNEL32.SetLastErrorï¼Œè€ŒWin7ä½¿ç”¨NTDLL.RtlSetLastWin32Error
+	//åŸå› å‚è§xpext.RtlSetLastWin32Errorï¼Œè¿™é‡Œç»Ÿä¸€ä½¿ç”¨xpext.RtlSetLastWin32Error
 	RtlSetLastWin32Error(NtStatus);
 	return dwWin32Error;
 }
