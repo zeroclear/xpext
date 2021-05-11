@@ -92,8 +92,8 @@ enum PRIVILEGE_LUID_INDEX
 	MaxPrivilegeLuidIndex_W7=36,
 };
 
-//RtlAcquirePrivilegeºÍRtlReleasePrivilege´ó²¿·ÖÕÕ°áÁËReactOSµÄrtltypes.hºÍpriv.c£¨Latest commit c2c66af on 3 Oct 2017£©
-//Ï¸½ÚÓĞËù¸Ä¶¯£¬²»Í¬Ö®´¦ÒÔWin7Îª×¼£¨ntdll.dll  x86  6.1.7601.17514£©
+//RtlAcquirePrivilegeå’ŒRtlReleasePrivilegeå¤§éƒ¨åˆ†ç…§æ¬äº†ReactOSçš„rtltypes.hå’Œpriv.cï¼ˆLatest commit c2c66af on 3 Oct 2017ï¼‰
+//ç»†èŠ‚æœ‰æ‰€æ”¹åŠ¨ï¼Œä¸åŒä¹‹å¤„ä»¥Win7ä¸ºå‡†ï¼ˆntdll.dll  x86  6.1.7601.17514ï¼‰
 #define RTL_ACQUIRE_PRIVILEGE_IMPERSONATE                   1
 #define RTL_ACQUIRE_PRIVILEGE_PROCESS                       2
 
@@ -114,8 +114,8 @@ RtlAcquirePrivilege(IN PULONG Privilege,
                     IN ULONG Flags,
                     OUT PVOID *ReturnedState)
 {
-	//ULONG ReturnLengthÓÉAdjustSize´úÌæ£¬NTSTATUS IntStatus²»ÓÃÁË
-	//C++03Ö§³ÖÑ­»·ÄÚ¶¨Òåi£¬OldSizeºÏ²¢µ½AdjustSize
+	//ULONG ReturnLengthç”±AdjustSizeä»£æ›¿ï¼ŒNTSTATUS IntStatusä¸ç”¨äº†
+	//C++03æ”¯æŒå¾ªç¯å†…å®šä¹‰iï¼ŒOldSizeåˆå¹¶åˆ°AdjustSize
     PRTL_ACQUIRE_STATE State;
     NTSTATUS Status;
     //ULONG i, OldSize;
@@ -124,12 +124,12 @@ RtlAcquirePrivilege(IN PULONG Privilege,
     OBJECT_ATTRIBUTES ObjectAttributes;
     HANDLE ImpersonationToken, ProcessToken;
 
-	//ReactOSÀïÓÃµÄÊÇRtlGetProcessHeap()£¬È«²¿Ìæ»»³ÉHeapHandle
-	//ÁíÍâ£¬ÔÚWin7Ô­°æµÄµ÷ÓÃÖĞ£¬RtlAllocateHeapµÄFlagsÊÇNtdllBaseTag+0x140000
+	//ReactOSé‡Œç”¨çš„æ˜¯RtlGetProcessHeap()ï¼Œå…¨éƒ¨æ›¿æ¢æˆHeapHandle
+	//å¦å¤–ï¼Œåœ¨Win7åŸç‰ˆçš„è°ƒç”¨ä¸­ï¼ŒRtlAllocateHeapçš„Flagsæ˜¯NtdllBaseTag+0x140000
 	//NtdllBaseTag=RtlCreateTagHeap(LdrpHeap,0,"NTDLL!","!Process");
-	//¿ÉÒÔÀí½âÎªRtlCreateTagHeap´´½¨ÁËÒ»¸ö×Ó¶Ñ£¬È»ºó·µ»ØIndex<<18
-	//NtdllBaseTagÊÇµÚÒ»¸ö´´½¨µÄ£¬Ë÷ÒıÎª0£¬ºóĞøµÄ×Ó¶Ñ£¬ÓÃNtdllBaseTag+(Index<<18)¾ÍÄÜ·ÃÎÊ
-	//¶øÕæÕıµÄFlagsÔÚµÍÎ»£¬ÓëIndexÏà¼Ó×éºÏ£¬²¢²»³åÍ»
+	//å¯ä»¥ç†è§£ä¸ºRtlCreateTagHeapåˆ›å»ºäº†ä¸€ä¸ªå­å †ï¼Œç„¶åè¿”å›Index<<18
+	//NtdllBaseTagæ˜¯ç¬¬ä¸€ä¸ªåˆ›å»ºçš„ï¼Œç´¢å¼•ä¸º0ï¼Œåç»­çš„å­å †ï¼Œç”¨NtdllBaseTag+(Index<<18)å°±èƒ½è®¿é—®
+	//è€ŒçœŸæ­£çš„Flagsåœ¨ä½ä½ï¼Œä¸Indexç›¸åŠ ç»„åˆï¼Œå¹¶ä¸å†²çª
 	PVOID HeapHandle=NtCurrentTeb()->ProcessEnvironmentBlock->ProcessHeap;
 
     //DPRINT("RtlAcquirePrivilege(%p, %u, %u, %p)\n", Privilege, NumPriv, Flags, ReturnedState);
@@ -165,7 +165,7 @@ RtlAcquirePrivilege(IN PULONG Privilege,
     /* Check whether we have already an active impersonation */
     if (NtCurrentTeb()->IsImpersonating)
     {
-		//ReactOSµÄÅĞ¶ÏºÍWin7»ã±à´úÂëÕıºÃÏà·´£¬ÒÔWin7Îª×¼
+		//ReactOSçš„åˆ¤æ–­å’ŒWin7æ±‡ç¼–ä»£ç æ­£å¥½ç›¸åï¼Œä»¥Win7ä¸ºå‡†
         /* Check whether we want to impersonate */
         if ((Flags&RTL_ACQUIRE_PRIVILEGE_IMPERSONATE)==0)
         {
@@ -195,7 +195,7 @@ RtlAcquirePrivilege(IN PULONG Privilege,
             /* Remember the fact we had an active impersonation */
             State->Flags |= RTL_ACQUIRE_PRIVILEGE_IMPERSONATE;
 
-			//Win7×¨ÃÅÓÃvar_10Íê³É£¬Êµ¼ÊÉÏÖØ¸´ÓÃÕâÒ»¸ö¾Í¹»ÁË
+			//Win7ä¸“é—¨ç”¨var_10å®Œæˆï¼Œå®é™…ä¸Šé‡å¤ç”¨è¿™ä¸€ä¸ªå°±å¤Ÿäº†
 			ImpersonationToken=NULL;
             /* Revert impersonation (ie, give 0 as handle) */
             Status = NtSetInformationThread(NtCurrentThread(),
@@ -206,12 +206,12 @@ RtlAcquirePrivilege(IN PULONG Privilege,
     }
 
     /* If we have no token yet (which is likely) */
-    if (!State->Token)	//IsImpersonatingÎªFALSEÊ±£¬Token±ØÈ»ÎªNULL£¬Á÷³ÌÓë»ã±àÒ»ÖÂ
+    if (!State->Token)	//IsImpersonatingä¸ºFALSEæ—¶ï¼ŒTokenå¿…ç„¶ä¸ºNULLï¼Œæµç¨‹ä¸æ±‡ç¼–ä¸€è‡´
     {
         /* If we are asked to use process, then do */
         if (Flags & RTL_ACQUIRE_PRIVILEGE_PROCESS)
         {
-			//ReactOSÊ¹ÓÃNtOpenProcessToken£¬¶øWin7Ê¹ÓÃNtOpenProcessTokenEx£¬È«²¿Ìæ»»
+			//ReactOSä½¿ç”¨NtOpenProcessTokenï¼Œè€ŒWin7ä½¿ç”¨NtOpenProcessTokenExï¼Œå…¨éƒ¨æ›¿æ¢
             Status = NtOpenProcessTokenEx(NtCurrentProcess(), TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY,
 									0x200, &State->Token);
             if (!NT_SUCCESS(Status))
@@ -219,7 +219,7 @@ RtlAcquirePrivilege(IN PULONG Privilege,
                 goto Cleanup;
             }
 
-			//ReactOSÂ©ÁË
+			//ReactOSæ¼äº†
 			State->Flags|=RTL_ACQUIRE_PRIVILEGE_PROCESS;
         }
         else
@@ -241,8 +241,8 @@ RtlAcquirePrivilege(IN PULONG Privilege,
 			Sqos.ContextTrackingMode = 1;
 			Sqos.EffectiveOnly = FALSE;
 
-			//ReactOSµÄ´úÂëÏà±ÈWin7ÉÙÁËNtOpenProcessTokenEx½á¹ûµÄÅĞ¶Ï
-			//ÕâÀïÕûÀí³ÉWin7»ã±àµÄĞÎÊ½
+			//ReactOSçš„ä»£ç ç›¸æ¯”Win7å°‘äº†NtOpenProcessTokenExç»“æœçš„åˆ¤æ–­
+			//è¿™é‡Œæ•´ç†æˆWin7æ±‡ç¼–çš„å½¢å¼
 			if (NT_SUCCESS(Status))
 			{
 				/* Duplicate */
@@ -321,7 +321,7 @@ RtlAcquirePrivilege(IN PULONG Privilege,
     }
 
     /* Start privileges adjustements */
-	//ReactOS°æÓëWin7½á¹¹²î¾àÌ«´ó£¬Ê£ÏÂµÄ²¿·Ö°´»ã±à¸ÄĞ´
+	//ReactOSç‰ˆä¸Win7ç»“æ„å·®è·å¤ªå¤§ï¼Œå‰©ä¸‹çš„éƒ¨åˆ†æŒ‰æ±‡ç¼–æ”¹å†™
 	AdjustSize=sizeof(State->OldPrivBuffer);
 	Status = NtAdjustPrivilegesToken(State->Token, FALSE, State->NewPrivileges,
 		AdjustSize, State->OldPrivileges, &AdjustSize);
@@ -403,7 +403,7 @@ RtlReleasePrivilege(IN PVOID ReturnedState)
 
     //DPRINT("RtlReleasePrivilege(%p)\n", ReturnedState);
 
-	//ReactOSÀïÓÃµÄÊÇRtlGetProcessHeap()£¬È«²¿Ìæ»»³ÉHeapHandle
+	//ReactOSé‡Œç”¨çš„æ˜¯RtlGetProcessHeap()ï¼Œå…¨éƒ¨æ›¿æ¢æˆHeapHandle
 	PVOID HeapHandle=NtCurrentTeb()->ProcessEnvironmentBlock->ProcessHeap;
 
     /* If we had an active impersonation before we acquired privileges
@@ -411,15 +411,15 @@ RtlReleasePrivilege(IN PVOID ReturnedState)
      */
     //if (State->Flags & RTL_ACQUIRE_PRIVILEGE_IMPERSONATE) {NtSetInformationThread()...}
     //else {NtAdjustPrivilegesToken()...}
-	//ReactOSºÍWin7µÄ´úÂëÀíÂÛÉÏÊÇµÈ¼ÛµÄ£¬ÕâÀï¸Ä³ÉÁËWin7µÄĞÎÊ½
-	//!(Flags&1)¶ÔÓ¦0ºÍ2£¬(Flags&1)&&(Flags&2)¶ÔÓ¦3
+	//ReactOSå’ŒWin7çš„ä»£ç ç†è®ºä¸Šæ˜¯ç­‰ä»·çš„ï¼Œè¿™é‡Œæ”¹æˆäº†Win7çš„å½¢å¼
+	//!(Flags&1)å¯¹åº”0å’Œ2ï¼Œ(Flags&1)&&(Flags&2)å¯¹åº”3
 	if ((State->Flags&RTL_ACQUIRE_PRIVILEGE_IMPERSONATE)==0 || (State->Flags&RTL_ACQUIRE_PRIVILEGE_PROCESS)!=0)
 	{
         /* Otherwise, restore old state */
         NtAdjustPrivilegesToken(State->Token, FALSE,
                                 State->OldPrivileges, 0, NULL, NULL);
 	}
-	//(Flags&1)¶ÔÓ¦1
+	//(Flags&1)å¯¹åº”1
 	else if (State->Flags&RTL_ACQUIRE_PRIVILEGE_IMPERSONATE)
 	{
         /* Restore it for the current thread */
