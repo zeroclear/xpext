@@ -2,52 +2,52 @@
 #include "common.h"
 
 /*
-Windows 7 SP1 32Î» 6.1.7601.17514
-@Çåãö 2020.6.5
+Windows 7 SP1 32ä½ 6.1.7601.17514
+@æ¸…æ³  2020.6.5
 
-SRWµÄ·ÖÎö
-¿ÕÏĞ×´Ì¬£¬¶ÀÕ¼ÇëÇóºÍ¹²ÏíÇëÇó¶¼ÄÜ»ñÈ¡Ëø
-¶ÀÕ¼×´Ì¬£¬¶ÀÕ¼ÇëÇóºÍ¹²ÏíÇëÇó¶¼²»ÄÜ»ñÈ¡Ëø
-¹²Ïí×´Ì¬£¬½ö¹²ÏíÇëÇóÄÜ»ñÈ¡Ëø£¬¶ÀÕ¼ÇëÇó²»ÄÜ»ñÈ¡Ëø
-ÀíÂÛÉÏ£¬Èç¹ûµ±Ç°ÊÇ¹²ÏíËø£¬ºóĞøµÄËùÓĞ¹²ÏíÇëÇó¶¼¿ÉÒÔ»ñÈ¡Ëø
-µ«ÊÇÎªÁË·ÀÖ¹Ğ´ÈëÏß³Ì³öÏÖ¼¢¶ö×´Ì¬£¬Ó¦ÓÃÁËÏà¶Ô¹«Æ½µÄËã·¨
-Ò»µ©³öÏÖ¶ÀÕ¼ÇëÇó£¬ºóĞøµÄËùÓĞ¹²ÏíÇëÇó¶¼ÒªµÈ´ı
+SRWçš„åˆ†æ
+ç©ºé—²çŠ¶æ€ï¼Œç‹¬å è¯·æ±‚å’Œå…±äº«è¯·æ±‚éƒ½èƒ½è·å–é”
+ç‹¬å çŠ¶æ€ï¼Œç‹¬å è¯·æ±‚å’Œå…±äº«è¯·æ±‚éƒ½ä¸èƒ½è·å–é”
+å…±äº«çŠ¶æ€ï¼Œä»…å…±äº«è¯·æ±‚èƒ½è·å–é”ï¼Œç‹¬å è¯·æ±‚ä¸èƒ½è·å–é”
+ç†è®ºä¸Šï¼Œå¦‚æœå½“å‰æ˜¯å…±äº«é”ï¼Œåç»­çš„æ‰€æœ‰å…±äº«è¯·æ±‚éƒ½å¯ä»¥è·å–é”
+ä½†æ˜¯ä¸ºäº†é˜²æ­¢å†™å…¥çº¿ç¨‹å‡ºç°é¥¥é¥¿çŠ¶æ€ï¼Œåº”ç”¨äº†ç›¸å¯¹å…¬å¹³çš„ç®—æ³•
+ä¸€æ—¦å‡ºç°ç‹¬å è¯·æ±‚ï¼Œåç»­çš„æ‰€æœ‰å…±äº«è¯·æ±‚éƒ½è¦ç­‰å¾…
 
-SRWLOCKÊÇÒ»¸öÈİÆ÷£¬±£´æ×ÅÕâ¸öËøµÄÈ«²¿ĞÅÏ¢
-SRWLOCK::PtrµÄÇ°28Î»±£´æÁËµÈ´ıÁ´±íµÄÍ·²¿£¨»ò¹²Ïí¼ÆÊı£©
-ºó4Î»Ê¹ÓÃalign(16)¿Õ³ö£¬ÓÃÓÚ±£´æ×´Ì¬
-Á´±í½ÚµãÔÚÕ»ÉÏ·ÖÅä£¬º¯ÊıĞİÃß·µ»ØÇ°Ò»Ö±ÓĞĞ§£¬·µ»ØÊ±×Ô¶¯ÊÍ·Å
-Ã¿´ÎÖ»ÔÊĞíÒ»¸öÏß³Ì±à¼­Á´±í£¬ÓÃSRWF_Link±ê¼Ç¿ØÖÆ
-ĞÂÏß³Ì½øÈëµÈ´ı×´Ì¬Ê±£¬°Ñ¾ÉÁ´±íÍ·²¿ÉèÎª×Ô¼ºµÄback½Úµã
-×ÔÉíµ±×öĞÂµÄÁ´±íÍ·²¿£¬Ìæ»»¾ÉµÄÁ´±íÍ·²¿£¬Íê³É²åÈë
+SRWLOCKæ˜¯ä¸€ä¸ªå®¹å™¨ï¼Œä¿å­˜ç€è¿™ä¸ªé”çš„å…¨éƒ¨ä¿¡æ¯
+SRWLOCK::Ptrçš„å‰28ä½ä¿å­˜äº†ç­‰å¾…é“¾è¡¨çš„å¤´éƒ¨ï¼ˆæˆ–å…±äº«è®¡æ•°ï¼‰
+å4ä½ä½¿ç”¨align(16)ç©ºå‡ºï¼Œç”¨äºä¿å­˜çŠ¶æ€
+é“¾è¡¨èŠ‚ç‚¹åœ¨æ ˆä¸Šåˆ†é…ï¼Œå‡½æ•°ä¼‘çœ è¿”å›å‰ä¸€ç›´æœ‰æ•ˆï¼Œè¿”å›æ—¶è‡ªåŠ¨é‡Šæ”¾
+æ¯æ¬¡åªå…è®¸ä¸€ä¸ªçº¿ç¨‹ç¼–è¾‘é“¾è¡¨ï¼Œç”¨SRWF_Linkæ ‡è®°æ§åˆ¶
+æ–°çº¿ç¨‹è¿›å…¥ç­‰å¾…çŠ¶æ€æ—¶ï¼ŒæŠŠæ—§é“¾è¡¨å¤´éƒ¨è®¾ä¸ºè‡ªå·±çš„backèŠ‚ç‚¹
+è‡ªèº«å½“åšæ–°çš„é“¾è¡¨å¤´éƒ¨ï¼Œæ›¿æ¢æ—§çš„é“¾è¡¨å¤´éƒ¨ï¼Œå®Œæˆæ’å…¥
 newi->back=status;
 status=&newi;
-ËùÒÔË³×ÅstatusµÄbackÒ»Ö±ÏòÇ°²éÕÒ£¬ÊÇ°´Ê±¼äÓÉ½üµ½Ô¶¼ÓÈëµÄ½Úµã
-¼´²åÈëµÄÒ»¶ËÎªlast£¬Ò²ÊÇÍ·²¿£»ÁíÒ»¶ËÎªfirst£¬ÊÇÎ²²¿
-lastÑØbackÒ»Ö±×ßÄÜÕÒµ½first£¬firstÑØnextÒ»Ö±×ßÄÜÕÒµ½last
+æ‰€ä»¥é¡ºç€statusçš„backä¸€ç›´å‘å‰æŸ¥æ‰¾ï¼Œæ˜¯æŒ‰æ—¶é—´ç”±è¿‘åˆ°è¿œåŠ å…¥çš„èŠ‚ç‚¹
+å³æ’å…¥çš„ä¸€ç«¯ä¸ºlastï¼Œä¹Ÿæ˜¯å¤´éƒ¨ï¼›å¦ä¸€ç«¯ä¸ºfirstï¼Œæ˜¯å°¾éƒ¨
+lastæ²¿backä¸€ç›´èµ°èƒ½æ‰¾åˆ°firstï¼Œfirstæ²¿nextä¸€ç›´èµ°èƒ½æ‰¾åˆ°last
 
-ÒòÎªfirst½Úµã×ã¹»ÖØÒª£¬last½Úµã»á±£´æfirstÖ¸Õë£¬¼ÓËÙºóĞø²Ù×÷
-µÚÒ»¸ö²åÈëµÄ½Úµã£¬ÆäfirstÖ¸ÕëÖ¸Ïò×ÔÉí£¬Ëü¼ÈÊÇfirstÒ²ÊÇlast
-Ö®ºó²åÈëµÄ½Úµã£¬»áÑØ×ÅbackÕÒÖ®Ç°µÄ½Úµã£¬°Ñ×î½ü´¦µÄfirstÖ¸Õë¸´ÖÆ¹ıÀ´
+å› ä¸ºfirstèŠ‚ç‚¹è¶³å¤Ÿé‡è¦ï¼ŒlastèŠ‚ç‚¹ä¼šä¿å­˜firstæŒ‡é’ˆï¼ŒåŠ é€Ÿåç»­æ“ä½œ
+ç¬¬ä¸€ä¸ªæ’å…¥çš„èŠ‚ç‚¹ï¼Œå…¶firstæŒ‡é’ˆæŒ‡å‘è‡ªèº«ï¼Œå®ƒæ—¢æ˜¯firstä¹Ÿæ˜¯last
+ä¹‹åæ’å…¥çš„èŠ‚ç‚¹ï¼Œä¼šæ²¿ç€backæ‰¾ä¹‹å‰çš„èŠ‚ç‚¹ï¼ŒæŠŠæœ€è¿‘å¤„çš„firstæŒ‡é’ˆå¤åˆ¶è¿‡æ¥
 if (curr->first!=NULL)
 last->first=curr->first;
-¸Õ¿ªÊ¼Á´±íÃ»ÓĞnext×Ö¶Î£¬ÔÚ´«µİfirstÖ¸ÕëµÄÊ±ºò»á±éÀú²¢²¹È«next×Ö¶Î
+åˆšå¼€å§‹é“¾è¡¨æ²¡æœ‰nextå­—æ®µï¼Œåœ¨ä¼ é€’firstæŒ‡é’ˆçš„æ—¶å€™ä¼šéå†å¹¶è¡¥å…¨nextå­—æ®µ
 curr->back->next=curr;
 curr=curr->back;
-ÕâÁ½¸ö²½ÖèºÏ³ÆÓÅ»¯£¬ÔÚ²åÈëĞÂ½ÚµãÊ±Ö´ĞĞ
+è¿™ä¸¤ä¸ªæ­¥éª¤åˆç§°ä¼˜åŒ–ï¼Œåœ¨æ’å…¥æ–°èŠ‚ç‚¹æ—¶æ‰§è¡Œ
 
-»½ĞÑ½Úµã´Ófirst¶Ë¿ªÊ¼£¬ÒòÎªÕâ±ßµÄÏß³ÌµÈ´ıÊ±¼ä×î¾Ã
-Èç¹ûÖ»»½ĞÑÒ»¸öÏß³Ì£¬»á´ÓÁ´±íÖĞÉ¾³ıÕâ¸ö½Úµã£¬²¢¶Ï¿ªnextÁ´½Ó
-É¾³ı×÷ÓÃÔÚlast½ÚµãµÄfirst×Ö¶ÎÉÏ£¬ÒòÎªÉ¾³ıÊ±×Ü´ÓÕâÀïÕÒfirst½Úµã
-ÓÅ»¯»áÔÚÕâÀïÍ£ÏÂ£¬È»ºó¸´ÖÆ¹ıÈ¥£¬Ò²²»»áÊÜµ½Ó°Ïì
+å”¤é†’èŠ‚ç‚¹ä»firstç«¯å¼€å§‹ï¼Œå› ä¸ºè¿™è¾¹çš„çº¿ç¨‹ç­‰å¾…æ—¶é—´æœ€ä¹…
+å¦‚æœåªå”¤é†’ä¸€ä¸ªçº¿ç¨‹ï¼Œä¼šä»é“¾è¡¨ä¸­åˆ é™¤è¿™ä¸ªèŠ‚ç‚¹ï¼Œå¹¶æ–­å¼€nexté“¾æ¥
+åˆ é™¤ä½œç”¨åœ¨lastèŠ‚ç‚¹çš„firstå­—æ®µä¸Šï¼Œå› ä¸ºåˆ é™¤æ—¶æ€»ä»è¿™é‡Œæ‰¾firstèŠ‚ç‚¹
+ä¼˜åŒ–ä¼šåœ¨è¿™é‡Œåœä¸‹ï¼Œç„¶åå¤åˆ¶è¿‡å»ï¼Œä¹Ÿä¸ä¼šå—åˆ°å½±å“
 wake=last->first;
 last->first=last->first->next;
 wake->next=NULL;
-Èç¹ûĞèÒª»½ĞÑµÄÇé¿ö±È½Ï¸´ÔÓ£¬¾Í»á»½ĞÑËùÓĞ½Úµã
-´ËÊ±statusÖÃ0£¬´Ófirst¿ªÊ¼£¬ÑØnextÁ´ÒÀ´Î»½ĞÑÏß³Ì
-È»ºóÕâĞ©Ïß³ÌÕù¶áËø£¬ÇÀµ½ËøµÄ·µ»Ø£¬ÇÀ²»µ½µÄÔÙ´ÎĞİÃß
+å¦‚æœéœ€è¦å”¤é†’çš„æƒ…å†µæ¯”è¾ƒå¤æ‚ï¼Œå°±ä¼šå”¤é†’æ‰€æœ‰èŠ‚ç‚¹
+æ­¤æ—¶statusç½®0ï¼Œä»firstå¼€å§‹ï¼Œæ²¿nexté“¾ä¾æ¬¡å”¤é†’çº¿ç¨‹
+ç„¶åè¿™äº›çº¿ç¨‹äº‰å¤ºé”ï¼ŒæŠ¢åˆ°é”çš„è¿”å›ï¼ŒæŠ¢ä¸åˆ°çš„å†æ¬¡ä¼‘çœ 
 
-Îª·½±ãÀí½â£¬ÎÒ»¹»­ÁËÕÅÍ¼srw_cv.png
+ä¸ºæ–¹ä¾¿ç†è§£ï¼Œæˆ‘è¿˜ç”»äº†å¼ å›¾srw_cv.png
 */
 
 DWORD SRWLockSpinCount=0x400;
@@ -70,15 +70,15 @@ void NTAPI RtlpWakeSRWLock(RTL_SRWLOCK* SRWLock,SYNCSTATUS OldStatus)
 	SYNCITEM* first;
 	while (1)
 	{
-		//ÒÑ¾­ÓĞÏß³ÌÇÀÏÈ»ñÈ¡ÁËËø£¬È¡Ïû»½ĞÑ²Ù×÷
-		if (OldStatus&SRWF_Hold)	//±àÒëÆ÷½«while(...)±àÒë³Éif (...) do {} while(...)
+		//å·²ç»æœ‰çº¿ç¨‹æŠ¢å…ˆè·å–äº†é”ï¼Œå–æ¶ˆå”¤é†’æ“ä½œ
+		if (OldStatus&SRWF_Hold)	//ç¼–è¯‘å™¨å°†while(...)ç¼–è¯‘æˆif (...) do {} while(...)
 		{
 			do 
 			{
-				CurrStatus=InterlockedCompareExchange((SYNCSTATUS*)SRWLock,OldStatus-SRWF_Link,OldStatus);	//Çå³ıÁ´±í²Ù×÷±ê¼Ç
-				//×´Ì¬±»ÆäËüÏß³Ì¸üĞÂ£¬ÉèÖÃ×´Ì¬Ê§°Ü
-				//±¾´Î·ÖÎöÊ§Ğ§£¬¸üĞÂ×´Ì¬ÖØĞÂ·ÖÎö
-				//ÏÂÃæÓĞ´óÁ¿ÀàËÆ´úÂë£¬²»ÔÙÖØ¸´ËµÃ÷
+				CurrStatus=InterlockedCompareExchange((SYNCSTATUS*)SRWLock,OldStatus-SRWF_Link,OldStatus);	//æ¸…é™¤é“¾è¡¨æ“ä½œæ ‡è®°
+				//çŠ¶æ€è¢«å…¶å®ƒçº¿ç¨‹æ›´æ–°ï¼Œè®¾ç½®çŠ¶æ€å¤±è´¥
+				//æœ¬æ¬¡åˆ†æå¤±æ•ˆï¼Œæ›´æ–°çŠ¶æ€é‡æ–°åˆ†æ
+				//ä¸‹é¢æœ‰å¤§é‡ç±»ä¼¼ä»£ç ï¼Œä¸å†é‡å¤è¯´æ˜
 				if (CurrStatus==OldStatus)
 					return ;
 				OldStatus=CurrStatus;
@@ -92,51 +92,51 @@ void NTAPI RtlpWakeSRWLock(RTL_SRWLOCK* SRWLock,SYNCSTATUS OldStatus)
 			SYNCITEM* curr=last;
 			do 
 			{
-				curr->back->next=curr;	//²¹È«Á´±í
-				curr=curr->back;		//±éÀúÁ´±í
-				first=curr->first;		//¸üĞÂ²éÕÒ½á¹û
-			} while (first==NULL);		//ÕÒÒ»¸öÓĞĞ§µÄfirst
-			//firstÖ¸ÕëÌáÇ°µ½×î½üµÄµØ·½
-			//ÓÅ»¯Á´±íÀïÃ»ÓĞÕâ¸öÅĞ¶Ï£¬´ó¸ÅÊÇ²åÈë¶à¸ö½ÚµãĞèÒªÓÅ»¯Ê±£¬firstÒ»¶¨²»Îªlast
+				curr->back->next=curr;	//è¡¥å…¨é“¾è¡¨
+				curr=curr->back;		//éå†é“¾è¡¨
+				first=curr->first;		//æ›´æ–°æŸ¥æ‰¾ç»“æœ
+			} while (first==NULL);		//æ‰¾ä¸€ä¸ªæœ‰æ•ˆçš„first
+			//firstæŒ‡é’ˆæå‰åˆ°æœ€è¿‘çš„åœ°æ–¹
+			//ä¼˜åŒ–é“¾è¡¨é‡Œæ²¡æœ‰è¿™ä¸ªåˆ¤æ–­ï¼Œå¤§æ¦‚æ˜¯æ’å…¥å¤šä¸ªèŠ‚ç‚¹éœ€è¦ä¼˜åŒ–æ—¶ï¼Œfirstä¸€å®šä¸ä¸ºlast
 			if (last!=curr)	
 				last->first=first;
 		}
 
-		//Èç¹ûºóĞø»¹ÓĞ½ÚµãµÈ´ı£¬ÇÒÕâ¸öÊÇ¶ÀÕ¼ÇëÇó
+		//å¦‚æœåç»­è¿˜æœ‰èŠ‚ç‚¹ç­‰å¾…ï¼Œä¸”è¿™ä¸ªæ˜¯ç‹¬å è¯·æ±‚
 		if ((first->next!=NULL) && (first->attr&SYNC_Exclusive))
 		{
-			last->first=first->next;	//´ÓÁ´±íÖĞÉ¾³ıÕâ¸ö½Úµã£¨É¾³ıºÍÓÅ»¯Ã¿´Î¶¼ÓÃ×î½üµÄfirstÖ¸Õë£©
-			first->next=NULL;			//first´ÓÔ­Á´±íÍÑÀë
-			_InterlockedAnd((long*)SRWLock,(~SRWF_Link));	//Á´±í²Ù×÷È«²¿Íê³É£¬È¥µô±ê¼Ç
+			last->first=first->next;	//ä»é“¾è¡¨ä¸­åˆ é™¤è¿™ä¸ªèŠ‚ç‚¹ï¼ˆåˆ é™¤å’Œä¼˜åŒ–æ¯æ¬¡éƒ½ç”¨æœ€è¿‘çš„firstæŒ‡é’ˆï¼‰
+			first->next=NULL;			//firstä»åŸé“¾è¡¨è„±ç¦»
+			_InterlockedAnd((long*)SRWLock,(~SRWF_Link));	//é“¾è¡¨æ“ä½œå…¨éƒ¨å®Œæˆï¼Œå»æ‰æ ‡è®°
 			break;
 		}
-		//·ñÔò£¬¿ÉÄÜÖ»ÓĞÕâÒ»¸ö½ÚµãµÈ´ı£¬»òÕâ¸öÊÇ¹²ÏíÇëÇó£¬È«²¿»½ĞÑ
+		//å¦åˆ™ï¼Œå¯èƒ½åªæœ‰è¿™ä¸€ä¸ªèŠ‚ç‚¹ç­‰å¾…ï¼Œæˆ–è¿™ä¸ªæ˜¯å…±äº«è¯·æ±‚ï¼Œå…¨éƒ¨å”¤é†’
 		else
 		{
-			CurrStatus=InterlockedCompareExchange((SYNCSTATUS*)SRWLock,0,OldStatus);	//½«×´Ì¬ÖØÖÃÎª¿ÕÏĞ
+			CurrStatus=InterlockedCompareExchange((SYNCSTATUS*)SRWLock,0,OldStatus);	//å°†çŠ¶æ€é‡ç½®ä¸ºç©ºé—²
 			if (OldStatus==CurrStatus)
 				break;
-			last->first=first;	//½«ÕÒµ½µÄfirst·Åµ½×î½üµÄÎ»ÖÃ
+			last->first=first;	//å°†æ‰¾åˆ°çš„firstæ”¾åˆ°æœ€è¿‘çš„ä½ç½®
 			OldStatus=CurrStatus;
 		}
 	}
 
-	//ÒÀ´Î»½ĞÑÏß³Ì£¬¿ÉÄÜ½öÓĞfirstÒ»¸ö£¬Ò²¿ÉÄÜÊÇfirstÁ´ÉÏµÄÈ«²¿
-	//Èç¹ûÊÇÈ«²¿»½ĞÑ£¬½ÓÏÂÀ´Ïß³Ì»áÔÙ´ÎÕù¶áËø£¬ÇÀ²»µ½µÄÔÙ´ÎÑ­»·£¬¹¹½¨Á´±í²¢×èÈû
-	//ºÃ´¦ÊÇÊ¡µôÁË¸÷ÖÖÇé¿öµÄ·ÖÎö£¬ºóÃæ¼¸¸ö¹²ÏíËø½«³É¹¦»ñµÃËø£¬Ö±µ½Óöµ½¶ÀÕ¼Ëø
+	//ä¾æ¬¡å”¤é†’çº¿ç¨‹ï¼Œå¯èƒ½ä»…æœ‰firstä¸€ä¸ªï¼Œä¹Ÿå¯èƒ½æ˜¯firsté“¾ä¸Šçš„å…¨éƒ¨
+	//å¦‚æœæ˜¯å…¨éƒ¨å”¤é†’ï¼Œæ¥ä¸‹æ¥çº¿ç¨‹ä¼šå†æ¬¡äº‰å¤ºé”ï¼ŒæŠ¢ä¸åˆ°çš„å†æ¬¡å¾ªç¯ï¼Œæ„å»ºé“¾è¡¨å¹¶é˜»å¡
+	//å¥½å¤„æ˜¯çœæ‰äº†å„ç§æƒ…å†µçš„åˆ†æï¼Œåé¢å‡ ä¸ªå…±äº«é”å°†æˆåŠŸè·å¾—é”ï¼Œç›´åˆ°é‡åˆ°ç‹¬å é”
 	do 
 	{
-		//ÇÀµ½ËøµÄÏß³Ì»á·µ»Ø£¬Õ»ÉÏµÄitemÊ§Ğ§£¬±ØĞëÏÈ±£´ænext
+		//æŠ¢åˆ°é”çš„çº¿ç¨‹ä¼šè¿”å›ï¼Œæ ˆä¸Šçš„itemå¤±æ•ˆï¼Œå¿…é¡»å…ˆä¿å­˜next
 		SYNCITEM* next=first->next;
-		//Èç¹ûÓĞSYNC_Spinning±ê¼Ç£¬±íÊ¾»¹ÔÚ×ÔĞıµÈ´ı£¬¼´½«½øÈëĞİÃß
-		//ÏÂÃæµÄlock btr½«ÆäÖÃ0£¬Ä¿±êÏß³Ì·¢ÏÖºóÌø¹ıĞİÃß
-		//Èç¹ûÃ»ÓĞSYNC_Spinning±ê¼Ç£¬ËµÃ÷Ä¿±êÏß³ÌÇåµôÁË´Ë±ê¼Ç£¬ÕıÊ½½øÈëĞİÃß
-		//ÏÂÃæµÄlock btrÃ»ÓĞÓ°Ïì£¬±¾Ïß³Ì¸ºÔğ½«Ä¿±êÏß³Ì»½ĞÑ
-		//ĞèÒª×¢ÒâµÄÊÇ£¬NtReleaseKeyedEvent·¢ÏÖkey²¢Ã»ÓĞĞİÃßÊ±£¬»á×èÈûµ±Ç°Ïß³Ì
-		//Ö±µ½ÓĞÏß³ÌÓÃ´Ëkeyµ÷ÓÃÁËNtWaitForKeyedEvent£¬²Å»á»½ĞÑ£¬Òò´Ë²»»á¶ªÊ§Í¨Öª
+		//å¦‚æœæœ‰SYNC_Spinningæ ‡è®°ï¼Œè¡¨ç¤ºè¿˜åœ¨è‡ªæ—‹ç­‰å¾…ï¼Œå³å°†è¿›å…¥ä¼‘çœ 
+		//ä¸‹é¢çš„lock btrå°†å…¶ç½®0ï¼Œç›®æ ‡çº¿ç¨‹å‘ç°åè·³è¿‡ä¼‘çœ 
+		//å¦‚æœæ²¡æœ‰SYNC_Spinningæ ‡è®°ï¼Œè¯´æ˜ç›®æ ‡çº¿ç¨‹æ¸…æ‰äº†æ­¤æ ‡è®°ï¼Œæ­£å¼è¿›å…¥ä¼‘çœ 
+		//ä¸‹é¢çš„lock btræ²¡æœ‰å½±å“ï¼Œæœ¬çº¿ç¨‹è´Ÿè´£å°†ç›®æ ‡çº¿ç¨‹å”¤é†’
+		//éœ€è¦æ³¨æ„çš„æ˜¯ï¼ŒNtReleaseKeyedEventå‘ç°keyå¹¶æ²¡æœ‰ä¼‘çœ æ—¶ï¼Œä¼šé˜»å¡å½“å‰çº¿ç¨‹
+		//ç›´åˆ°æœ‰çº¿ç¨‹ç”¨æ­¤keyè°ƒç”¨äº†NtWaitForKeyedEventï¼Œæ‰ä¼šå”¤é†’ï¼Œå› æ­¤ä¸ä¼šä¸¢å¤±é€šçŸ¥
 		if (InterlockedBitTestAndReset((LONG*)&(first->attr),SYNC_SPIN_BIT)==0)
 			NtReleaseKeyedEvent(GlobalKeyedEventHandle,first,FALSE,NULL);
-		first=next;	//±éÀúÁ´±í
+		first=next;	//éå†é“¾è¡¨
 	} while (first!=NULL);
 }
 
@@ -152,19 +152,19 @@ void NTAPI RtlpOptimizeSRWLockList(RTL_SRWLOCK* SRWLock,SYNCSTATUS OldStatus)
 				SYNCITEM* curr=last;
 				while (curr->first==NULL)
 				{
-					curr->back->next=curr;	//²¹È«Á´±í
-					curr=curr->back;		//±éÀúÁ´±í
+					curr->back->next=curr;	//è¡¥å…¨é“¾è¡¨
+					curr=curr->back;		//éå†é“¾è¡¨
 				}
-				last->first=curr->first;	//½«first·Åµ½ÀëÈİÆ÷Èë¿Ú×î½üµÄÎ»ÖÃ£¬¼ÓËÙÏÂ´Î²éÕÒ
+				last->first=curr->first;	//å°†firstæ”¾åˆ°ç¦»å®¹å™¨å…¥å£æœ€è¿‘çš„ä½ç½®ï¼ŒåŠ é€Ÿä¸‹æ¬¡æŸ¥æ‰¾
 			}
-			//Á´±í²Ù×÷½áÊø£¬Çå³ı±ê¼Ç
+			//é“¾è¡¨æ“ä½œç»“æŸï¼Œæ¸…é™¤æ ‡è®°
 			SYNCSTATUS CurrStatus=InterlockedCompareExchange((SYNCSTATUS*)SRWLock,OldStatus-SRWF_Link,OldStatus);
 			if (CurrStatus==OldStatus)
 				return ;
 			OldStatus=CurrStatus;
 		} while (OldStatus&SRWF_Hold);
 	}
-	//ÓĞÈËÊÍ·ÅÁËËø£¬Í£Ö¹ÓÅ»¯£¬¸ÄÎª»½ĞÑ
+	//æœ‰äººé‡Šæ”¾äº†é”ï¼Œåœæ­¢ä¼˜åŒ–ï¼Œæ”¹ä¸ºå”¤é†’
 	RtlpWakeSRWLock(SRWLock,OldStatus);
 }
 
@@ -176,9 +176,9 @@ void NTAPI RtlAcquireSRWLockExclusive(RTL_SRWLOCK* SRWLock)
 	SYNCSTATUS NewStatus;
 	DWORD dwBackOffCount=0;
 
-	//Èç¹ûµ±Ç°×´Ì¬Îª¿ÕÏĞ£¬Ö±½Ó»ñÈ¡Ëø
-	//ÉõÖÁÄ³¸öÏß³Ì¸ÕÊÍ·ÅËø£¬½öÇå³ıÁËHold±ê¼Ç£¬ÆäËüÏß³Ì»¹Ã»À´µÃ¼°»ñÈ¡Ëø
-	//±¾Ïß³ÌÒ²¿ÉÒÔ³Ã»ú»ñÈ¡Ëø£¬ÉèÖÃ±ê¼Ç£¬Áî»½ĞÑ²Ù×÷È¡Ïû»ò»½ĞÑºóÔÙ´Î½øÈëµÈ´ı
+	//å¦‚æœå½“å‰çŠ¶æ€ä¸ºç©ºé—²ï¼Œç›´æ¥è·å–é”
+	//ç”šè‡³æŸä¸ªçº¿ç¨‹åˆšé‡Šæ”¾é”ï¼Œä»…æ¸…é™¤äº†Holdæ ‡è®°ï¼Œå…¶å®ƒçº¿ç¨‹è¿˜æ²¡æ¥å¾—åŠè·å–é”
+	//æœ¬çº¿ç¨‹ä¹Ÿå¯ä»¥è¶æœºè·å–é”ï¼Œè®¾ç½®æ ‡è®°ï¼Œä»¤å”¤é†’æ“ä½œå–æ¶ˆæˆ–å”¤é†’åå†æ¬¡è¿›å…¥ç­‰å¾…
 	if (InterlockedBitTestAndSet((LONG*)SRWLock,SRW_HOLD_BIT)==0)
 		return ;
 
@@ -186,7 +186,7 @@ void NTAPI RtlAcquireSRWLockExclusive(RTL_SRWLOCK* SRWLock)
 	SYNCSTATUS CurrStatus;
 	while (1)
 	{
-		//Èç¹ûµ±Ç°ÒÑÓĞÏß³Ì³ÖÓĞËø£¬±¾Ïß³Ì½«¹¹½¨½Úµã£¬½«×Ô¼º¼ÓÈëÁ´±í
+		//å¦‚æœå½“å‰å·²æœ‰çº¿ç¨‹æŒæœ‰é”ï¼Œæœ¬çº¿ç¨‹å°†æ„å»ºèŠ‚ç‚¹ï¼Œå°†è‡ªå·±åŠ å…¥é“¾è¡¨
 		if (OldStatus&SRWF_Hold)
 		{
 			if (RtlpWaitCouldDeadlock())
@@ -199,7 +199,7 @@ void NTAPI RtlAcquireSRWLockExclusive(RTL_SRWLOCK* SRWLock)
 			item.next=NULL;
 			IsOptimize=FALSE;
 
-			//Èç¹ûÓĞÏß³ÌÒÑ¾­ÔÚÇ°ÃæµÈ´ıÁË£¬¾Í°ÑÖ®Ç°µÄ½ÚµãÉèÎªback
+			//å¦‚æœæœ‰çº¿ç¨‹å·²ç»åœ¨å‰é¢ç­‰å¾…äº†ï¼Œå°±æŠŠä¹‹å‰çš„èŠ‚ç‚¹è®¾ä¸ºback
 			if (OldStatus&SRWF_Wait)
 			{
 				item.first=NULL;
@@ -207,49 +207,49 @@ void NTAPI RtlAcquireSRWLockExclusive(RTL_SRWLOCK* SRWLock)
 				item.back=(SYNCITEM*)(OldStatus&SRWM_ITEM);
 				NewStatus=((SYNCSTATUS)&item)|(OldStatus&SRWF_Many)|(SRWF_Link|SRWF_Wait|SRWF_Hold);
 
-				if (!(OldStatus&SRWF_Link))	//µ±Ç°Ã»ÈË²Ù×÷Á´±í£¬¾ÍÓÅ»¯Á´±í
+				if (!(OldStatus&SRWF_Link))	//å½“å‰æ²¡äººæ“ä½œé“¾è¡¨ï¼Œå°±ä¼˜åŒ–é“¾è¡¨
 					IsOptimize=TRUE;
 			}
-			//Èç¹û±¾Ïß³ÌÊÇµÚÒ»¸öµÈ´ıµÄÏß³Ì£¬firstÖ¸Ïò×Ô¼º
-			//²éÕÒÊ±ÒÔfirstÖ¸ÕëÎª×¼£¬²»ĞèÒªÉèÖÃback
+			//å¦‚æœæœ¬çº¿ç¨‹æ˜¯ç¬¬ä¸€ä¸ªç­‰å¾…çš„çº¿ç¨‹ï¼ŒfirstæŒ‡å‘è‡ªå·±
+			//æŸ¥æ‰¾æ—¶ä»¥firstæŒ‡é’ˆä¸ºå‡†ï¼Œä¸éœ€è¦è®¾ç½®back
 			else
 			{
 				item.first=&item;
-				//Èç¹ûËøµÄÓµÓĞÕßÒÔ¶ÀÕ¼·½Ê½³ÖÓĞ£¬¹²Ïí¼ÆÊıÎª0
-				//Èç¹ûËøµÄÓµÓĞÕßÒÔ¹²Ïí·½Ê½³ÖÓĞ£¬¹²Ïí¼ÆÊıÎª1»ò¸ü¶à
+				//å¦‚æœé”çš„æ‹¥æœ‰è€…ä»¥ç‹¬å æ–¹å¼æŒæœ‰ï¼Œå…±äº«è®¡æ•°ä¸º0
+				//å¦‚æœé”çš„æ‹¥æœ‰è€…ä»¥å…±äº«æ–¹å¼æŒæœ‰ï¼Œå…±äº«è®¡æ•°ä¸º1æˆ–æ›´å¤š
 				item.count=OldStatus>>SRW_COUNT_BIT;
 				if (item.count>1)
 					NewStatus=((SYNCSTATUS)&item)|(SRWF_Many|SRWF_Wait|SRWF_Hold);
 				else
 					NewStatus=((SYNCSTATUS)&item)|(SRWF_Wait|SRWF_Hold);
 			}
-			//Ìá½»ĞÂ×´Ì¬
+			//æäº¤æ–°çŠ¶æ€
 			CurrStatus=InterlockedCompareExchange((SYNCSTATUS*)SRWLock,NewStatus,OldStatus);
 			if (CurrStatus==OldStatus)
 			{
 				if (IsOptimize)
 					RtlpOptimizeSRWLockList(SRWLock,NewStatus);
-				//½øÈëÄÚºËµÄ´ú¼ÛÌ«¸ß£¬ÏÈ½øĞĞÒ»¶Î×ÔĞıµÈ´ı
+				//è¿›å…¥å†…æ ¸çš„ä»£ä»·å¤ªé«˜ï¼Œå…ˆè¿›è¡Œä¸€æ®µè‡ªæ—‹ç­‰å¾…
 				for (int i=SRWLockSpinCount;i>0;i--)
 				{
-					if (!(item.attr&SYNC_Spinning))	//ÆäËüÏß³Ì¿ÉÄÜ»½ĞÑ±¾Ïß³Ì£¬Çå³ı±ê¼Ç
+					if (!(item.attr&SYNC_Spinning))	//å…¶å®ƒçº¿ç¨‹å¯èƒ½å”¤é†’æœ¬çº¿ç¨‹ï¼Œæ¸…é™¤æ ‡è®°
 						break;
 					_mm_pause();
 				}
-				//Èç¹ûÒ»Ö±Ã»ÄÜµÈµ½»½ĞÑ£¬¾Í½øÈëÄÚºËĞİÃß
+				//å¦‚æœä¸€ç›´æ²¡èƒ½ç­‰åˆ°å”¤é†’ï¼Œå°±è¿›å…¥å†…æ ¸ä¼‘çœ 
 				if (InterlockedBitTestAndReset((LONG*)(&item.attr),SYNC_SPIN_BIT))
 					NtWaitForKeyedEvent(GlobalKeyedEventHandle,&item,FALSE,NULL);
-				//±»»½ĞÑºóÔÙ´ÎÑ­»·¼ì²âÌõ¼ş
+				//è¢«å”¤é†’åå†æ¬¡å¾ªç¯æ£€æµ‹æ¡ä»¶
 				OldStatus=CurrStatus;
 			}
 			else
 			{
-				//Ïß³Ì´¦ÓÚ¼¤ÁÒµÄ¾ºÕùÖĞ£¬ÍË±ÜÒ»¶ÎÊ±¼ä
+				//çº¿ç¨‹å¤„äºæ¿€çƒˆçš„ç«äº‰ä¸­ï¼Œé€€é¿ä¸€æ®µæ—¶é—´
 				RtlBackoff(&dwBackOffCount);
 				OldStatus=(SYNCSTATUS)(SRWLock->Ptr);
 			}
 		}
-		//±ğµÄÏß³Ì¿ÉÄÜ×öÁËÊ²Ã´£¬·´ÕıÏÖÔÚÃ»ÓĞÏß³Ì³ÖÓĞËøÁË£¬³¢ÊÔ»ñÈ¡Ëø
+		//åˆ«çš„çº¿ç¨‹å¯èƒ½åšäº†ä»€ä¹ˆï¼Œåæ­£ç°åœ¨æ²¡æœ‰çº¿ç¨‹æŒæœ‰é”äº†ï¼Œå°è¯•è·å–é”
 		else
 		{
 			CurrStatus=InterlockedCompareExchange((SYNCSTATUS*)SRWLock,OldStatus+SRWF_Hold,OldStatus);
@@ -271,20 +271,20 @@ void NTAPI RtlAcquireSRWLockShared(RTL_SRWLOCK* SRWLock)
 	SYNCSTATUS NewStatus;
 	SYNCSTATUS CurrStatus;
 	SYNCSTATUS OldStatus=InterlockedCompareExchange((SYNCSTATUS*)SRWLock,(1<<SRW_COUNT_BIT)|SRWF_Hold,0);
-	//Èç¹ûµ±Ç°×´Ì¬Îª¿ÕÏĞ£¬Ö±½Ó»ñÈ¡Ëø
+	//å¦‚æœå½“å‰çŠ¶æ€ä¸ºç©ºé—²ï¼Œç›´æ¥è·å–é”
 	if (OldStatus==0)
 		return ;
 
 	while (1)
 	{
-		//Òò¶ÀÕ¼ËøĞèÒªµÈ´ıµÄÇé¿ö
-		//³öÓÚ¹«Æ½ĞÔ¿¼ÂÇ£¬Ö»ÒªÓĞ¶ÀÕ¼ËøÇëÇó£¬ºóĞøµÄËùÓĞ¹²ÏíËøÇëÇó¶¼ÒªÅÅ¶Ó£¨¼´Ê¹µ±Ç°Õı´¦ÓÚ¹²Ïí×´Ì¬£©
-		//ÓĞÁËwait±ê¼Ç£¬ËµÃ÷£º1.µ±Ç°ÊÇ¶ÀÕ¼Ëø£¬ºóĞøÎŞÂÛÊ²Ã´ÀàĞÍµÄÇëÇó¶¼ÒªÅÅ¶Ó
-		//2.µ±Ç°ÊÇ¹²ÏíËø£¬µ«ÊÇ¶ÓÁĞÀïÓĞ¶ÀÕ¼ËøÇëÇó£¬ºóÀ´µÄ¹²ÏíËøÒ²Ó¦¸ÃÅÅ¶Ó
-		//×÷Îª¶Ô±È£¬Èôµ±Ç°ÊÇ¹²ÏíËø£¬½ô½Ó×ÅµÄ¹²ÏíÇëÇó¿ÉÒÔÖ±½Ó»ñÈ¡Ëø£¬²»»á×èÈûºÍÌí¼Ówait±ê¼Ç
-		//ÁíÓĞÒ»ÖÖÌØÊâÇé¿ö£¬µ±Ç°ÊÇ¶ÀÕ¼Ëø£¬ºóĞøÃ»ÓĞÏß³ÌÇëÇóËø£¬Ò²¾ÍÃ»ÓĞwait±ê¼Ç
-		//µ«ÊÇÕâÖÖÇé¿öµÄshare countÎª0£¨×÷Îª¶Ô±È£¬Ö»ÓĞµ¥¸ö¹²ÏíËøÊ±share countÎª1£©
-		//Ò»µ©ºóĞøÓĞÇëÇó£¬ÇëÇóÕß¾Í»áµÈ´ı£¬±ä³ÉÓĞwait±ê¼ÇµÄÇé¿ö
+		//å› ç‹¬å é”éœ€è¦ç­‰å¾…çš„æƒ…å†µ
+		//å‡ºäºå…¬å¹³æ€§è€ƒè™‘ï¼Œåªè¦æœ‰ç‹¬å é”è¯·æ±‚ï¼Œåç»­çš„æ‰€æœ‰å…±äº«é”è¯·æ±‚éƒ½è¦æ’é˜Ÿï¼ˆå³ä½¿å½“å‰æ­£å¤„äºå…±äº«çŠ¶æ€ï¼‰
+		//æœ‰äº†waitæ ‡è®°ï¼Œè¯´æ˜ï¼š1.å½“å‰æ˜¯ç‹¬å é”ï¼Œåç»­æ— è®ºä»€ä¹ˆç±»å‹çš„è¯·æ±‚éƒ½è¦æ’é˜Ÿ
+		//2.å½“å‰æ˜¯å…±äº«é”ï¼Œä½†æ˜¯é˜Ÿåˆ—é‡Œæœ‰ç‹¬å é”è¯·æ±‚ï¼Œåæ¥çš„å…±äº«é”ä¹Ÿåº”è¯¥æ’é˜Ÿ
+		//ä½œä¸ºå¯¹æ¯”ï¼Œè‹¥å½“å‰æ˜¯å…±äº«é”ï¼Œç´§æ¥ç€çš„å…±äº«è¯·æ±‚å¯ä»¥ç›´æ¥è·å–é”ï¼Œä¸ä¼šé˜»å¡å’Œæ·»åŠ waitæ ‡è®°
+		//å¦æœ‰ä¸€ç§ç‰¹æ®Šæƒ…å†µï¼Œå½“å‰æ˜¯ç‹¬å é”ï¼Œåç»­æ²¡æœ‰çº¿ç¨‹è¯·æ±‚é”ï¼Œä¹Ÿå°±æ²¡æœ‰waitæ ‡è®°
+		//ä½†æ˜¯è¿™ç§æƒ…å†µçš„share countä¸º0ï¼ˆä½œä¸ºå¯¹æ¯”ï¼Œåªæœ‰å•ä¸ªå…±äº«é”æ—¶share countä¸º1ï¼‰
+		//ä¸€æ—¦åç»­æœ‰è¯·æ±‚ï¼Œè¯·æ±‚è€…å°±ä¼šç­‰å¾…ï¼Œå˜æˆæœ‰waitæ ‡è®°çš„æƒ…å†µ
 		if ((OldStatus&SRWF_Hold) && ((OldStatus&SRWF_Wait) || ((OldStatus&SRWM_ITEM)==NULL)))
 		{
 			if (RtlpWaitCouldDeadlock())
@@ -298,7 +298,7 @@ void NTAPI RtlAcquireSRWLockShared(RTL_SRWLOCK* SRWLock)
 			if (OldStatus&SRWF_Wait)
 			{
 				item.back=(SYNCITEM*)(OldStatus&SRWM_ITEM);
-				//Ô­»ã±à¾ÍÊÇÕâÃ´Ğ´µÄ£¬µ«ÊÇ¸Õ²ÅSRWF_HoldÒÑ¾­¼ì²âµ½ÁË
+				//åŸæ±‡ç¼–å°±æ˜¯è¿™ä¹ˆå†™çš„ï¼Œä½†æ˜¯åˆšæ‰SRWF_Holdå·²ç»æ£€æµ‹åˆ°äº†
 				NewStatus=((SYNCSTATUS)&item)|(OldStatus&(SRWF_Many|SRWF_Hold))|(SRWF_Link|SRWF_Wait);
 				item.first=NULL;
 
@@ -308,7 +308,7 @@ void NTAPI RtlAcquireSRWLockShared(RTL_SRWLOCK* SRWLock)
 			else
 			{
 				item.first=&item;
-				//µ±Ç°Ò»¶¨ÊÇ¶ÀÕ¼Ëø£¬ËùÒÔ²»ÓÃ¿¼ÂÇSRWF_Many
+				//å½“å‰ä¸€å®šæ˜¯ç‹¬å é”ï¼Œæ‰€ä»¥ä¸ç”¨è€ƒè™‘SRWF_Many
 				NewStatus=((SYNCSTATUS)&item)|(SRWF_Wait|SRWF_Hold);
 			}
 
@@ -337,13 +337,13 @@ void NTAPI RtlAcquireSRWLockShared(RTL_SRWLOCK* SRWLock)
 		}
 		else
 		{
-			//Ä³¸öÏß³Ì¸ÕÊÍ·ÅËø£¬½öÇå³ıÁËHold±ê¼Ç£¬ÆäËüÏß³Ì»¹Ã»À´µÃ¼°»ñÈ¡Ëø
-			//±¾Ïß³Ì¿ÉÒÔ³Ã»ú»ñÈ¡Ëø£¬ÉèÖÃ±ê¼Ç£¬Áî»½ĞÑ²Ù×÷È¡Ïû»ò»½ĞÑºóÔÙ´ÎÇÀÕ¼Ëø
-			//ÕâÀïÓĞµãĞ¡ÎÊÌâ£¬Èç¹û¸Õ¸ÕÊÇ¶ÀÕ¼ËøÊÍ·Å£¬¼´Ê¹ºóĞøÊÇ¹²ÏíÇëÇó
-			//Ò²ÓĞ¿ÉÄÜÈ¡Ïû»½ĞÑ²Ù×÷£¬¶ø²»ÊÇºÍµ±Ç°µÄ¹²ÏíÏß³ÌÒ»Æğ»ñÈ¡Ëø
+			//æŸä¸ªçº¿ç¨‹åˆšé‡Šæ”¾é”ï¼Œä»…æ¸…é™¤äº†Holdæ ‡è®°ï¼Œå…¶å®ƒçº¿ç¨‹è¿˜æ²¡æ¥å¾—åŠè·å–é”
+			//æœ¬çº¿ç¨‹å¯ä»¥è¶æœºè·å–é”ï¼Œè®¾ç½®æ ‡è®°ï¼Œä»¤å”¤é†’æ“ä½œå–æ¶ˆæˆ–å”¤é†’åå†æ¬¡æŠ¢å é”
+			//è¿™é‡Œæœ‰ç‚¹å°é—®é¢˜ï¼Œå¦‚æœåˆšåˆšæ˜¯ç‹¬å é”é‡Šæ”¾ï¼Œå³ä½¿åç»­æ˜¯å…±äº«è¯·æ±‚
+			//ä¹Ÿæœ‰å¯èƒ½å–æ¶ˆå”¤é†’æ“ä½œï¼Œè€Œä¸æ˜¯å’Œå½“å‰çš„å…±äº«çº¿ç¨‹ä¸€èµ·è·å–é”
 			if (OldStatus&SRWF_Wait)
 				NewStatus=OldStatus+SRWF_Hold;
-			//µ±Ç°´¦ÓÚ¹²Ïí×´Ì¬£¬¿ÉÒÔ»ñÈ¡Ëø£¬Ôö¼Ó¹²Ïí¼ÆÊı
+			//å½“å‰å¤„äºå…±äº«çŠ¶æ€ï¼Œå¯ä»¥è·å–é”ï¼Œå¢åŠ å…±äº«è®¡æ•°
 			else
 				NewStatus=(OldStatus+(1<<SRW_COUNT_BIT))|SRWF_Hold;
 			CurrStatus=InterlockedCompareExchange((SYNCSTATUS*)SRWLock,NewStatus,OldStatus);
@@ -357,12 +357,12 @@ void NTAPI RtlAcquireSRWLockShared(RTL_SRWLOCK* SRWLock)
 
 void NTAPI RtlReleaseSRWLockExclusive(RTL_SRWLOCK* SRWLock)
 {
-	//È¥µôHold±ê¼Ç
+	//å»æ‰Holdæ ‡è®°
 	SYNCSTATUS OldStatus=InterlockedExchangeAdd((SYNCSTATUS*)SRWLock,-SRWF_Hold);
 	if (!(OldStatus&SRWF_Hold))
 		RtlRaiseStatus(0xC0000264);	//STATUS_RESOURCE_NOT_OWNED
-	//ÓĞÏß³ÌÔÚµÈ´ı£¬ÇÒÃ»ÓĞÏß³ÌÕıÔÚ²Ù×÷Á´±í£¬Ö´ĞĞ»½ĞÑ²Ù×÷
-	//·ñÔòµ±Ç°²Ù×÷Á´±íµÄÏß³Ì¼ì²âµ½×´Ì¬¸Ä±ä£¬Ö´ĞĞ»½ĞÑ²Ù×÷
+	//æœ‰çº¿ç¨‹åœ¨ç­‰å¾…ï¼Œä¸”æ²¡æœ‰çº¿ç¨‹æ­£åœ¨æ“ä½œé“¾è¡¨ï¼Œæ‰§è¡Œå”¤é†’æ“ä½œ
+	//å¦åˆ™å½“å‰æ“ä½œé“¾è¡¨çš„çº¿ç¨‹æ£€æµ‹åˆ°çŠ¶æ€æ”¹å˜ï¼Œæ‰§è¡Œå”¤é†’æ“ä½œ
 	if ((OldStatus&SRWF_Wait) && !(OldStatus&SRWF_Link))
 	{
 		OldStatus-=SRWF_Hold;
@@ -376,23 +376,23 @@ void NTAPI RtlReleaseSRWLockShared(RTL_SRWLOCK* SRWLock)
 {
 	SYNCSTATUS CurrStatus,NewStatus;
 	SYNCSTATUS OldStatus=InterlockedCompareExchange((SYNCSTATUS*)SRWLock,0,((1<<SRW_COUNT_BIT)|SRWF_Hold));
-	//Èç¹û¹²Ïí¼ÆÊıÎª1£¬ÇÒ±ê¼Ç½öÎªHold
-	//ËµÃ÷½öÓĞÒ»¸ö¹²ÏíËø£¬»Ö¸´ÖÁ¿ÕÏĞ×´Ì¬¾Í¿ÉÒÔÁË
+	//å¦‚æœå…±äº«è®¡æ•°ä¸º1ï¼Œä¸”æ ‡è®°ä»…ä¸ºHold
+	//è¯´æ˜ä»…æœ‰ä¸€ä¸ªå…±äº«é”ï¼Œæ¢å¤è‡³ç©ºé—²çŠ¶æ€å°±å¯ä»¥äº†
 	if (OldStatus==((1<<SRW_COUNT_BIT)|SRWF_Hold))
 		return ;
 
 	if (!(OldStatus&SRWF_Hold))
 		RtlRaiseStatus(0xC0000264);
 
-	//Ö»´æÔÚ¹²ÏíËø
+	//åªå­˜åœ¨å…±äº«é”
 	if (!(OldStatus&SRWF_Wait))
 	{
 		do 
 		{
-			//¹²Ïí¼ÆÊıÎª1£¬Çå¿ÕÎª¿ÕÏĞ×´Ì¬
+			//å…±äº«è®¡æ•°ä¸º1ï¼Œæ¸…ç©ºä¸ºç©ºé—²çŠ¶æ€
 			if ((OldStatus&SRWM_COUNT)<=(1<<SRW_COUNT_BIT))
 				NewStatus=0;
-			//¹²Ïí¼ÆÊı´óÓÚ0£¬½«Æä-1
+			//å…±äº«è®¡æ•°å¤§äº0ï¼Œå°†å…¶-1
 			else
 				NewStatus=OldStatus-(1<<SRW_COUNT_BIT);
 			CurrStatus=InterlockedCompareExchange((SYNCSTATUS*)SRWLock,NewStatus,OldStatus);
@@ -402,30 +402,30 @@ void NTAPI RtlReleaseSRWLockShared(RTL_SRWLOCK* SRWLock)
 		} while (!(OldStatus&SRWF_Wait));
 	}
 
-	//ÓĞ¶ÀÕ¼ÇëÇóµÈ´ıÊ±
-	//Èç¹ûÓĞ¶à¸ö¹²ÏíËø£¬¼ÆÊı-1
+	//æœ‰ç‹¬å è¯·æ±‚ç­‰å¾…æ—¶
+	//å¦‚æœæœ‰å¤šä¸ªå…±äº«é”ï¼Œè®¡æ•°-1
 	if (OldStatus&SRWF_Many)
 	{
 		SYNCITEM* curr=(SYNCITEM*)(OldStatus&SRWM_ITEM);
-		//Ñ°ÕÒ×î½üµÄfirst½Úµã£¬²éÑ¯¹²Ïí¼ÆÊı
-		//¹²ÏíËø½Ó¹²ÏíËø²»»á×èÈû£¬Ò²²»»áĞÂÔöµÈ´ı½Úµã
-		//¹²ÏíËø½Ó¶ÀÕ¼Ëø£¬¶ÀÕ¼Ëø»áµÈ´ı£¬²¢ÇÒÆäitem¼ÇÂ¼¹²Ïí¼ÆÊı
-		//ÌØÊâµÄ£¬¶ÀÕ¼Ëø½Ó¶ÀÕ¼Ëø£¬»ò¶ÀÕ¼Ëø½Ó¹²ÏíËø£¬¼ÇÂ¼µÄ¹²Ïí¼ÆÊıÎª0
+		//å¯»æ‰¾æœ€è¿‘çš„firstèŠ‚ç‚¹ï¼ŒæŸ¥è¯¢å…±äº«è®¡æ•°
+		//å…±äº«é”æ¥å…±äº«é”ä¸ä¼šé˜»å¡ï¼Œä¹Ÿä¸ä¼šæ–°å¢ç­‰å¾…èŠ‚ç‚¹
+		//å…±äº«é”æ¥ç‹¬å é”ï¼Œç‹¬å é”ä¼šç­‰å¾…ï¼Œå¹¶ä¸”å…¶itemè®°å½•å…±äº«è®¡æ•°
+		//ç‰¹æ®Šçš„ï¼Œç‹¬å é”æ¥ç‹¬å é”ï¼Œæˆ–ç‹¬å é”æ¥å…±äº«é”ï¼Œè®°å½•çš„å…±äº«è®¡æ•°ä¸º0
 		while (curr->first==NULL)
 			curr=curr->back;	
 		curr=curr->first;
 
-		//¹²Ïí¼ÆÊı-1£¬Èç¹û¹²Ïí¼ÆÊı´óÓÚ0£¬ËµÃ÷ÏÖÔÚÈÔÓĞÏß³ÌÕ¼ÓĞ¹²ÏíËø
+		//å…±äº«è®¡æ•°-1ï¼Œå¦‚æœå…±äº«è®¡æ•°å¤§äº0ï¼Œè¯´æ˜ç°åœ¨ä»æœ‰çº¿ç¨‹å æœ‰å…±äº«é”
 		DWORD count=InterlockedDecrement(&curr->count);
 		if (count>0)
 			return ;
 	}
 
-	//¹²ÏíËøÍêÈ«ÊÍ·Å£¬»½ĞÑÏÂ¸öµÈ´ıÕß
+	//å…±äº«é”å®Œå…¨é‡Šæ”¾ï¼Œå”¤é†’ä¸‹ä¸ªç­‰å¾…è€…
 	while (1)
 	{
 		NewStatus=OldStatus&(~(SRWF_Many|SRWF_Hold));
-		//ÓĞÏß³ÌÔÚ²Ù×÷Á´±í£¬ÈÃËüÈ¥»½ĞÑ°É
+		//æœ‰çº¿ç¨‹åœ¨æ“ä½œé“¾è¡¨ï¼Œè®©å®ƒå»å”¤é†’å§
 		if (OldStatus&SRWF_Link)
 		{
 			CurrStatus=InterlockedCompareExchange((SYNCSTATUS*)SRWLock,NewStatus,OldStatus);
