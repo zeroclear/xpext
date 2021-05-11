@@ -3,12 +3,12 @@
 
 BOOL NTAPI RtlpWaitCouldDeadlock()
 {
-	//byte_77F978A8¼«ÓĞ¿ÉÄÜÊÇLdrpShutdownInProgress
-	//½ø³ÌÍË³öÊ±£¬¸÷ÖÖ×ÊÔ´¼´½«±»Ïú»Ù£¬¼ÌĞøµÈ´ı½«»á³öÏÖ´íÎóµÄ½á¹û
+	//byte_77F978A8ææœ‰å¯èƒ½æ˜¯LdrpShutdownInProgress
+	//è¿›ç¨‹é€€å‡ºæ—¶ï¼Œå„ç§èµ„æºå³å°†è¢«é”€æ¯ï¼Œç»§ç»­ç­‰å¾…å°†ä¼šå‡ºç°é”™è¯¯çš„ç»“æœ
 	return *LdrpShutdownInProgress!=0;
 }
 
-//Í¨¹ıÑÓÊ±À´ÔİÊ±ÍË±Ü¾ºÕù
+//é€šè¿‡å»¶æ—¶æ¥æš‚æ—¶é€€é¿ç«äº‰
 void NTAPI RtlBackoff(DWORD* pCount)
 {
 	DWORD nBackCount=*pCount;
@@ -25,7 +25,7 @@ void NTAPI RtlBackoff(DWORD* pCount)
 			nBackCount=nBackCount+nBackCount;
 	}
 	nBackCount=(__rdtsc()&(nBackCount-1))+nBackCount;
-	//Win7Ô­´úÂë½èÓÃ²ÎÊıÀ´¼ÆÊı£¬Ê¡È¥¾Ö²¿±äÁ¿
+	//Win7åŸä»£ç å€Ÿç”¨å‚æ•°æ¥è®¡æ•°ï¼Œçœå»å±€éƒ¨å˜é‡
 	pCount=0;
 	while ((DWORD)pCount<nBackCount)
 	{
@@ -43,7 +43,7 @@ BOOL NTAPI RtlIsAnyDebuggerPresent()
 
 int NTAPI RtlpTerminateFailureFilter(NTSTATUS ExceptionCode,EXCEPTION_POINTERS* ms_exc_ptr)
 {
-	//Õâ¸öº¯Êı¸ºÔğÏòÏµÍ³±¨¸æÒì³£²¢ÍË³ö½ø³Ì£¬ÓÉÓÚÌ«¹ı¸´ÔÓ£¬ÕâÀï²»Ê¹ÓÃ
+	//è¿™ä¸ªå‡½æ•°è´Ÿè´£å‘ç³»ç»ŸæŠ¥å‘Šå¼‚å¸¸å¹¶é€€å‡ºè¿›ç¨‹ï¼Œç”±äºå¤ªè¿‡å¤æ‚ï¼Œè¿™é‡Œä¸ä½¿ç”¨
 	//RtlReportException(ms_exc_ptr->ExceptionRecord,ms_exc_ptr->ContextRecord,0);
 	NtTerminateProcess((HANDLE)0xFFFFFFFF,ExceptionCode);
 	return EXCEPTION_EXECUTE_HANDLER;
@@ -75,29 +75,29 @@ void NTAPI RtlReportCriticalFailure(DWORD ExceptionCode,ULONG_PTR ExceptionParam
 }
 
 /*
-Windows XP£º
+Windows XPï¼š
 kernel32.SetLastError={BreakPoint}+{LastErrorSet}
 kernel32.BaseSetLastNTError=ntdll.RtlNtStatusToDosError+kernel32.SetLastError
 sdk.SetLastError=ntdll.RtlRestoreLastWin32Error
 ntdll.RtlRestoreLastWin32Error={LastErrorSet}
 ntdll.RtlSetLastWin32ErrorAndNtStatusFromNtStatus=ntdll.RtlNtStatusToDosError+{LastErrorSet}
-Windows 7£º
+Windows 7ï¼š
 kernel32.SetLastError=jmp ntdll.RtlRestoreLastWin32Error
 kernel32.BaseSetLastNTError=ntdll.RtlNtStatusToDosError+ntdll.RtlSetLastWin32Error
 sdk.SetLastError=kernel32.SetLastError
 ntdll.RtlSetLastWin32Error=ntdll.RtlRestoreLastWin32Error={BreakPoint}+{LastErrorSet}
 ntdll.RtlSetLastWin32ErrorAndNtStatusFromNtStatus=ntdll.RtlNtStatusToDosError+ntdll.RtlSetLastWin32Error
 
-XPµÄSetLastError·ÖÁ½ÖÖ£¬Ò»ÖÖÊÇkernel32ÄÚ²¿Ê¹ÓÃµÄkernel32.SetLastError£¬¾ßÓĞ¶Ïµã¹¦ÄÜ
-ÁíÒ»ÖÖÊÇsdkÀï¹©¿ª·¢ÕßÊ¹ÓÃµÄ£¬Êµ¼ÊÊÇntdll.RtlRestoreLastWin32Error£¬Ã»ÓĞ¶Ïµã¹¦ÄÜ
-Win7Ôò¶Ô´Ë×÷³öÁËÍ³Ò»£¬ÎŞÂÛÊ²Ã´ÑùµÄSetLastError£¬×îºó¶¼µ÷ÓÃntdll.RtlSetLastWin32Error£¬×ÜÓĞ¶Ïµã¹¦ÄÜ
+XPçš„SetLastErroråˆ†ä¸¤ç§ï¼Œä¸€ç§æ˜¯kernel32å†…éƒ¨ä½¿ç”¨çš„kernel32.SetLastErrorï¼Œå…·æœ‰æ–­ç‚¹åŠŸèƒ½
+å¦ä¸€ç§æ˜¯sdké‡Œä¾›å¼€å‘è€…ä½¿ç”¨çš„ï¼Œå®é™…æ˜¯ntdll.RtlRestoreLastWin32Errorï¼Œæ²¡æœ‰æ–­ç‚¹åŠŸèƒ½
+Win7åˆ™å¯¹æ­¤ä½œå‡ºäº†ç»Ÿä¸€ï¼Œæ— è®ºä»€ä¹ˆæ ·çš„SetLastErrorï¼Œæœ€åéƒ½è°ƒç”¨ntdll.RtlSetLastWin32Errorï¼Œæ€»æœ‰æ–­ç‚¹åŠŸèƒ½
 
-±¾À´ÏëÄ£·ÂWin7£¬°Ñkernel32.SetLastError¸øHookÁË£¬ÁîÆäÌø×ªµ½ÎÒµÄxpext.RtlSetLastWin32Error
-µ«ÊÇÕâÑùÖ»ÄÜĞŞ¸Äkernel32ÄÚ²¿µÄµ÷ÓÃ£¬ÆäËüÈí¼ş¶Ôntdll.RtlRestoreLastWin32ErrorµÄµ÷ÓÃ»¹ÊÇÃ»Ğ§¹û
-¸ü½øÒ»²½µÄ×ö·¨ÊÇÁîkernel32.SetLastErrorÌø×ªµ½ntdll.RtlRestoreLastWin32Error
-È»ºóÁîntdll.RtlRestoreLastWin32ErrorÌø×ªµ½xpext.RtlSetLastWin32Error£¬Í³Ò»Ê¹ÓÃÎÒµÄº¯Êı
-µ«ÊÇ×ĞÏ¸ÏëÏë£¬¾ÍÕâÃ´¸öÆÆ¶Ïµã£¬Õı³£ÈË°Ë±²×ÓÓÃ²»µ½£¬Ã»±ØÒª´ó·ÑÖÜÕÂ¸ãHook£¬Ó°ÏìÏµÍ³ÎÈ¶¨ĞÔ
-×îÖÕµÄ¾ö¶¨ÊÇ£¬xpextÄÚ²¿µÄº¯ÊıÊ¹ÓÃxpext.RtlSetLastWin32Error£¬ÆäËûÈí¼ş²»×öĞŞ¸Ä£¬±£³ÖÔ­À´µÄµ÷ÓÃ
+æœ¬æ¥æƒ³æ¨¡ä»¿Win7ï¼ŒæŠŠkernel32.SetLastErrorç»™Hookäº†ï¼Œä»¤å…¶è·³è½¬åˆ°æˆ‘çš„xpext.RtlSetLastWin32Error
+ä½†æ˜¯è¿™æ ·åªèƒ½ä¿®æ”¹kernel32å†…éƒ¨çš„è°ƒç”¨ï¼Œå…¶å®ƒè½¯ä»¶å¯¹ntdll.RtlRestoreLastWin32Errorçš„è°ƒç”¨è¿˜æ˜¯æ²¡æ•ˆæœ
+æ›´è¿›ä¸€æ­¥çš„åšæ³•æ˜¯ä»¤kernel32.SetLastErrorè·³è½¬åˆ°ntdll.RtlRestoreLastWin32Error
+ç„¶åä»¤ntdll.RtlRestoreLastWin32Errorè·³è½¬åˆ°xpext.RtlSetLastWin32Errorï¼Œç»Ÿä¸€ä½¿ç”¨æˆ‘çš„å‡½æ•°
+ä½†æ˜¯ä»”ç»†æƒ³æƒ³ï¼Œå°±è¿™ä¹ˆä¸ªç ´æ–­ç‚¹ï¼Œæ­£å¸¸äººå…«è¾ˆå­ç”¨ä¸åˆ°ï¼Œæ²¡å¿…è¦å¤§è´¹å‘¨ç« æHookï¼Œå½±å“ç³»ç»Ÿç¨³å®šæ€§
+æœ€ç»ˆçš„å†³å®šæ˜¯ï¼Œxpextå†…éƒ¨çš„å‡½æ•°ä½¿ç”¨xpext.RtlSetLastWin32Errorï¼Œå…¶ä»–è½¯ä»¶ä¸åšä¿®æ”¹ï¼Œä¿æŒåŸæ¥çš„è°ƒç”¨
 */
 
 DWORD g_dwLastErrorToBreakOn=0;
@@ -107,7 +107,7 @@ void NTAPI RtlSetLastWin32Error(DWORD Win32ErrorCode)
 	if (g_dwLastErrorToBreakOn!=0 && Win32ErrorCode==g_dwLastErrorToBreakOn)
 		_asm int 3;
 	TEB* CurrentTeb=NtCurrentTeb();
-	if (CurrentTeb->LastErrorValue!=Win32ErrorCode)		//Õâ¸öÅĞ¶ÏÓĞÒâÒåÂğ£¿
+	if (CurrentTeb->LastErrorValue!=Win32ErrorCode)		//è¿™ä¸ªåˆ¤æ–­æœ‰æ„ä¹‰å—ï¼Ÿ
 		CurrentTeb->LastErrorValue=Win32ErrorCode;
 }
 
