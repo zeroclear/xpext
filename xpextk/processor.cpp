@@ -1,26 +1,26 @@
-
+﻿
 #include <ntddk.h>
 
 /*
-��Ҫ֪���̵߳�ǰ�������ĸ�CPU�����ϣ�ÿ�����ľ���Ҫһ������Ŀռ䣬������¼�Ͷ�ȡID
-���õ�ѡ����ֻ��CPU��GDT��IDT��MSR���Լ�����ϵͳ��KPCR��64��������Ҫ6bit�洢
-Win7��KPCR��¼��CPUÿ�����ĵı���Լ���ţ����ں����API��ѯ
-����KCPR��Ring0��Ring3����ʾ�Ҫ�������ӵ�ϵͳ���ã�Ring3��ҪѰ�Ҹ���Ч�ķ���
+想要知道线程当前运行在哪个CPU核心上，每个核心就需要一块关联的空间，用来记录和读取ID
+可用的选择大概只有CPU的GDT、IDT、MSR，以及操作系统的KPCR，64个核心需要6bit存储
+Win7在KPCR记录了CPU每个核心的编号以及组号，供内核相关API查询
+但是KCPR在Ring0，Ring3想访问就要经过复杂的系统调用，Ring3需要寻找更高效的方案
 
-���ں��е���������ͬ��Ring3����ͨ��lslָ���öν��ޣ�����Win7ѡ����GDT��¼ID
-���һ���εĳ��Ⱥ̣ܶ��ν��޾��ò������ߵ�λ���ճ����Ĳ��ֿ���������¼CPU���
-���TEB���Ǹ��ξ�����Ҫ����������������̶���Ring3���������ܷ��ʵ�
-��ǰ�����Ӽ�λ���öν��ޱ�ʵ�ʴ�һЩ����û��ʲô���⣬�����޸����������Ŀ��
-Ҫ���ľ�����Ring0��GDT�ĵ�8���14��19λ�����ϱ�ţ���Ring3��lslָ���ȡ
+与内核中的其它表不同，Ring3可以通过lsl指令获得段界限，于是Win7选择在GDT记录ID
+如果一个段的长度很短，段界限就用不到更高的位，空出来的部分可以用来记录CPU编号
+存放TEB的那个段就满足要求，它体积不大，索引固定，Ring3代码总是能访问到
+在前面增加几位，让段界限比实际大一些，并没有什么问题，我们修改它就能完成目标
+要做的就是在Ring0将GDT的第8项的14到19位设置上编号，在Ring3用lsl指令读取
 
-Win7�Ժ��64λϵͳ��CPU���飬����Ҫ��¼��ţ�32λ�����Ϊ0��
-�����һ��WORD��Ӧ��Ϊ16bit��������CPU����Ҳ��WORD��ʾ�����=65536/64=1024������Ҫ10bit
-Win7 x64����ż�¼�ڶν��޵ĵ�10λ���ټ��ϸ�6λ��CPU��ţ�ֻʣ���м�4λ����
-����64λCPU��Ʒ����˱仯���ε�ַĬ�ϴ�0��ʼ������ȫ����ַ�ռ䣬���ټ��ν���
-������������ƣ�Win7 x64��GDT�������٣�TEB���ڶ�Ҳ���е���������������10
+Win7以后的64位系统将CPU编组，还需要记录组号（32位组号总为0）
+组号是一个WORD，应该为16bit，可能是CPU总数也用WORD表示，组号=65536/64=1024个，需要10bit
+Win7 x64将组号记录在段界限的低10位，再加上高6位的CPU编号，只剩下中间4位可用
+不过64位CPU设计发生了变化，段地址默认从0开始，覆盖全部地址空间，不再检查段界限
+得益于这项机制，Win7 x64的GDT总数减少，TEB所在段也进行调整，换到了索引10
 
-��û���ҵ�Win7�ں�ʵ�ֵĻ����룬�����Ǵ�GetCurrentProcessorNumberEx�Ļ���Ʋ����
-�������������ģ�����PCHunter��GDT��ʶ�������⣬��ʾ������
+我没能找到Win7内核实现的汇编代码，仅仅是从GetCurrentProcessorNumberEx的汇编推测而来
+理论上是这样的，但是PCHunter对GDT的识别有问题，显示不正常
 */
 
 #pragma pack(1)
@@ -63,12 +63,12 @@ void InitProcessorIdHelper()
 	for (ULONG i=0;i<core;i++)
 	{
 		KeSetSystemAffinityThread(1<<i);
-		//KPCR��GDT�ֶ�Ҳ���Ի��
+		//KPCR的GDT字段也可以获得
 		GDTR gdtr={0,0};
 		_asm sgdt gdtr;
 		GDT* gdt=(GDT*)gdtr.Base;
 		DbgPrint("core%d GDT at:0x%08X\n",i,gdtr.Base);
-		//14λ��19λ�洢CPU���ĺţ�limit�������޴�1MB��Ϊ16KB
+		//14位到19位存储CPU核心号，limit可用上限从1MB变为16KB
 		gdt[7].Limit0_15=((i&3)<<14)|gdt[7].Limit0_15;
 		gdt[7].Limit16_19=(i>>2)&0x0F;
 	}

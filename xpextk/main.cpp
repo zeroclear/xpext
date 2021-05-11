@@ -1,4 +1,4 @@
-
+﻿
 #include <ntddk.h>
 
 void InitTickCount64Helper();

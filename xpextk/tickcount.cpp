@@ -1,37 +1,37 @@
-
+ï»¿
 #include <ntddk.h>
 
 /*
-WindowsÊ±¼äµÄ×îÐ¡µ¥ÔªÊÇ100ns£¬Ò»¸ötick³ÖÐø¶à¸öµ¥ÔªµÄÊ±¼ä
-µ±Ê±ÖÓÖÐ¶Ï·¢ÉúÊ±£¬Ïà¶ÔÉÏÒ»´ÎÖÐ¶ÏÓÖÁ÷ÊÅÁËÒ»Ð©Ê±¼ä
-ÏµÍ³´Óµ±Ç°tick¼õÈ¥¾­¹ýµÄÊ±¼ä£¬Ê£ÓàµÄÊ±¼ä¼ÇÂ¼ÔÚKiTickOffset
-Èç¹ûÊ£ÓàÊ±¼äÐ¡ÓÚ0£¬´ú±íÊ±¼ä¾­¹ýÁËÒ»¸ötick£¬µ±Ç°tick½áÊø
-´ËÊ±ÐèÒª¸üÐÂtickÊý£¬Í³¼ÆÏß³Ì¹¤×÷Ê±¼ä£¬¼ÆËãÏß³ÌÊ±¼äÆ¬£¨quantum£©
-»·¾³ÔÊÐíµÄÇé¿öÏÂ£¬»¹»áµ÷ÓÃKiTimeUpdateNotifyRoutine£¨Win7²»ÔÙÖ§³Ö£©
-×îºó£¬ÎªKiTickOffset²¹³äKeMaximumIncrement¸öÊ±¼äµ¥Ôª£¬½øÈëÏÂ¸ötick
-£¨Win2003µÄ´úÂëÀï£¬»á¸ù¾ÝÊ±¼ä¼ÆËã³ö¾­¹ýÁË¼¸¸ötick£¬¶ø·Ç×ÜÊÇ¼Ó1¸ö£©
-Èç¹ûÊ£ÓàÊ±¼ä´óÓÚ0£¬»á´¦ÀíÒ»Ð©DPCµÄÄÚÈÝ£¬ÕâÀï¾Í²»¹ÜÁË
+Windowsæ—¶é—´çš„æœ€å°å•å…ƒæ˜¯100nsï¼Œä¸€ä¸ªtickæŒç»­å¤šä¸ªå•å…ƒçš„æ—¶é—´
+å½“æ—¶é’Ÿä¸­æ–­å‘ç”Ÿæ—¶ï¼Œç›¸å¯¹ä¸Šä¸€æ¬¡ä¸­æ–­åˆæµé€äº†ä¸€äº›æ—¶é—´
+ç³»ç»Ÿä»Žå½“å‰tickå‡åŽ»ç»è¿‡çš„æ—¶é—´ï¼Œå‰©ä½™çš„æ—¶é—´è®°å½•åœ¨KiTickOffset
+å¦‚æžœå‰©ä½™æ—¶é—´å°äºŽ0ï¼Œä»£è¡¨æ—¶é—´ç»è¿‡äº†ä¸€ä¸ªtickï¼Œå½“å‰tickç»“æŸ
+æ­¤æ—¶éœ€è¦æ›´æ–°tickæ•°ï¼Œç»Ÿè®¡çº¿ç¨‹å·¥ä½œæ—¶é—´ï¼Œè®¡ç®—çº¿ç¨‹æ—¶é—´ç‰‡ï¼ˆquantumï¼‰
+çŽ¯å¢ƒå…è®¸çš„æƒ…å†µä¸‹ï¼Œè¿˜ä¼šè°ƒç”¨KiTimeUpdateNotifyRoutineï¼ˆWin7ä¸å†æ”¯æŒï¼‰
+æœ€åŽï¼Œä¸ºKiTickOffsetè¡¥å……KeMaximumIncrementä¸ªæ—¶é—´å•å…ƒï¼Œè¿›å…¥ä¸‹ä¸ªtick
+ï¼ˆWin2003çš„ä»£ç é‡Œï¼Œä¼šæ ¹æ®æ—¶é—´è®¡ç®—å‡ºç»è¿‡äº†å‡ ä¸ªtickï¼Œè€Œéžæ€»æ˜¯åŠ 1ä¸ªï¼‰
+å¦‚æžœå‰©ä½™æ—¶é—´å¤§äºŽ0ï¼Œä¼šå¤„ç†ä¸€äº›DPCçš„å†…å®¹ï¼Œè¿™é‡Œå°±ä¸ç®¡äº†
 
-¸üÐÂtickÊ±£¬Ê×ÏÈ¸üÐÂKeTickCount£¬ÕâÊÇ¸ö64Î»µÄÖµ£¬×ã¹»¼ÇÂ¼ÊýÍòÄê
-µ«GetTickCount²»Ê¹ÓÃÕâ¸öÖµ£¬¶øÊÇKUSER_SHARED_DATAÀïµÄÖµ
-Win7ÏÂÊÇÆ«ÒÆ0x320µÄTickCount×Ö¶Î£¬Í¬ÑùÒ²ÊÇ64Î»
-XPÏÂÊÇÆ«ÒÆ0µÄTickCountLow£¬Ö»ÓÐ32Î»£¬ÏµÍ³ÔËÐÐÒ»¶ÎÊ±¼äºóÒç³ö¹éÁã
-ÒòÎªGetTickCount·µ»ØÒ²ÊÇ32Î»µÄ£¬Ò»¸öÖÜÆÚÖ»ÓÐ49.7Ìì£¬ÏµÍ³»áÔÚÒç³öºóÂÔÎ¢µ÷Õû
+æ›´æ–°tickæ—¶ï¼Œé¦–å…ˆæ›´æ–°KeTickCountï¼Œè¿™æ˜¯ä¸ª64ä½çš„å€¼ï¼Œè¶³å¤Ÿè®°å½•æ•°ä¸‡å¹´
+ä½†GetTickCountä¸ä½¿ç”¨è¿™ä¸ªå€¼ï¼Œè€Œæ˜¯KUSER_SHARED_DATAé‡Œçš„å€¼
+Win7ä¸‹æ˜¯åç§»0x320çš„TickCountå­—æ®µï¼ŒåŒæ ·ä¹Ÿæ˜¯64ä½
+XPä¸‹æ˜¯åç§»0çš„TickCountLowï¼Œåªæœ‰32ä½ï¼Œç³»ç»Ÿè¿è¡Œä¸€æ®µæ—¶é—´åŽæº¢å‡ºå½’é›¶
+å› ä¸ºGetTickCountè¿”å›žä¹Ÿæ˜¯32ä½çš„ï¼Œä¸€ä¸ªå‘¨æœŸåªæœ‰49.7å¤©ï¼Œç³»ç»Ÿä¼šåœ¨æº¢å‡ºåŽç•¥å¾®è°ƒæ•´
 
-Ö»ÒªÔÚKeUpdateSystemTime¸üÐÂTickCountLowÊ±£¬Í¬Ê±¸üÐÂTickCount£¬¾ÍÄÜÊµÏÖ¹¦ÄÜ
-·½°¸1ÊÇ¸Äntoskrnl.exeµÄÎÄ¼þ£¬Ð§¹ûÎÈ¶¨£¬µ«Âé·³ÇÒÍ¨ÓÃÐÔ²î
-·½°¸2ÊÇÉèÖÃÒ»¸öTimer£¬¶¨Ê±°ÑKeTickCount¸´ÖÆ¹ýÈ¥£¬×î¼òµ¥µ«Òì²½²Ù×÷¾«¶ÈÌ«²î
-·½°¸3ÊÇÊ¹ÓÃKiTimeUpdateNotifyRoutine£¬µ«ËüÖ»ÓÐÒ»¸öÎ»ÖÃ£¬¿ÉÄÜ±»Ä³Ð©ÌØÊâÈí¼þÕ¼ÓÃ
-£¨×¢Òâ£¬ÅÐ¶Ïº¯Êý·Ç¿ÕºÍµ÷ÓÃº¯ÊýÊÇ·Ö¿ªµÄ£¬¶øÇÒÃ»ÓÐ¼ÓËø£¬Çå¿Õ»Øµ÷Ö¸ÕëÓÐ¼«µÍ¸ÅÂÊÀ¶ÆÁ£©
+åªè¦åœ¨KeUpdateSystemTimeæ›´æ–°TickCountLowæ—¶ï¼ŒåŒæ—¶æ›´æ–°TickCountï¼Œå°±èƒ½å®žçŽ°åŠŸèƒ½
+æ–¹æ¡ˆ1æ˜¯æ”¹ntoskrnl.exeçš„æ–‡ä»¶ï¼Œæ•ˆæžœç¨³å®šï¼Œä½†éº»çƒ¦ä¸”é€šç”¨æ€§å·®
+æ–¹æ¡ˆ2æ˜¯è®¾ç½®ä¸€ä¸ªTimerï¼Œå®šæ—¶æŠŠKeTickCountå¤åˆ¶è¿‡åŽ»ï¼Œæœ€ç®€å•ä½†å¼‚æ­¥æ“ä½œç²¾åº¦å¤ªå·®
+æ–¹æ¡ˆ3æ˜¯ä½¿ç”¨KiTimeUpdateNotifyRoutineï¼Œä½†å®ƒåªæœ‰ä¸€ä¸ªä½ç½®ï¼Œå¯èƒ½è¢«æŸäº›ç‰¹æ®Šè½¯ä»¶å ç”¨
+ï¼ˆæ³¨æ„ï¼Œåˆ¤æ–­å‡½æ•°éžç©ºå’Œè°ƒç”¨å‡½æ•°æ˜¯åˆ†å¼€çš„ï¼Œè€Œä¸”æ²¡æœ‰åŠ é”ï¼Œæ¸…ç©ºå›žè°ƒæŒ‡é’ˆæœ‰æžä½Žæ¦‚çŽ‡è“å±ï¼‰
 
-¾¡¹ÜWindowsÍ¨¹ýÒ»Ð©Ëã·¨£¬Í¬Ò»Ê±¼äÖ»ÔÊÐíÒ»¸öºËÐÄÖ´ÐÐKeUpdateSystemTime
-µ«ÊÇÈÔÓÐÒì²½µÄÇé¿ö·¢Éú£¬±ÈÈçÓÃ»§ÐÞ¸ÄÊ±¼ä£¬Ò²»áµ÷ÕûKeTickCount
-¸üÐÂtickÎªÁËÐ§ÂÊÃ»ÓÐÊ¹ÓÃËø£¬¿ÉÄÜµ¼ÖÂKSYSTEM_TIMEµÄLowºÍHigh1Á½¸ö×Ö¶Î²»Í¬²½
-ËùÒÔWin7 32Î»ÒýÈëHigh2Time£¬ÖµÓëHigh1TimeÏàÍ¬£¬ÔÚ×îºóÐ´Èë
-Èç¹û¶ÁÈ¡Ê±£¬High2TimeºÍHigh1Time²»Í¬£¬ËµÃ÷Ð´ÈëÃ»ÓÐÍê³É£¬»òÏß³Ì¼ä¸²¸ÇÐ´Èë
-GetTickCountÉÔµÈÒ»»á£¬Ñ­»·ÔÙ´Î¶ÁÈ¡£¬Á½ÕßÏàÍ¬Ê±£¬¾Í´ú±í½á¹ûÕý³£ÁË
-XPÊ¹ÓÃµÄ¼ÆÊ±Æ÷ÊÇÀÏÊ½µÄRTC£¬¾«¶ÈÔ¶²»ÈçÐÂÊ½µÄHPET¼ÆÊ±Æ÷£¬Ã»±ØÒªÔÚÒâÎó²îÁË
-ÖÁÓÚWin7 64Î»£¬64Î»µÄ²Ù×÷Êý¿ÉÒÔÒ»´ÎÐÔÐ´ÍêÁ½¸ö×Ö¶Î£¬²»ÐèÒªÕâÖÖÍ¬²½·½Ê½
+å°½ç®¡Windowsé€šè¿‡ä¸€äº›ç®—æ³•ï¼ŒåŒä¸€æ—¶é—´åªå…è®¸ä¸€ä¸ªæ ¸å¿ƒæ‰§è¡ŒKeUpdateSystemTime
+ä½†æ˜¯ä»æœ‰å¼‚æ­¥çš„æƒ…å†µå‘ç”Ÿï¼Œæ¯”å¦‚ç”¨æˆ·ä¿®æ”¹æ—¶é—´ï¼Œä¹Ÿä¼šè°ƒæ•´KeTickCount
+æ›´æ–°tickä¸ºäº†æ•ˆçŽ‡æ²¡æœ‰ä½¿ç”¨é”ï¼Œå¯èƒ½å¯¼è‡´KSYSTEM_TIMEçš„Lowå’ŒHigh1ä¸¤ä¸ªå­—æ®µä¸åŒæ­¥
+æ‰€ä»¥Win7 32ä½å¼•å…¥High2Timeï¼Œå€¼ä¸ŽHigh1Timeç›¸åŒï¼Œåœ¨æœ€åŽå†™å…¥
+å¦‚æžœè¯»å–æ—¶ï¼ŒHigh2Timeå’ŒHigh1Timeä¸åŒï¼Œè¯´æ˜Žå†™å…¥æ²¡æœ‰å®Œæˆï¼Œæˆ–çº¿ç¨‹é—´è¦†ç›–å†™å…¥
+GetTickCountç¨ç­‰ä¸€ä¼šï¼Œå¾ªçŽ¯å†æ¬¡è¯»å–ï¼Œä¸¤è€…ç›¸åŒæ—¶ï¼Œå°±ä»£è¡¨ç»“æžœæ­£å¸¸äº†
+XPä½¿ç”¨çš„è®¡æ—¶å™¨æ˜¯è€å¼çš„RTCï¼Œç²¾åº¦è¿œä¸å¦‚æ–°å¼çš„HPETè®¡æ—¶å™¨ï¼Œæ²¡å¿…è¦åœ¨æ„è¯¯å·®äº†
+è‡³äºŽWin7 64ä½ï¼Œ64ä½çš„æ“ä½œæ•°å¯ä»¥ä¸€æ¬¡æ€§å†™å®Œä¸¤ä¸ªå­—æ®µï¼Œä¸éœ€è¦è¿™ç§åŒæ­¥æ–¹å¼
 */
 
 /*
@@ -92,7 +92,7 @@ VOID __stdcall KeUpdateSystemTime_XP(KIRQL OldIrql,ULONG Vector,KTRAP_FRAME* TrF
 		KeTickCount.High2Time=(ULONG)(TickCount>>32);
 		*(ULONGLONG*)&KeTickCount=TickCount;
 
-		if (KUserSharedData->TickCountLowDeprecated+1==0)	//TickCountLowÒç³ö
+		if (KUserSharedData->TickCountLowDeprecated+1==0)	//TickCountLowæº¢å‡º
 			ExpTickCountAdjustmentCount++;
 
 		KUserSharedData->TickCountLowDeprecated=KeTickCount.LowPart+
@@ -100,7 +100,7 @@ VOID __stdcall KeUpdateSystemTime_XP(KIRQL OldIrql,ULONG Vector,KTRAP_FRAME* TrF
 		//...
 	}
 
-	//ÖÐ¼äµÄ²¿·ÖÊÇ×öÒ»Ð©DPCÏà¹ØµÄ²Ù×÷£¬¿É²Î¿¼NT5´úÂë£¬ÕâÀï²»Ð´ÁË
+	//ä¸­é—´çš„éƒ¨åˆ†æ˜¯åšä¸€äº›DPCç›¸å…³çš„æ“ä½œï¼Œå¯å‚è€ƒNT5ä»£ç ï¼Œè¿™é‡Œä¸å†™äº†
 	//Win2K3\NT\base\ntos\ke\ia64\clock.c
 	//XPSP1\NT\base\ntos\ke\ia64\clock.c
 
@@ -122,7 +122,7 @@ VOID __stdcall KeUpdateSystemTime_XP(KIRQL OldIrql,ULONG Vector,KTRAP_FRAME* TrF
 VOID __stdcall KeUpdateRunTime_XP(KIRQL OldIrql)
 {
 	KTRAP_FRAME* TrFrame=ebp;
-	//KPRCBÔÚKPCRÆ«ÒÆ0x120´¦£¬ÕâÀïÖ±½ÓÓÃKPRCB
+	//KPRCBåœ¨KPCRåç§»0x120å¤„ï¼Œè¿™é‡Œç›´æŽ¥ç”¨KPRCB
 	KPRCB* Prcb=KeGetCurrentPrcb();
 	Prcb->InterruptCount++;
 	KTHREAD* Thread=Prcb->CurrentThread;
@@ -166,7 +166,7 @@ typedef VOID (__fastcall*FNTIMEUPDATECALLBACK)(HANDLE ThreadId);
 extern "C" NTSYSAPI VOID __fastcall KeSetTimeUpdateNotifyRoutine(FNTIMEUPDATECALLBACK TimeUpdateCallback);
 KSYSTEM_TIME* KeTickCountAddr=NULL;
 
-//²âÊÔ½×¶Î£¬ÏÈ²ÉÓÃKiTimeUpdateNotifyRoutine
+//æµ‹è¯•é˜¶æ®µï¼Œå…ˆé‡‡ç”¨KiTimeUpdateNotifyRoutine
 VOID __fastcall KeTimeUpdateCallback(HANDLE ThreadId)
 {
 	KUSER_SHARED_DATA* KUserSharedData=(KUSER_SHARED_DATA*)0xFFDF0000;
