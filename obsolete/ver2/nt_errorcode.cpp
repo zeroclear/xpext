@@ -2,35 +2,35 @@
 #include "common.h"
 
 /*
-½«NT´íÎóÂë×ª»»³ÉWindows´íÎóÂëÐèÒªÓÃRtlNtStatusToDosError£¬Æä¹¦ÄÜÊÇÓÉRtlNtStatusToDosErrorNoTebÊµÏÖµÄ
-RtlNtStatusToDosErrorNoTebÓÃµ½Ò»¸ö×ª»»±í£¬´ó¶àÊý×ª»»Í¨¹ý²é±íÍê³É£¬Ð¡²¿·Ö°´Ìõ¼þ×ª»»£¬ÎÞ·¨×ª»»µÄ·µ»Ø0x13D
-XPÏµÍ³×ª»»STATUS_TIMEOUT£¨0x102£©£¬»á·µ»ØERROR_MR_MID_NOT_FOUND£¨0x13D£©£¬¶ø²»ÊÇÔ¤ÆÚµÄERROR_TIMEOUT£¨0x5B4£©
-ÕâÊÇÒòÎªXPµÄ×ª»»±í´Ó0x103¿ªÊ¼¼ÇÂ¼£¬Â©µôÁËÖ®Ç°µÄ´íÎóÂë
-Win7µÄRtlNtStatusToDosErrorNoTebºÍXPÍêÈ«Ò»Ñù£¬µ«ÊÇÓ¦ÓÃÁË¸üÈ«µÄ×ª»»±í£¬STATUS_TIMEOUT¿ÉÒÔÕý³£×ª»»
+å°†NTé”™è¯¯ç è½¬æ¢æˆWindowsé”™è¯¯ç éœ€è¦ç”¨RtlNtStatusToDosErrorï¼Œå…¶åŠŸèƒ½æ˜¯ç”±RtlNtStatusToDosErrorNoTebå®žçŽ°çš„
+RtlNtStatusToDosErrorNoTebç”¨åˆ°ä¸€ä¸ªè½¬æ¢è¡¨ï¼Œå¤§å¤šæ•°è½¬æ¢é€šè¿‡æŸ¥è¡¨å®Œæˆï¼Œå°éƒ¨åˆ†æŒ‰æ¡ä»¶è½¬æ¢ï¼Œæ— æ³•è½¬æ¢çš„è¿”å›ž0x13D
+XPç³»ç»Ÿè½¬æ¢STATUS_TIMEOUTï¼ˆ0x102ï¼‰ï¼Œä¼šè¿”å›žERROR_MR_MID_NOT_FOUNDï¼ˆ0x13Dï¼‰ï¼Œè€Œä¸æ˜¯é¢„æœŸçš„ERROR_TIMEOUTï¼ˆ0x5B4ï¼‰
+è¿™æ˜¯å› ä¸ºXPçš„è½¬æ¢è¡¨ä»Ž0x103å¼€å§‹è®°å½•ï¼Œæ¼æŽ‰äº†ä¹‹å‰çš„é”™è¯¯ç 
+Win7çš„RtlNtStatusToDosErrorNoTebå’ŒXPå®Œå…¨ä¸€æ ·ï¼Œä½†æ˜¯åº”ç”¨äº†æ›´å…¨çš„è½¬æ¢è¡¨ï¼ŒSTATUS_TIMEOUTå¯ä»¥æ­£å¸¸è½¬æ¢
 
-¿ÉÒÔÔÚXPSP1\NT\base\ntos\rtl\error.cÕÒµ½Õâ¸öº¯ÊýµÄÊµÏÖ£¬ÀïÃæÓÐÒ»¶ÎÁîÈËÃÔ»óµÄ²é±íËã·¨
-ÔÚXPSP1\NT\base\tools\winerror\winerror.c¿ÉÒÔÕÒµ½ËüµÄ»¹Ô­Ëã·¨ReconstructPairs()
-ÕâËµÃ÷NT´íÎóÂëºÍWindows´íÎóÂëÊÇÒ»Ò»¶ÔÓ¦µÄÒ»×é±í£¬½øÐÐ×ª»»¿ÉÄÜÊÇÎªÁËÌáÉýÐ§ÂÊ£¬»òÑ¹ËõÌå»ý
-£¨¿ªÊ¼ÎÒ´òËãÓÃÇî¾Ù½«±í»¹Ô­£¬ºóÀ´·¢ÏÖÊ±¼äºÍ¿Õ¼ä¶¼²»ÔÊÐíÕâÃ´×ö£©
+å¯ä»¥åœ¨XPSP1\NT\base\ntos\rtl\error.cæ‰¾åˆ°è¿™ä¸ªå‡½æ•°çš„å®žçŽ°ï¼Œé‡Œé¢æœ‰ä¸€æ®µä»¤äººè¿·æƒ‘çš„æŸ¥è¡¨ç®—æ³•
+åœ¨XPSP1\NT\base\tools\winerror\winerror.cå¯ä»¥æ‰¾åˆ°å®ƒçš„è¿˜åŽŸç®—æ³•ReconstructPairs()
+è¿™è¯´æ˜ŽNTé”™è¯¯ç å’ŒWindowsé”™è¯¯ç æ˜¯ä¸€ä¸€å¯¹åº”çš„ä¸€ç»„è¡¨ï¼Œè¿›è¡Œè½¬æ¢å¯èƒ½æ˜¯ä¸ºäº†æå‡æ•ˆçŽ‡ï¼Œæˆ–åŽ‹ç¼©ä½“ç§¯
+ï¼ˆå¼€å§‹æˆ‘æ‰“ç®—ç”¨ç©·ä¸¾å°†è¡¨è¿˜åŽŸï¼ŒåŽæ¥å‘çŽ°æ—¶é—´å’Œç©ºé—´éƒ½ä¸å…è®¸è¿™ä¹ˆåšï¼‰
 
-×îÖÕÎÒÔÚXPSP1\NT\sdktools\generr\generr.c·¢ÏÖÁË×ª»»Æ÷µÄ´úÂë£¬Í·ÎÄ¼þºÍ²éÕÒÓÃµÄ±í¶¼ÊÇËã·¨Éú³ÉµÄ
-×ª»»Æ÷ÒªÇóÊäÈëÒ»¸ö°üº¬{NT´íÎóÂë-Windows´íÎóÂë}Åä¶ÔµÄÎÄ¼þ
-Í·²¿±ØÐëÎª"igeBeg nrrenlbt "£¨"Begin generr tbl"µÄlittle endian£©
-±íµÄ×îºóÒ»Ïî±ØÐëÊÇ0xFFFFFFFF 0x00000000£¬È»ºóÒÔ0x00000000 0x00000000 0x00000000 0x00000000½áÎ²
-ÔÚÃüÁîÐÐÖ¸¶¨ÊäÈëÎÄ¼þÃûºÍÊä³öÎÄ¼þÃû£¬¾Í¿ÉÒÔ½«Ô­Ê¼µÄ´íÎóÂë±í×ª»»³É2¸öÐÂ±í£¬²¢Éú³ÉÍ·ÎÄ¼þ
+æœ€ç»ˆæˆ‘åœ¨XPSP1\NT\sdktools\generr\generr.cå‘çŽ°äº†è½¬æ¢å™¨çš„ä»£ç ï¼Œå¤´æ–‡ä»¶å’ŒæŸ¥æ‰¾ç”¨çš„è¡¨éƒ½æ˜¯ç®—æ³•ç”Ÿæˆçš„
+è½¬æ¢å™¨è¦æ±‚è¾“å…¥ä¸€ä¸ªåŒ…å«{NTé”™è¯¯ç -Windowsé”™è¯¯ç }é…å¯¹çš„æ–‡ä»¶
+å¤´éƒ¨å¿…é¡»ä¸º"igeBeg nrrenlbt "ï¼ˆ"Begin generr tbl"çš„little endianï¼‰
+è¡¨çš„æœ€åŽä¸€é¡¹å¿…é¡»æ˜¯0xFFFFFFFF 0x00000000ï¼Œç„¶åŽä»¥0x00000000 0x00000000 0x00000000 0x00000000ç»“å°¾
+åœ¨å‘½ä»¤è¡ŒæŒ‡å®šè¾“å…¥æ–‡ä»¶åå’Œè¾“å‡ºæ–‡ä»¶åï¼Œå°±å¯ä»¥å°†åŽŸå§‹çš„é”™è¯¯ç è¡¨è½¬æ¢æˆ2ä¸ªæ–°è¡¨ï¼Œå¹¶ç”Ÿæˆå¤´æ–‡ä»¶
 
-¾­¹ýÒ»·¬·ÖÎö£¬ÎÒ·¢ÏÖÕâÊÇ¸öÑ¹ËõËã·¨
-Èç¹ûÁ¬Ðø¼¸¸öNT´íÎóÂëÒÔ1Îª²½³¤Á¬ÐøµÝÔö£¬»á±»Ñ¹Ëõ³É»ùÊý+µÝÔö¸öÊýµÄÐÎÊ½
-Èç¹û±»Ñ¹ËõµÄÕâ¿é£¬ÀïÃæËùÓÐWindows´íÎóÂëµÄ¸ß16Î»Îª0£¬¾ÍÖ»±£´æµÍ16Î»£¬¼ÇÂ¼³¤¶ÈÎª1 WORD£¬·ñÔò³¤¶ÈÎª2 WORD
-×îÖÕ£¬Ñ¹ËõµÄNT´íÎóÂë×÷ÎªË÷Òý£¬±£´æÔÚRtlpRunTableÀï£»Ñ¹ËõµÄWindows´íÎóÂë±£´æÔÚRtlpStatusTableÀï
-Õâ·Ý´úÂë×¥×¡ÁË´íÎóÂëµÄÌØµã£ºNT´íÎóÂëÁ¬ÐøÐÔÇ¿£¬Windows´íÎóÂë´ó¶àÊý²»´óÓÚ0xFFFF
-Ëã·¨È¡µÃÁËÏÔÖøµÄÐ§¹û£¬½«XPµÄ×ª»»±í´Ó6.5KBÑ¹Ëõµ½3.1KB£¬½«Win7µÄ×ª»»±í´Ó16KBÑ¹Ëõµ½7.8KB
-¶øÇÒ²éÕÒÊ±ÎÞÐè½âÑ¹£¬ÉõÖÁ»¹ÓÐµã¼ÓËÙ¶Ô±ÈµÄ×÷ÓÃ
+ç»è¿‡ä¸€ç•ªåˆ†æžï¼Œæˆ‘å‘çŽ°è¿™æ˜¯ä¸ªåŽ‹ç¼©ç®—æ³•
+å¦‚æžœè¿žç»­å‡ ä¸ªNTé”™è¯¯ç ä»¥1ä¸ºæ­¥é•¿è¿žç»­é€’å¢žï¼Œä¼šè¢«åŽ‹ç¼©æˆåŸºæ•°+é€’å¢žä¸ªæ•°çš„å½¢å¼
+å¦‚æžœè¢«åŽ‹ç¼©çš„è¿™å—ï¼Œé‡Œé¢æ‰€æœ‰Windowsé”™è¯¯ç çš„é«˜16ä½ä¸º0ï¼Œå°±åªä¿å­˜ä½Ž16ä½ï¼Œè®°å½•é•¿åº¦ä¸º1 WORDï¼Œå¦åˆ™é•¿åº¦ä¸º2 WORD
+æœ€ç»ˆï¼ŒåŽ‹ç¼©çš„NTé”™è¯¯ç ä½œä¸ºç´¢å¼•ï¼Œä¿å­˜åœ¨RtlpRunTableé‡Œï¼›åŽ‹ç¼©çš„Windowsé”™è¯¯ç ä¿å­˜åœ¨RtlpStatusTableé‡Œ
+è¿™ä»½ä»£ç æŠ“ä½äº†é”™è¯¯ç çš„ç‰¹ç‚¹ï¼šNTé”™è¯¯ç è¿žç»­æ€§å¼ºï¼ŒWindowsé”™è¯¯ç å¤§å¤šæ•°ä¸å¤§äºŽ0xFFFF
+ç®—æ³•å–å¾—äº†æ˜¾è‘—çš„æ•ˆæžœï¼Œå°†XPçš„è½¬æ¢è¡¨ä»Ž6.5KBåŽ‹ç¼©åˆ°3.1KBï¼Œå°†Win7çš„è½¬æ¢è¡¨ä»Ž16KBåŽ‹ç¼©åˆ°7.8KB
+è€Œä¸”æŸ¥æ‰¾æ—¶æ— éœ€è§£åŽ‹ï¼Œç”šè‡³è¿˜æœ‰ç‚¹åŠ é€Ÿå¯¹æ¯”çš„ä½œç”¨
 
-ÔÚ´úÂë¿ªÍ·¿ÉÒÔ¿´µ½£¬×÷ÕßÊÇÒ»Î»½ÐDavid N. Cutler (davec)µÄ´óÉñ£¬Íê³ÉÓÚ1992Äê12ÔÂ
-µ±Ê±µÄÓ²¼þË®Æ½ÓëÏÖÔÚ²»¿ÉÍ¬ÈÕ¶øÓï£¬ÄÚ´æ¿Õ¼äÊ®·Ö±¦¹ó£¬Ê¡ÏÂÕâ¼¸KB¿Õ¼äÒ²ÊÇÒ»ÖÖ¿É¹ÛµÄÌáÉý
-È»¶øÏÖÔÚÊÇ2021Äê£¬Ó²¼þË®Æ½·ÉËÙ·¢Õ¹£¬ÏûºÄÄÔÏ¸°û½ÚÊ¡Ò»µã¿Õ¼ä¾ÍÏÔµÃÃ»ÄÇÃ´ÖØÒªÁË
-ËùÒÔÔÚÎªXPÓ¦ÓÃÐÂ±íÊ±£¬ÎÒ½«Ñ¹ËõµÄ×ª»»±íÕ¹¿ª£¬Ëã·¨¸Ä³ÉÁË¸üÍ¨ÓÃµÄ¶þ·Ö²éÕÒ
+åœ¨ä»£ç å¼€å¤´å¯ä»¥çœ‹åˆ°ï¼Œä½œè€…æ˜¯ä¸€ä½å«David N. Cutler (davec)çš„å¤§ç¥žï¼Œå®ŒæˆäºŽ1992å¹´12æœˆ
+å½“æ—¶çš„ç¡¬ä»¶æ°´å¹³ä¸ŽçŽ°åœ¨ä¸å¯åŒæ—¥è€Œè¯­ï¼Œå†…å­˜ç©ºé—´ååˆ†å®è´µï¼Œçœä¸‹è¿™å‡ KBç©ºé—´ä¹Ÿæ˜¯ä¸€ç§å¯è§‚çš„æå‡
+ç„¶è€ŒçŽ°åœ¨æ˜¯2021å¹´ï¼Œç¡¬ä»¶æ°´å¹³é£žé€Ÿå‘å±•ï¼Œæ¶ˆè€—è„‘ç»†èƒžèŠ‚çœä¸€ç‚¹ç©ºé—´å°±æ˜¾å¾—æ²¡é‚£ä¹ˆé‡è¦äº†
+æ‰€ä»¥åœ¨ä¸ºXPåº”ç”¨æ–°è¡¨æ—¶ï¼Œæˆ‘å°†åŽ‹ç¼©çš„è½¬æ¢è¡¨å±•å¼€ï¼Œç®—æ³•æ”¹æˆäº†æ›´é€šç”¨çš„äºŒåˆ†æŸ¥æ‰¾
 */
 
 typedef struct _CODEPAIR
@@ -45,20 +45,20 @@ extern CODEPAIR RtlCodeTable[CodeTableLen];
 ULONG NTAPI RtlNtStatusToDosErrorNoTeb(NTSTATUS StatusCode)
 {
 	ULONG Status=(ULONG)StatusCode;
-	//µÚ29Î»±íÊ¾·ÇÎ¢Èí¶¨Òå£¬ÎÞ·¨×ª»»
+	//ç¬¬29ä½è¡¨ç¤ºéžå¾®è½¯å®šä¹‰ï¼Œæ— æ³•è½¬æ¢
 	if (Status&0x20000000)
 		return Status;
-	//ÒÑ¾­ÊÇ½á¹û£¬ÎÞÐè×ª»»
+	//å·²ç»æ˜¯ç»“æžœï¼Œæ— éœ€è½¬æ¢
 	if ((Status&0xFFFF0000)==0x80070000)
 		return Status&0x0000FFFF;
-	//HRESULT×ªNTSTATUS£¨µÚ28Î»±£Áô£©
+	//HRESULTè½¬NTSTATUSï¼ˆç¬¬28ä½ä¿ç•™ï¼‰
 	if ((Status&0xF0000000)==0xD0000000)
 		Status=Status&0xCFFFFFFF;
 
-	//×î³£ÓÃ
+	//æœ€å¸¸ç”¨
 	if (Status==STATUS_SUCCESS)
 		return ERROR_SUCCESS;
-	//²é±í×ª»»£¨Binary Find£©
+	//æŸ¥è¡¨è½¬æ¢ï¼ˆBinary Findï¼‰
 	int lo=0;
 	int hi=CodeTableLen-1;
 	while (lo<=hi)
@@ -72,10 +72,10 @@ ULONG NTAPI RtlNtStatusToDosErrorNoTeb(NTSTATUS StatusCode)
 			lo=mid+1;
 	}
 
-	//³¢ÊÔ×ª»»
+	//å°è¯•è½¬æ¢
 	if ((Status&0xFFFF0000)==0xC0010000)
 		return Status&0x0000FFFF;
-	//ÎÞ·¨×ª»»
+	//æ— æ³•è½¬æ¢
 	DbgPrint("RTL: RtlNtStatusToDosError(0x%lx): No Valid Win32 Error Mapping\n",StatusCode);
 	DbgPrint("RTL: Edit ntos\\rtl\\generr.c to correct the problem\n");
 	DbgPrint("RTL: ERROR_MR_MID_NOT_FOUND is being returned\n");
@@ -97,7 +97,7 @@ ULONG NTAPI RtlNtStatusToDosError(NTSTATUS Status)
 	return RtlNtStatusToDosErrorNoTeb(Status);
 }
 
-//Ê¹ÓÃWin7µÄ×ª»»±í
+//ä½¿ç”¨Win7çš„è½¬æ¢è¡¨
 CODEPAIR RtlCodeTable[CodeTableLen]={
 	{0x00000000,0x00000000},{0x00000001,0x000002DB},{0x00000002,0x000002DC},{0x00000003,0x000002DD},
 	{0x0000003F,0x000002DE},{0x00000080,0x00000080},{0x000000BF,0x000002E0},{0x000000C0,0x000002E1},
