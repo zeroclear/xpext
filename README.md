@@ -35,19 +35,21 @@ GetMaximumProcessorCount
 #### k32_miscellaneous.cpp
 GetTickCount64  
 RaiseFailFastException  
+#### k32_file.cpp
+GetFileInformationByHandleEx  
+SetFileInformationByHandle  
+GetFinalPathNameByHandleA  
+GetFinalPathNameByHandleW  
+CreateSymbolicLinkA  
+CreateSymbolicLinkW  
 
 ### 即将完成：
-#### misc.cpp
+#### k32_miscellaneous.cpp
 GetErrorMode 
 #### k32_processthread.cpp
 InitializeProcThreadAttributeList  
 UpdateProcThreadAttribute  
 DeleteProcThreadAttributeList  
-#### k32_file.cpp
-GetFinalPathNameByHandleA/W  
-GetFileInformationByHandleEx  
-SetFileInformationByHandle  
-CreateSymbolicLinkA/W  
 
 ### 分析中：
 FlsAlloc  
@@ -82,7 +84,23 @@ NtQueryObject用在某些对象上会卡死
 CancelIoEx  
 GetOverlappedResultEx  
 normaliz.dll  
-SetLastError断点
+SetLastError断点  
+
+### 更新说明：
+ver3 2021.05.11  
+增加一些文件相关的API，修复ver2中BaseSetLastNTError的严重bug  
+由于Github展示代码的算法不完善，从ver3开始代码文件全部使用BOM+UTF8编码  
+由于Github目录操作设计太差，从ver3开始新版和旧版都放在根目录下，以最新版本号为准  
+ver2 2021.05.02  
+添加内核支持模块xpextk  
+增加RunOnce系列API，以及一些其他API  
+项目名由ntext改为xpext，调整代码结构，重新编排文件名  
+ver1 2021.03.21  
+确定了基本框架和实现方向  
+增加Condition Variable系列API，以及一些其他API  
+调整SRW Lock，使之与Condition Variable一致  
+ver0 2020.05.29  
+初版，SRW Lock系列API  
 
 ### 其它说明：
 代码是开源出来参考的，希望能得到反馈，更正错误，你编译了也没用  
@@ -93,7 +111,7 @@ SetLastError断点
 The procedure entry point XXX could not be located in the dynamic link library XXX.dll  
 ![Entry Point Not Found](https://github.com/zeroclear/ntext/raw/master/introduce.png)  
 
-### 类似项目
+### 相关项目：
 [SharedReadWriteLock](https://github.com/anydream/SharedReadWriteLock)  
 [YY-Thunks - 让兼容 Windows 更轻松](https://github.com/Chuyu-Team/YY-Thunks)  
 [PHP 7 and PHP 5.6 for Windows XP/2003](https://github.com/source-power/php7-for-windows2003)  
