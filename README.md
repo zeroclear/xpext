@@ -84,7 +84,7 @@ user32.SetProcessDPIAware
 CompareStringEx  
 
 ### 暂时无法实现：
-CreateProcess应用AttributeList  
+CreateProcess应用ProcThreadAttribute  
 NtXXXKeyedEvent允许句柄传入NULL  
 IoConnectInterruptEx和MSIX  
 CreateRemoteThreadEx  
@@ -130,3 +130,4 @@ The procedure entry point XXX could not be located in the dynamic link library X
 [wine](https://github.com/wine-mirror/wine)  
 [ReactOS](https://github.com/reactos/reactos)  
 [NTOSKRNL Emu_Extender](https://github.com/MovAX0xDEAD/NTOSKRNL_Emu)  
+[CreateProcessInternal](https://github.com/MeeSong/Reverse-Engineering)  
