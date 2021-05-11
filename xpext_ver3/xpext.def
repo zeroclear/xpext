@@ -1,0 +1,55 @@
+﻿LIBRARY xpext
+EXPORTS
+
+RtlAcquirePrivilege
+RtlReleasePrivilege
+RtlNtStatusToDosError
+RtlNtStatusToDosErrorNoTeb
+RtlSetLastWin32Error
+RtlInitAnsiStringEx
+
+K32InitializeCriticalSectionEx	;InitializeCriticalSectionEx
+
+RtlInitializeSRWLock			;InitializeSRWLock
+RtlAcquireSRWLockExclusive		;AcquireSRWLockExclusive
+RtlAcquireSRWLockShared			;AcquireSRWLockShared
+RtlReleaseSRWLockExclusive		;ReleaseSRWLockExclusive
+RtlReleaseSRWLockShared			;ReleaseSRWLockShared
+RtlTryAcquireSRWLockExclusive	;TryAcquireSRWLockExclusive
+RtlTryAcquireSRWLockShared		;TryAcquireSRWLockShared
+
+RtlInitializeConditionVariable	;InitializeConditionVariable
+K32SleepConditionVariableCS		;SleepConditionVariableCS
+K32SleepConditionVariableSRW	;SleepConditionVariableSRW
+RtlWakeConditionVariable		;WakeConditionVariable
+RtlWakeAllConditionVariable		;WakeAllConditionVariable
+
+RtlRunOnceInitialize2			;InitOnceInitialize
+K32InitOnceBeginInitialize		;InitOnceBeginInitialize
+K32InitOnceExecuteOnce			;InitOnceComplete
+K32InitOnceComplete				;InitOnceExecuteOnce
+
+K32GetThreadId					;GetThreadId	
+K32GetProcessId					;GetProcessId	
+K32GetProcessIdOfThread			;GetProcessIdOfThread	
+K32DeleteProcThreadAttributeList;DeleteProcThreadAttributeList
+;K32InitializeProcThreadAttributeList	;InitializeProcThreadAttributeList
+;K32UpdateProcThreadAttribute	;UpdateProcThreadAttribute
+
+K32GetActiveProcessorGroupCount	;GetActiveProcessorGroupCount
+K32GetMaximumProcessorGroupCount;GetMaximumProcessorGroupCount
+K32GetActiveProcessorCount		;GetActiveProcessorCount
+K32GetMaximumProcessorCount		;GetMaximumProcessorCount
+RtlGetCurrentProcessorNumber	;GetCurrentProcessorNumber
+RtlGetCurrentProcessorNumberEx	;GetCurrentProcessorNumberEx
+
+;GetErrorMode
+K32GetTickCount64				;GetTickCount64
+K32RaiseFailFastException		;RaiseFailFastException
+
+K32GetFileInformationByHandleEx
+K32SetFileInformationByHandle
+K32GetFinalPathNameByHandleW
+K32GetFinalPathNameByHandleA
+K32CreateSymbolicLinkW
+K32CreateSymbolicLinkA
