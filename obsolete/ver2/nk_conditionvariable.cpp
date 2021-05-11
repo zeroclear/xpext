@@ -2,52 +2,52 @@
 #include "common.h"
 
 /*
-Windows 7 SP1 32Î» 6.1.7601.17514
-@Çåãö 2021.4.12
+Windows 7 SP1 32ä½ 6.1.7601.17514
+@æ¸…æ³  2021.4.12
 
-CVµÄ·ÖÎö
-CVÄÚ²¿Òª×öµÄÊÂÊÇ£ºÊÍ·ÅËø-ĞİÃß-£¨±»»½ĞÑ£©»ñÈ¡Ëø
-»ù±¾µÄÊµÏÖ»úÖÆÓëSRW¼«ÎªÏàËÆ£¬¶¼ÊÇÒÔÈİÆ÷±£´æÁ´±í
-Ç°Ãæ28Î»ÊÇ½ÚµãÖ¸Õë£¬ºóÃæ4Î»ÊÇ±ê¼Ç
-µ÷ÓÃSleepXXXÊ±£¬¾ÍÍùÁ´±íµÄÍ·²¿²åÈëÒ»¸ö
-ÒÀ¾ÉÊÇ²åÈëµÄÒ»¶ËÎªlast£¬ÁíÒ»¶ËÎªfirst
-lastÑØbackÒ»Ö±×ßÄÜÕÒµ½first£¬firstÑØnextÒ»Ö±×ßÄÜÕÒµ½last
-µ±È»Ò²ÓĞÀàËÆµÄÁ´±íÓÅ»¯²ßÂÔ
+CVçš„åˆ†æ
+CVå†…éƒ¨è¦åšçš„äº‹æ˜¯ï¼šé‡Šæ”¾é”-ä¼‘çœ -ï¼ˆè¢«å”¤é†’ï¼‰è·å–é”
+åŸºæœ¬çš„å®ç°æœºåˆ¶ä¸SRWæä¸ºç›¸ä¼¼ï¼Œéƒ½æ˜¯ä»¥å®¹å™¨ä¿å­˜é“¾è¡¨
+å‰é¢28ä½æ˜¯èŠ‚ç‚¹æŒ‡é’ˆï¼Œåé¢4ä½æ˜¯æ ‡è®°
+è°ƒç”¨SleepXXXæ—¶ï¼Œå°±å¾€é“¾è¡¨çš„å¤´éƒ¨æ’å…¥ä¸€ä¸ª
+ä¾æ—§æ˜¯æ’å…¥çš„ä¸€ç«¯ä¸ºlastï¼Œå¦ä¸€ç«¯ä¸ºfirst
+lastæ²¿backä¸€ç›´èµ°èƒ½æ‰¾åˆ°firstï¼Œfirstæ²¿nextä¸€ç›´èµ°èƒ½æ‰¾åˆ°last
+å½“ç„¶ä¹Ÿæœ‰ç±»ä¼¼çš„é“¾è¡¨ä¼˜åŒ–ç­–ç•¥
 
-×îÖ÷ÒªµÄ²»Í¬ÔÚÓÚ»½ĞÑ
-Èç¹ûµ±Ç°Ã»ÓĞÆäËûÏß³Ì²Ù×÷Á´±í£¬Ö±½Óµ÷ÓÃ»½ĞÑº¯Êı¼´¿É
-¶øÓĞÏß³ÌÕıÔÚ²Ù×÷Á´±íÊ±£¬´ËÏß³Ì»áÉèÖÃCVF_Link±ê¼Ç£¬×èÖ¹ÆäËûÏß³Ì·ÃÎÊ
-Èô´ËÊ±ÓĞ»½ĞÑÇëÇó£¬»áÔÚºó3Î»µÄflagÁôÏÂ¼ÇÂ¼£¬È»ºóÁ¢¼´·µ»Ø
-Ã¿¸ö²Ù×÷Á´±íµÄº¯Êı£¬×îºó¶¼»áµ÷ÓÃÒ»´Î»½ĞÑº¯Êı£¬°´ÕÕÇëÇóÖ´ĞĞ»½ĞÑ
-×îºó3Î»µÄflagÊµ¼ÊÊÇ¸öcount£¬»½ĞÑ1¸ö¾Í¸øÕâ¸öcount+1£¬3Î»×î¶àÄÜ´æ7¸öÇëÇó
-ÊıÁ¿´óÓÚµÈÓÚ7Ê±£¬ÊÓÎªÈ«²¿»½ĞÑ£¨»áµ¼ÖÂspurious wakeup£©
+æœ€ä¸»è¦çš„ä¸åŒåœ¨äºå”¤é†’
+å¦‚æœå½“å‰æ²¡æœ‰å…¶ä»–çº¿ç¨‹æ“ä½œé“¾è¡¨ï¼Œç›´æ¥è°ƒç”¨å”¤é†’å‡½æ•°å³å¯
+è€Œæœ‰çº¿ç¨‹æ­£åœ¨æ“ä½œé“¾è¡¨æ—¶ï¼Œæ­¤çº¿ç¨‹ä¼šè®¾ç½®CVF_Linkæ ‡è®°ï¼Œé˜»æ­¢å…¶ä»–çº¿ç¨‹è®¿é—®
+è‹¥æ­¤æ—¶æœ‰å”¤é†’è¯·æ±‚ï¼Œä¼šåœ¨å3ä½çš„flagç•™ä¸‹è®°å½•ï¼Œç„¶åç«‹å³è¿”å›
+æ¯ä¸ªæ“ä½œé“¾è¡¨çš„å‡½æ•°ï¼Œæœ€åéƒ½ä¼šè°ƒç”¨ä¸€æ¬¡å”¤é†’å‡½æ•°ï¼ŒæŒ‰ç…§è¯·æ±‚æ‰§è¡Œå”¤é†’
+æœ€å3ä½çš„flagå®é™…æ˜¯ä¸ªcountï¼Œå”¤é†’1ä¸ªå°±ç»™è¿™ä¸ªcount+1ï¼Œ3ä½æœ€å¤šèƒ½å­˜7ä¸ªè¯·æ±‚
+æ•°é‡å¤§äºç­‰äº7æ—¶ï¼Œè§†ä¸ºå…¨éƒ¨å”¤é†’ï¼ˆä¼šå¯¼è‡´spurious wakeupï¼‰
 
-»½ĞÑº¯ÊıÍ³¼ÆÇëÇóµÄÊıÁ¿£¬µÈÓÚ7È«²¿»½ĞÑ£¬Ğ¡ÓÚ7Ôò´ÓÁ´±íÈ¡³ö¶ÔÓ¦µÄ¸öÊı
-Èç¹ûÊıÁ¿²»¹»£¬ÓĞ¶àÉÙ¾Í»½ĞÑ¶àÉÙ£¨µ«²Ù×÷ºÍÈ«²¿»½ĞÑÓĞµã²»Ò»Ñù£©
-È«²¿»½ĞÑ½«statusÖÃ0£¬²¢»ñÈ¡last½Úµã£¬ÑØ×ÅbackÁ´»½ĞÑËùÓĞ½Úµã
-°´ÊıÁ¿»½ĞÑ»á×¼±¸Ò»¸öĞÂµÄÁ´±íµ±collector£¬½«¾ÉÁ´±íÒÆ³ıµÄ½ÚµãÊÕ¼¯ÆğÀ´
-ÒÆ³ı´Ó¾ÉÁ´±íµÄfirst¿ªÊ¼£¬ÑØnextÁ´£¬Ö±µ½lastÎªÖ¹£¨ÊıÁ¿²»¹»µÄ»°£©
-ÒÆ³ıµÄ½Úµã´Óµ±Ç°½ÚµãµÄµÄÎ»ÖÃ²åÈë£¬³ÉÎªback½Úµã
+å”¤é†’å‡½æ•°ç»Ÿè®¡è¯·æ±‚çš„æ•°é‡ï¼Œç­‰äº7å…¨éƒ¨å”¤é†’ï¼Œå°äº7åˆ™ä»é“¾è¡¨å–å‡ºå¯¹åº”çš„ä¸ªæ•°
+å¦‚æœæ•°é‡ä¸å¤Ÿï¼Œæœ‰å¤šå°‘å°±å”¤é†’å¤šå°‘ï¼ˆä½†æ“ä½œå’Œå…¨éƒ¨å”¤é†’æœ‰ç‚¹ä¸ä¸€æ ·ï¼‰
+å…¨éƒ¨å”¤é†’å°†statusç½®0ï¼Œå¹¶è·å–lastèŠ‚ç‚¹ï¼Œæ²¿ç€backé“¾å”¤é†’æ‰€æœ‰èŠ‚ç‚¹
+æŒ‰æ•°é‡å”¤é†’ä¼šå‡†å¤‡ä¸€ä¸ªæ–°çš„é“¾è¡¨å½“collectorï¼Œå°†æ—§é“¾è¡¨ç§»é™¤çš„èŠ‚ç‚¹æ”¶é›†èµ·æ¥
+ç§»é™¤ä»æ—§é“¾è¡¨çš„firstå¼€å§‹ï¼Œæ²¿nexté“¾ï¼Œç›´åˆ°lastä¸ºæ­¢ï¼ˆæ•°é‡ä¸å¤Ÿçš„è¯ï¼‰
+ç§»é™¤çš„èŠ‚ç‚¹ä»å½“å‰èŠ‚ç‚¹çš„çš„ä½ç½®æ’å…¥ï¼Œæˆä¸ºbackèŠ‚ç‚¹
 oldcurr->next->back=NULL;
 newcurr->back=oldcurr;
-Èç¹ûÔ­Á´±í´Ólastµ½first£¬ÑØbackÁ´Óöµ½µÄÊÇ54321
-ÄÇÃ´ĞÂÁ´±í´ÓcollectorµÄhead£¬µ½tail£¬ÑØbackÁ´£¬Óöµ½µÄÊÇ12345
-ÕâÃ´×ö±£Ö¤ÁË²Ù×÷·½Ê½µÄÒ»ÖÂĞÔ£¬×îºó£¬ÑØĞÂÁ´±íµÄbackÁ´Öğ¸ö»½ĞÑ
+å¦‚æœåŸé“¾è¡¨ä»laståˆ°firstï¼Œæ²¿backé“¾é‡åˆ°çš„æ˜¯54321
+é‚£ä¹ˆæ–°é“¾è¡¨ä»collectorçš„headï¼Œåˆ°tailï¼Œæ²¿backé“¾ï¼Œé‡åˆ°çš„æ˜¯12345
+è¿™ä¹ˆåšä¿è¯äº†æ“ä½œæ–¹å¼çš„ä¸€è‡´æ€§ï¼Œæœ€åï¼Œæ²¿æ–°é“¾è¡¨çš„backé“¾é€ä¸ªå”¤é†’
 
-»½ĞÑÊ±²ÉÓÃÁËÒ»¸öÓÅ»¯²ßÂÔ£¬£¨Èç¹ûÓĞSRWµÄ»°£©¼ì²âSRWµÄ×´Ì¬
-Èç¹ûSRW±»Õ¼ÓÃ£¬´ËÊ±»½ĞÑÊÇÃ»ÓĞÒâÒåµÄ£¬½Ó×Åµ÷ÓÃAcquireSRWÓÖ»á½øÈëĞİÃß
-ËùÒÔCVµÄÊµÏÖ½«SRW²ğ³ÉÁË3²¿·Ö£¬µÚÒ»²¿·ÖÊÇSRWµÄ×´Ì¬ÅĞ¶Ï
-µÚ¶ş²¿·ÖÊÇSRWµÄĞİÃß£¬µÚÈı²¿·ÖÊÇSRW»½ĞÑºó»ñÈ¡Ê§°Ü£¬ÓÖÑ­»·Ò»´Î
-»½ĞÑº¯ÊıÊµÏÖÁËµÚÒ»²¿·Ö£¬½«Ïß³ÌÈÓµ½SRWµÈ´ı¶ÓÁĞÈ¥£¬Ê¡È¥ÁËµÚ¶ş²¿·ÖµÄ¿ªÏú
-SRWÒòÊÍ·Å±ä¶¯Ê±£¬Ïß³Ì²Å±»»½ĞÑ£¬½ÓÏÂÀ´µÄAcquireSRW³¢ÊÔ»ñÈ¡Ëø
-³É¹¦Ôò·µ»Ø£¬Ê§°ÜÔòÍ£ÔÚÕâÀïµÈ´ı£¬¾ÍÏñSRWÀïÓÖÑ­»·ÁËÒ»±éÒ»Ñù
+å”¤é†’æ—¶é‡‡ç”¨äº†ä¸€ä¸ªä¼˜åŒ–ç­–ç•¥ï¼Œï¼ˆå¦‚æœæœ‰SRWçš„è¯ï¼‰æ£€æµ‹SRWçš„çŠ¶æ€
+å¦‚æœSRWè¢«å ç”¨ï¼Œæ­¤æ—¶å”¤é†’æ˜¯æ²¡æœ‰æ„ä¹‰çš„ï¼Œæ¥ç€è°ƒç”¨AcquireSRWåˆä¼šè¿›å…¥ä¼‘çœ 
+æ‰€ä»¥CVçš„å®ç°å°†SRWæ‹†æˆäº†3éƒ¨åˆ†ï¼Œç¬¬ä¸€éƒ¨åˆ†æ˜¯SRWçš„çŠ¶æ€åˆ¤æ–­
+ç¬¬äºŒéƒ¨åˆ†æ˜¯SRWçš„ä¼‘çœ ï¼Œç¬¬ä¸‰éƒ¨åˆ†æ˜¯SRWå”¤é†’åè·å–å¤±è´¥ï¼Œåˆå¾ªç¯ä¸€æ¬¡
+å”¤é†’å‡½æ•°å®ç°äº†ç¬¬ä¸€éƒ¨åˆ†ï¼Œå°†çº¿ç¨‹æ‰”åˆ°SRWç­‰å¾…é˜Ÿåˆ—å»ï¼Œçœå»äº†ç¬¬äºŒéƒ¨åˆ†çš„å¼€é”€
+SRWå› é‡Šæ”¾å˜åŠ¨æ—¶ï¼Œçº¿ç¨‹æ‰è¢«å”¤é†’ï¼Œæ¥ä¸‹æ¥çš„AcquireSRWå°è¯•è·å–é”
+æˆåŠŸåˆ™è¿”å›ï¼Œå¤±è´¥åˆ™åœåœ¨è¿™é‡Œç­‰å¾…ï¼Œå°±åƒSRWé‡Œåˆå¾ªç¯äº†ä¸€éä¸€æ ·
 
-ÓëSRW²»Í¬£¬CV¿ÉÄÜµÈ´ı³¬Ê±£¬×Ô¼ºÖ÷¶¯ĞÑÀ´
-´ËÊ±Ö»Òª½«×ÔÉí¶ÔÓ¦µÄ½Úµã´ÓÁ´±íÖĞÉ¾³ı£¬¾Í¿ÉÒÔ·µ»ØÁË
-µ«ÊÇÒòÎª»½ĞÑµÄÓÅ»¯²ßÂÔ£¬½Úµã¿ÉÄÜ²»ÔÚÁ´±íÀïÁË£¬¶øÊÇ±»ÈÓµ½SRWÀï
-ËùÒÔĞèÒªÑ°ÕÒ½Úµã£¬·Ö±ğ´¦ÀíÁ½ÖÖÇé¿ö
-ÕÒµ½½ÚµãÒ»ÇĞÕı³££¬É¾³ı×ÔÉí½Úµã²¢·µ»Ø
-ÕÒ²»µ½½ÚµãËµÃ÷SRW±»Õ¼ÓÃ£¬»¹²»ÊÇ»½ĞÑµÄÊ±ºò£¬¾Í¼ÌĞøĞİÃß
+ä¸SRWä¸åŒï¼ŒCVå¯èƒ½ç­‰å¾…è¶…æ—¶ï¼Œè‡ªå·±ä¸»åŠ¨é†’æ¥
+æ­¤æ—¶åªè¦å°†è‡ªèº«å¯¹åº”çš„èŠ‚ç‚¹ä»é“¾è¡¨ä¸­åˆ é™¤ï¼Œå°±å¯ä»¥è¿”å›äº†
+ä½†æ˜¯å› ä¸ºå”¤é†’çš„ä¼˜åŒ–ç­–ç•¥ï¼ŒèŠ‚ç‚¹å¯èƒ½ä¸åœ¨é“¾è¡¨é‡Œäº†ï¼Œè€Œæ˜¯è¢«æ‰”åˆ°SRWé‡Œ
+æ‰€ä»¥éœ€è¦å¯»æ‰¾èŠ‚ç‚¹ï¼Œåˆ†åˆ«å¤„ç†ä¸¤ç§æƒ…å†µ
+æ‰¾åˆ°èŠ‚ç‚¹ä¸€åˆ‡æ­£å¸¸ï¼Œåˆ é™¤è‡ªèº«èŠ‚ç‚¹å¹¶è¿”å›
+æ‰¾ä¸åˆ°èŠ‚ç‚¹è¯´æ˜SRWè¢«å ç”¨ï¼Œè¿˜ä¸æ˜¯å”¤é†’çš„æ—¶å€™ï¼Œå°±ç»§ç»­ä¼‘çœ 
 */
 
 DWORD ConditionVariableSpinCount=0x400;
@@ -63,12 +63,12 @@ void NTAPI RtlInitializeConditionVariable(RTL_CONDITION_VARIABLE* ConditionVaria
 	ConditionVariable->Ptr=NULL;
 }
 
-//·µ»ØTRUE²»»½ĞÑ£¬·µ»ØFALSE»½ĞÑ
+//è¿”å›TRUEä¸å”¤é†’ï¼Œè¿”å›FALSEå”¤é†’
 BOOL NTAPI RtlpQueueWaitBlockToSRWLock(SYNCITEM* Item,RTL_SRWLOCK* SRWLock,BOOL IsSharedLock)
 {
 	SYNCSTATUS OldStatus=(SYNCSTATUS)SRWLock->Ptr;
 	DWORD dwBackOffCount=0;
-	//Ã»ÈË³ÖÓĞËø£¬¿É»ñÈ¡£¬·µ»Ø
+	//æ²¡äººæŒæœ‰é”ï¼Œå¯è·å–ï¼Œè¿”å›
 	if ((OldStatus&SRWF_Hold)==0)
 	{
 		do 
@@ -77,14 +77,14 @@ BOOL NTAPI RtlpQueueWaitBlockToSRWLock(SYNCITEM* Item,RTL_SRWLOCK* SRWLock,BOOL 
 				Item->attr|=SYNC_Exclusive;
 			else
 			{
-				//Èç¹ûÎŞÈËµÈ´ı£¬ÇÒ¹²Ïí¼ÆÊı´óÓÚ0£¬ËµÃ÷ÊÇ³ÖÓĞÕßÊÇ¹²ÏíËø
-				//±¾Ïß³ÌÒª»ñÈ¡¹²ÏíËø£¬¿É»ñÈ¡£¬·µ»Ø
-				//·ñÔòÇ°ÃæÓĞÏß³ÌÔÚµÈ´ı£¬±¾Ïß³ÌÒ²Ó¦¸Ã¸úÔÚºóÃæµÈ
+				//å¦‚æœæ— äººç­‰å¾…ï¼Œä¸”å…±äº«è®¡æ•°å¤§äº0ï¼Œè¯´æ˜æ˜¯æŒæœ‰è€…æ˜¯å…±äº«é”
+				//æœ¬çº¿ç¨‹è¦è·å–å…±äº«é”ï¼Œå¯è·å–ï¼Œè¿”å›
+				//å¦åˆ™å‰é¢æœ‰çº¿ç¨‹åœ¨ç­‰å¾…ï¼Œæœ¬çº¿ç¨‹ä¹Ÿåº”è¯¥è·Ÿåœ¨åé¢ç­‰
 				if (!(OldStatus&SRWF_Wait) && (OldStatus&CVM_ITEM)!=0)
 					return FALSE;
 			}
-			//Ç°ÃæÖÁÉÙÓĞÒ»¸ö¶ÀÕ¼ËøÔÚµÈ´ı£¬µ¼ÖÂºóÃæÅÅ¶Ó
-			//°´¶ÀÕ¼ËøµÄ·½Ê½½«×ÔÉí½Úµã²åÈë
+			//å‰é¢è‡³å°‘æœ‰ä¸€ä¸ªç‹¬å é”åœ¨ç­‰å¾…ï¼Œå¯¼è‡´åé¢æ’é˜Ÿ
+			//æŒ‰ç‹¬å é”çš„æ–¹å¼å°†è‡ªèº«èŠ‚ç‚¹æ’å…¥
 			Item->next=NULL;
 			SYNCSTATUS NewStatus;
 			if (OldStatus&SRWF_Wait)
@@ -105,7 +105,7 @@ BOOL NTAPI RtlpQueueWaitBlockToSRWLock(SYNCITEM* Item,RTL_SRWLOCK* SRWLock,BOOL 
 					NewStatus|=SRWF_Hold|SRWF_Wait;
 			}
 			SYNCSTATUS CurrStatus=InterlockedCompareExchange((SYNCSTATUS*)SRWLock,NewStatus,OldStatus);
-			//²åÈëSRW³É¹¦£¬·µ»ØTRUE²»»½ĞÑ
+			//æ’å…¥SRWæˆåŠŸï¼Œè¿”å›TRUEä¸å”¤é†’
 			if (CurrStatus==OldStatus)
 				return TRUE;
 			RtlBackoff(&dwBackOffCount);
@@ -124,14 +124,14 @@ void NTAPI RtlpWakeConditionVariable(RTL_CONDITION_VARIABLE* ConditionVariable,S
 
 	while (1)
 	{
-		//µÇ¼ÇµÄÇëÇóÒÑÂú£¬È«²¿»½ĞÑ£¬½«lastÁ´ÒÆÈëÍ¨ÖªÁ´±í£¬Çå¿ÕÈİÆ÷
+		//ç™»è®°çš„è¯·æ±‚å·²æ»¡ï¼Œå…¨éƒ¨å”¤é†’ï¼Œå°†lasté“¾ç§»å…¥é€šçŸ¥é“¾è¡¨ï¼Œæ¸…ç©ºå®¹å™¨
 		if ((OldStatus&CVF_Full)==CVF_Full)
 		{
 			CurrStatus=InterlockedExchange((SYNCSTATUS*)ConditionVariable,0);
 			*InsertPos=(SYNCITEM*)(CurrStatus&CVM_ITEM);
 			break;
 		}
-		//·ñÔò°´ÇëÇóÊıÁ¿»½ĞÑ£¬´Ófirst¶Ë¿ªÊ¼
+		//å¦åˆ™æŒ‰è¯·æ±‚æ•°é‡å”¤é†’ï¼Œä»firstç«¯å¼€å§‹
 		SYNCITEM* curr=(SYNCITEM*)(OldStatus&CVM_ITEM);
 		int RequestNum=(OldStatus&CVM_COUNT)+WakeCount;
 		SYNCITEM** FirstPos=&curr->first;
@@ -145,52 +145,52 @@ void NTAPI RtlpWakeConditionVariable(RTL_CONDITION_VARIABLE* ConditionVariable,S
 			} while (curr->first==NULL);
 		}
 		curr=curr->first;
-		//½«½Úµã´ÓµÈ´ıÁ´±íÒÆ³ı£¬×ªÒÆµ½Í¨ÖªÁ´±í
+		//å°†èŠ‚ç‚¹ä»ç­‰å¾…é“¾è¡¨ç§»é™¤ï¼Œè½¬ç§»åˆ°é€šçŸ¥é“¾è¡¨
 		if (CollectNum<RequestNum)
 		{
 			do 
 			{
 				SYNCITEM* next=curr->next;
-				if (next==NULL)		//µ½´ïhead£¬Ã»ÓĞ¸ü¶àÁË
+				if (next==NULL)		//åˆ°è¾¾headï¼Œæ²¡æœ‰æ›´å¤šäº†
 					break;
 				CollectNum++;
-				*InsertPos=curr;	//µÚÒ»´ÎÊÇÍùnotifyÍ·²åÈë£¬ºóÃæ¶¼ÊÇÍùbackÁ´²åÈë
-				//curr³ÉÎªĞÂÁ´±íµÄ¶Ëµã£¬ÆäbackÎªNULL
-				//Êµ¼Ê¾ÉÁ´±íÃ¿ÒÆ³ıÒ»¸ö£¬ºóÃæµÄ¾Í»á½«backÉèÎªNULL£¬ÕâÀï¿Ï¶¨ÎªNULL
-				//ËäÈ»ĞÂ½¨µÄÁ´±íÓÃ²»µ½nextÁ´£¬»¹²»Èç°ÑnextÉèÎªNULL£¬»º½âÇ¿ÆÈÖ¢
+				*InsertPos=curr;	//ç¬¬ä¸€æ¬¡æ˜¯å¾€notifyå¤´æ’å…¥ï¼Œåé¢éƒ½æ˜¯å¾€backé“¾æ’å…¥
+				//curræˆä¸ºæ–°é“¾è¡¨çš„ç«¯ç‚¹ï¼Œå…¶backä¸ºNULL
+				//å®é™…æ—§é“¾è¡¨æ¯ç§»é™¤ä¸€ä¸ªï¼Œåé¢çš„å°±ä¼šå°†backè®¾ä¸ºNULLï¼Œè¿™é‡Œè‚¯å®šä¸ºNULL
+				//è™½ç„¶æ–°å»ºçš„é“¾è¡¨ç”¨ä¸åˆ°nexté“¾ï¼Œè¿˜ä¸å¦‚æŠŠnextè®¾ä¸ºNULLï¼Œç¼“è§£å¼ºè¿«ç—‡
 				curr->back=NULL;
-				*FirstPos=next;		//´Ófirst¶ËÒÆ³ıÒ»¸öºó£¬µ±Ç°µÄfirst»á±äÎªfirst->next£¬head´¦¼ÇÂ¼µÄfirstÒªÍ¬²½¸üĞÂ
-				next->back=NULL;	//curr´ÓÁ´±íÍÑÀë£¬next³ÉÎªĞÂµÄfirst
+				*FirstPos=next;		//ä»firstç«¯ç§»é™¤ä¸€ä¸ªåï¼Œå½“å‰çš„firstä¼šå˜ä¸ºfirst->nextï¼Œheadå¤„è®°å½•çš„firstè¦åŒæ­¥æ›´æ–°
+				next->back=NULL;	//currä»é“¾è¡¨è„±ç¦»ï¼Œnextæˆä¸ºæ–°çš„first
 				InsertPos=&curr->back;
-				curr=next;			//´ÓfirstÏòlast±éÀú
+				curr=next;			//ä»firstå‘lastéå†
 			} while (CollectNum<RequestNum);
 		}
-		//Èç¹ûÊıÁ¿²»¹»£¬ÓĞ¶àÉÙÍ¨Öª¶àÉÙ
+		//å¦‚æœæ•°é‡ä¸å¤Ÿï¼Œæœ‰å¤šå°‘é€šçŸ¥å¤šå°‘
 		if (CollectNum<RequestNum)
 		{
 			CurrStatus=InterlockedCompareExchange((SYNCSTATUS*)ConditionVariable,0,OldStatus);
 			if (CurrStatus==OldStatus)
 			{
-				//Ã»ÓĞ¸ü¶àÁË£¬ÌîÉÏ×îºóÒ»¸ö£¬¿ªÊ¼Í¨Öª£¬CollectNumÒÑ¾­ÓÃ²»µ½ÁË
+				//æ²¡æœ‰æ›´å¤šäº†ï¼Œå¡«ä¸Šæœ€åä¸€ä¸ªï¼Œå¼€å§‹é€šçŸ¥ï¼ŒCollectNumå·²ç»ç”¨ä¸åˆ°äº†
 				*InsertPos=curr;
 				curr->back=NULL;
 				break;
 			}
 			else
 			{
-				//Èç¹ûÓÖÓĞÁËĞÂµÄµÈ´ı½Úµã£¬notifyÁ´±íºÍCollectNum¾ù±£Áô£¬¼ÌĞøÊÕ¼¯
-				//ÕâÀïÃ»ÌîÉÏ×îºóÒ»¸ö£¬ÒòÎªÊıÁ¿±¾À´¾Í²»¹»£¬Ï£ÍûÔÙÀ´Ò»ÂÖÄÜ¹»Êı
+				//å¦‚æœåˆæœ‰äº†æ–°çš„ç­‰å¾…èŠ‚ç‚¹ï¼Œnotifyé“¾è¡¨å’ŒCollectNumå‡ä¿ç•™ï¼Œç»§ç»­æ”¶é›†
+				//è¿™é‡Œæ²¡å¡«ä¸Šæœ€åä¸€ä¸ªï¼Œå› ä¸ºæ•°é‡æœ¬æ¥å°±ä¸å¤Ÿï¼Œå¸Œæœ›å†æ¥ä¸€è½®èƒ½å¤Ÿæ•°
 				OldStatus=CurrStatus;
 				continue;
 			}
 		}
-		//ÊÕ¼¯ÊıÁ¿µÈÓÚÇëÇóÊıÁ¿£¬½«ÇëÇóÊıÇåÁã£¬¿ªÊ¼Í¨Öª
+		//æ”¶é›†æ•°é‡ç­‰äºè¯·æ±‚æ•°é‡ï¼Œå°†è¯·æ±‚æ•°æ¸…é›¶ï¼Œå¼€å§‹é€šçŸ¥
 		CurrStatus=InterlockedCompareExchange((SYNCSTATUS*)ConditionVariable,OldStatus&CVM_ITEM,OldStatus);
 		if (OldStatus==CurrStatus)
 			break;
 		OldStatus=CurrStatus;
 	}
-	//Í¨ÖªnotifyÁ´±íÊÕ¼¯µÄ½Úµã£¬ÑØbackÁ´»½ĞÑ
+	//é€šçŸ¥notifyé“¾è¡¨æ”¶é›†çš„èŠ‚ç‚¹ï¼Œæ²¿backé“¾å”¤é†’
 	if (notify!=NULL)
 	{
 		do 
@@ -198,7 +198,7 @@ void NTAPI RtlpWakeConditionVariable(RTL_CONDITION_VARIABLE* ConditionVariable,S
 			SYNCITEM* back=notify->back;
 			if (InterlockedBitTestAndReset((LONG*)&notify->attr,SYNC_SPIN_BIT)==0)
 			{
-				//CV½ÚµãºÍSRW½Úµã½á¹¹Ò»Ñù£¬ÄÃÀ´ÖØ¸´ÀûÓÃ
+				//CVèŠ‚ç‚¹å’ŒSRWèŠ‚ç‚¹ç»“æ„ä¸€æ ·ï¼Œæ‹¿æ¥é‡å¤åˆ©ç”¨
 				if (notify->lock!=NULL || 
 					RtlpQueueWaitBlockToSRWLock(notify,notify->lock,(notify->attr&SYNC_SharedLock))==FALSE)
 				{
@@ -210,21 +210,21 @@ void NTAPI RtlpWakeConditionVariable(RTL_CONDITION_VARIABLE* ConditionVariable,S
 	}
 }
 
-//·µ»ØTRUE×¼±¸Íê³É£¬·µ»ØFALSE¼ÌĞøĞİÃß
+//è¿”å›TRUEå‡†å¤‡å®Œæˆï¼Œè¿”å›FALSEç»§ç»­ä¼‘çœ 
 BOOL NTAPI RtlpWakeSingle(RTL_CONDITION_VARIABLE* ConditionVariable,SYNCITEM* Item)
 {
 	SYNCSTATUS CurrStatus,NewStatus;
 	SYNCSTATUS OldStatus=(SYNCSTATUS)ConditionVariable->Ptr;
-	//¿Ï¶¨ÕÒ²»µ½Ä¿±ê½ÚµãÁË
+	//è‚¯å®šæ‰¾ä¸åˆ°ç›®æ ‡èŠ‚ç‚¹äº†
 	if (OldStatus==0)
 		return FALSE;
 	while (1)
 	{
-		//´óÁ¿ÉêÇëÃ»À´µÃ¼°´¦Àí£¬Ò»¶¨»á·¢Éú¾ºÕù£¬»¹ÊÇ¼ÌĞøĞİÃß°É
+		//å¤§é‡ç”³è¯·æ²¡æ¥å¾—åŠå¤„ç†ï¼Œä¸€å®šä¼šå‘ç”Ÿç«äº‰ï¼Œè¿˜æ˜¯ç»§ç»­ä¼‘çœ å§
 		int Count=OldStatus&CVM_COUNT;
 		if (Count==CVF_Full)
 			return FALSE;
-		//ÓĞÈËÔÚ²Ù×÷Á´±í£¬µÇ¼Ç»½ĞÑÉêÇë£¨ÎªÊ²Ã´ÒªÈ«²¿»½ĞÑ¶ø²»ÊÇ+1£¿£©
+		//æœ‰äººåœ¨æ“ä½œé“¾è¡¨ï¼Œç™»è®°å”¤é†’ç”³è¯·ï¼ˆä¸ºä»€ä¹ˆè¦å…¨éƒ¨å”¤é†’è€Œä¸æ˜¯+1ï¼Ÿï¼‰
 		if (OldStatus&CVF_Link)
 		{
 			NewStatus=OldStatus|CVF_Full;
@@ -234,7 +234,7 @@ BOOL NTAPI RtlpWakeSingle(RTL_CONDITION_VARIABLE* ConditionVariable,SYNCITEM* It
 		}
 		else
 		{
-			//×¼±¸²Ù×÷Á´±í
+			//å‡†å¤‡æ“ä½œé“¾è¡¨
 			NewStatus=OldStatus+CVF_Link;
 			CurrStatus=InterlockedCompareExchange((SYNCSTATUS*)ConditionVariable,NewStatus,OldStatus);
 			if (CurrStatus==OldStatus)
@@ -245,29 +245,29 @@ BOOL NTAPI RtlpWakeSingle(RTL_CONDITION_VARIABLE* ConditionVariable,SYNCITEM* It
 			return FALSE;
 	}
 
-	//ÉèÖÃ³É¹¦£¬CurrStatus¾ÍÊÇNewStatus
+	//è®¾ç½®æˆåŠŸï¼ŒCurrStatuså°±æ˜¯NewStatus
 	SYNCITEM* curr=(SYNCITEM*)(NewStatus&CVM_ITEM);
 	OldStatus=NewStatus;
 	SYNCITEM* last=curr;
 	SYNCITEM* next=NULL;
 	int result=FALSE;
 
-	//´ÓlastÑØback±éÀú
+	//ä»lastæ²¿backéå†
 	if (curr!=NULL)
 	{
 		do 
 		{
-			//Ã»ÕÒµ½Ä¿±ê£¬ÑØback¼ÌĞø±éÀú
+			//æ²¡æ‰¾åˆ°ç›®æ ‡ï¼Œæ²¿backç»§ç»­éå†
 			if (curr!=Item)	
 			{
-				curr->next=next;	//Ë³Â·²¹È«nextÁ´
-				next=curr;			//±£´æcurr£¬ÔÚÏÂ´ÎÑ­»·ÖĞ£¬curr=curr->back£¬next¾ÍÊÇÕæÕıµÄnextÁË
+				curr->next=next;	//é¡ºè·¯è¡¥å…¨nexté“¾
+				next=curr;			//ä¿å­˜currï¼Œåœ¨ä¸‹æ¬¡å¾ªç¯ä¸­ï¼Œcurr=curr->backï¼Œnextå°±æ˜¯çœŸæ­£çš„nextäº†
 				curr=curr->back;
 			}
-			//ÕÒµ½Ä¿±ê£¬´ÓÁ´±íÒÆ³ı£¬¼ÌĞø±éÀú£¨¿ÉÄÜÓĞÖØ¸´½Úµã£©
+			//æ‰¾åˆ°ç›®æ ‡ï¼Œä»é“¾è¡¨ç§»é™¤ï¼Œç»§ç»­éå†ï¼ˆå¯èƒ½æœ‰é‡å¤èŠ‚ç‚¹ï¼‰
 			else
 			{
-				if (next==NULL)	//currÊÇlast
+				if (next==NULL)	//curræ˜¯last
 				{
 					SYNCITEM* back=curr->back;
 					NewStatus=(SYNCSTATUS)back;
@@ -277,45 +277,45 @@ BOOL NTAPI RtlpWakeSingle(RTL_CONDITION_VARIABLE* ConditionVariable,SYNCITEM* It
 						//OldStatus&CVM_FLAG=0_flag
 						//0_0^0_flag=0_flag
 						//back_0^0_flag=back_flag
-						//ÒòÎªbackÊÇ½ÚµãÖ¸Õë£¬ËùÒÔ×îºó4Î»Îª0
-						//µÚÒ»¸öÒì»ò£¬½«OldStatusµÄºó4Î»¸³Öµ¸øbackºó4Î»µÄ0
-						//½Ó×ÅÊÇand£¬½Ø¶ÏÇ°ÃæµÄ½á¹û£¬Ç°28Î»Îª0£¬Ö»ÁôÏÂºó4Î»
-						//µÚ¶ş¸öÒì»ò£¬½«backÇ°28Î»µÄÖ¸Õë²¿·Ö¸³Öµ¸øÖĞ¼ä½á¹ûÇ°ÃæµÄ0
-						//ºÏÆğÀ´¾ÍÊÇNewStatus= (OldStatus & 0x0F) | (back & 0xFFFFFFF0)
+						//å› ä¸ºbackæ˜¯èŠ‚ç‚¹æŒ‡é’ˆï¼Œæ‰€ä»¥æœ€å4ä½ä¸º0
+						//ç¬¬ä¸€ä¸ªå¼‚æˆ–ï¼Œå°†OldStatusçš„å4ä½èµ‹å€¼ç»™backå4ä½çš„0
+						//æ¥ç€æ˜¯andï¼Œæˆªæ–­å‰é¢çš„ç»“æœï¼Œå‰28ä½ä¸º0ï¼Œåªç•™ä¸‹å4ä½
+						//ç¬¬äºŒä¸ªå¼‚æˆ–ï¼Œå°†backå‰28ä½çš„æŒ‡é’ˆéƒ¨åˆ†èµ‹å€¼ç»™ä¸­é—´ç»“æœå‰é¢çš„0
+						//åˆèµ·æ¥å°±æ˜¯NewStatus= (OldStatus & 0x0F) | (back & 0xFFFFFFF0)
 						NewStatus=((NewStatus ^ OldStatus) & CVM_FLAG) ^ (SYNCSTATUS)back;
 					}
-					//ÒÆ³ıcurr£¬²¢½«curr->backÉèÎªĞÂµÄlast
+					//ç§»é™¤currï¼Œå¹¶å°†curr->backè®¾ä¸ºæ–°çš„last
 					CurrStatus=InterlockedCompareExchange((SYNCSTATUS*)ConditionVariable,NewStatus,OldStatus);
 					if (CurrStatus==OldStatus)
 					{
 						OldStatus=NewStatus;
-						if (back==NULL)	//Á´±í¿ÕÁË
+						if (back==NULL)	//é“¾è¡¨ç©ºäº†
 							return TRUE;
 						else
 							result=TRUE;
 					}
 					else
 					{
-						//ÉèÖÃ³É¹¦£¬CurrStatus¾ÍÊÇNewStatus
+						//è®¾ç½®æˆåŠŸï¼ŒCurrStatuså°±æ˜¯NewStatus
 						OldStatus=CurrStatus;
 					}
-					//¸üĞÂÖ¸Õë£¬¼ÌĞø²Ù×÷
+					//æ›´æ–°æŒ‡é’ˆï¼Œç»§ç»­æ“ä½œ
 					curr=(SYNCITEM*)(OldStatus&CVM_ITEM);
 					last=curr;
 					next=NULL;
 				}
-				else	//curr²»ÊÇlast
+				else	//currä¸æ˜¯last
 				{
 					curr=curr->back;
 					result=TRUE;
-					next->back=curr;	//Ò»±ß¶Ï¿ªÁ´½Ó
-					if (curr==NULL)		//µ½Í·ÁË£¬firstÇ°ÃæÃ»ÓĞÁË
+					next->back=curr;	//ä¸€è¾¹æ–­å¼€é“¾æ¥
+					if (curr==NULL)		//åˆ°å¤´äº†ï¼Œfirstå‰é¢æ²¡æœ‰äº†
 						break;
-					curr->next=next;	//ÁíÒ»±ß¶Ï¿ªÁ´½Ó
+					curr->next=next;	//å¦ä¸€è¾¹æ–­å¼€é“¾æ¥
 				}
 			}
 		} while (curr!=NULL);
-		//ËÑË÷µ½Í·£¬currÎªNULL£¬nextÎªfirst
+		//æœç´¢åˆ°å¤´ï¼Œcurrä¸ºNULLï¼Œnextä¸ºfirst
 		if (last!=NULL)
 			last->first=next;
 	}
@@ -346,7 +346,7 @@ void NTAPI RtlpOptimizeConditionVariableWaitList(RTL_CONDITION_VARIABLE* Conditi
 			return ;
 		OldStatus=CurrStatus;
 	} while ((OldStatus&CVM_COUNT)==0);
-	//Èç¹ûÔÚ×Ô¼º²Ù×÷Á´±íÆÚ¼ä£¬ÓĞÈËÌá½»ÁË»½ĞÑÉêÇë£¬¾ÍÓ¦¸Ã¸ºÔğ»½ĞÑ
+	//å¦‚æœåœ¨è‡ªå·±æ“ä½œé“¾è¡¨æœŸé—´ï¼Œæœ‰äººæäº¤äº†å”¤é†’ç”³è¯·ï¼Œå°±åº”è¯¥è´Ÿè´£å”¤é†’
 	RtlpWakeConditionVariable(ConditionVariable,OldStatus,0);
 }
 
@@ -369,16 +369,16 @@ NTSTATUS NTAPI RtlSleepConditionVariableCS(RTL_CONDITION_VARIABLE* ConditionVari
 		item.back=(SYNCITEM*)(OldStatus&CVM_ITEM);
 		if (item.back==NULL)
 		{
-			//Á´±íÄÚÃ»ÓĞµÈ´ı½Úµã£¬×Ô¼ºÊÇµÚÒ»¸ö
+			//é“¾è¡¨å†…æ²¡æœ‰ç­‰å¾…èŠ‚ç‚¹ï¼Œè‡ªå·±æ˜¯ç¬¬ä¸€ä¸ª
 			item.first=&item;
 		}
 		else
 		{
-			//Á´±íÄÚÒÑ¾­ÓĞµÈ´ı½Úµã£¬½«ËüÃÇ·Åµ½back
+			//é“¾è¡¨å†…å·²ç»æœ‰ç­‰å¾…èŠ‚ç‚¹ï¼Œå°†å®ƒä»¬æ”¾åˆ°back
 			item.first=NULL;
 			NewStatus|=CVF_Link;
 		}
-		//½«×ÔÉí½Úµã²åÈë
+		//å°†è‡ªèº«èŠ‚ç‚¹æ’å…¥
 		SYNCSTATUS CurrStatus=InterlockedCompareExchange((SYNCSTATUS*)ConditionVariable,NewStatus,OldStatus);
 		if (CurrStatus==OldStatus)
 			break;
@@ -387,15 +387,15 @@ NTSTATUS NTAPI RtlSleepConditionVariableCS(RTL_CONDITION_VARIABLE* ConditionVari
 
 	RtlLeaveCriticalSection(CriticalSection);
 
-	//¼ì²âµÚ3Î»£¨´Ó0¿ªÊ¼Êı£©£¬Òì»òÓĞ4ÖÖÇé¿ö
-	//1.oldÓĞ±ê¼Ç£¬newÓĞ±ê¼Ç£¬Òì»òÎªfalse
-	//±ğµÄÏß³ÌÕıÔÚ²Ù×÷Á´±í£¬ĞèÒªÓÅ»¯µ«ÎŞ·¨½øĞĞ
-	//2.oldÓĞ±ê¼Ç£¬newÃ»±ê¼Ç£¬Òì»òÎªtrue
-	//±ğµÄÏß³ÌÕıÔÚ²Ù×÷Á´±í£¬¶øÇÒÁ´±íÄÚÖ»ÓĞÒ»¸ö£¬ÎªÊ²Ã´Òª½øĞĞÓÅ»¯£¿
-	//3.oldÃ»±ê¼Ç£¬newÃ»±ê¼Ç£¬Òì»òÎªfalse
-	//ÎŞÈË²Ù×÷Á´±í£¬µ«Á´±íÄÚÖ»ÓĞÒ»¸ö£¬²»ĞèÒªÓÅ»¯
-	//4.oldÃ»±ê¼Ç£¬newÓĞ±ê¼Ç£¬Òì»òÎªtrue
-	//ÎŞÈË²Ù×÷Á´±í£¬ĞèÒªÓÅ»¯£¬¿ÉÒÔ½øĞĞÓÅ»¯
+	//æ£€æµ‹ç¬¬3ä½ï¼ˆä»0å¼€å§‹æ•°ï¼‰ï¼Œå¼‚æˆ–æœ‰4ç§æƒ…å†µ
+	//1.oldæœ‰æ ‡è®°ï¼Œnewæœ‰æ ‡è®°ï¼Œå¼‚æˆ–ä¸ºfalse
+	//åˆ«çš„çº¿ç¨‹æ­£åœ¨æ“ä½œé“¾è¡¨ï¼Œéœ€è¦ä¼˜åŒ–ä½†æ— æ³•è¿›è¡Œ
+	//2.oldæœ‰æ ‡è®°ï¼Œnewæ²¡æ ‡è®°ï¼Œå¼‚æˆ–ä¸ºtrue
+	//åˆ«çš„çº¿ç¨‹æ­£åœ¨æ“ä½œé“¾è¡¨ï¼Œè€Œä¸”é“¾è¡¨å†…åªæœ‰ä¸€ä¸ªï¼Œä¸ºä»€ä¹ˆè¦è¿›è¡Œä¼˜åŒ–ï¼Ÿ
+	//3.oldæ²¡æ ‡è®°ï¼Œnewæ²¡æ ‡è®°ï¼Œå¼‚æˆ–ä¸ºfalse
+	//æ— äººæ“ä½œé“¾è¡¨ï¼Œä½†é“¾è¡¨å†…åªæœ‰ä¸€ä¸ªï¼Œä¸éœ€è¦ä¼˜åŒ–
+	//4.oldæ²¡æ ‡è®°ï¼Œnewæœ‰æ ‡è®°ï¼Œå¼‚æˆ–ä¸ºtrue
+	//æ— äººæ“ä½œé“¾è¡¨ï¼Œéœ€è¦ä¼˜åŒ–ï¼Œå¯ä»¥è¿›è¡Œä¼˜åŒ–
 	if ((OldStatus^NewStatus)&CVF_Link)
 	{
 		RtlpOptimizeConditionVariableWaitList(ConditionVariable,NewStatus);
@@ -414,7 +414,7 @@ NTSTATUS NTAPI RtlSleepConditionVariableCS(RTL_CONDITION_VARIABLE* ConditionVari
 		result=NtWaitForKeyedEvent(GlobalKeyedEventHandle,&item,FALSE,Timeout);
 		if (result==STATUS_TIMEOUT)
 		{
-			//Èç¹ûÖ÷¶¯ĞÑÀ´£¬È¥Á´±íÕÒ×Ô¼ºµÄ½ÚµãÒÆ³ı
+			//å¦‚æœä¸»åŠ¨é†’æ¥ï¼Œå»é“¾è¡¨æ‰¾è‡ªå·±çš„èŠ‚ç‚¹ç§»é™¤
 			if (RtlpWakeSingle(ConditionVariable,&item)==FALSE)
 			{
 				NtWaitForKeyedEvent(GlobalKeyedEventHandle,&item,FALSE,NULL);
@@ -504,20 +504,20 @@ void NTAPI RtlWakeConditionVariable(RTL_CONDITION_VARIABLE* ConditionVariable)
 	{
 		do 
 		{
-			//±ğµÄÏß³ÌÔÚ²Ù×÷Á´±í
+			//åˆ«çš„çº¿ç¨‹åœ¨æ“ä½œé“¾è¡¨
 			if (OldStatus&CVF_Link)
 			{
-				//ÒÑ¾­ÓĞÈ«²¿»½ĞÑµÄµÇ¼ÇÁË£¬·µ»Ø
+				//å·²ç»æœ‰å…¨éƒ¨å”¤é†’çš„ç™»è®°äº†ï¼Œè¿”å›
 				if ((OldStatus&CVF_Full)==CVF_Full)
 					return ;
-				//ĞèÒª»½ĞÑµÄ¸öÊı+1
+				//éœ€è¦å”¤é†’çš„ä¸ªæ•°+1
 				CurrStatus=InterlockedCompareExchange((SYNCSTATUS*)ConditionVariable,OldStatus+1,OldStatus);
 				if (CurrStatus==OldStatus)
 					return ;
 			}
 			else
 			{
-				//µ±Ç°Ã»ÓĞ±ğµÄÏß³Ì²Ù×÷Á´±í£¬½øĞĞ»½ĞÑ
+				//å½“å‰æ²¡æœ‰åˆ«çš„çº¿ç¨‹æ“ä½œé“¾è¡¨ï¼Œè¿›è¡Œå”¤é†’
 				CurrStatus=InterlockedCompareExchange((SYNCSTATUS*)ConditionVariable,OldStatus+CVF_Link,OldStatus);
 				if (CurrStatus==OldStatus)
 				{
@@ -538,10 +538,10 @@ void NTAPI RtlWakeAllConditionVariable(RTL_CONDITION_VARIABLE* ConditionVariable
 	{
 		do 
 		{
-			//ÒÑ¾­ÓĞÈ«²¿»½ĞÑµÄµÇ¼ÇÁË£¬·µ»Ø
+			//å·²ç»æœ‰å…¨éƒ¨å”¤é†’çš„ç™»è®°äº†ï¼Œè¿”å›
 			if ((OldStatus&CVF_Full)==CVF_Full)
 				return ;
-			//±ğµÄÏß³ÌÔÚ²Ù×÷Á´±í£¬µÇ¼ÇÈ«²¿»½ĞÑ
+			//åˆ«çš„çº¿ç¨‹åœ¨æ“ä½œé“¾è¡¨ï¼Œç™»è®°å…¨éƒ¨å”¤é†’
 			if ((OldStatus&CVF_Link))
 			{
 				CurrStatus=InterlockedCompareExchange((SYNCSTATUS*)ConditionVariable,OldStatus|CVF_Full,OldStatus);
@@ -550,7 +550,7 @@ void NTAPI RtlWakeAllConditionVariable(RTL_CONDITION_VARIABLE* ConditionVariable
 			}
 			else
 			{
-				//½«ÈİÆ÷ÖÃ¿Õ£¬´Ólast¶ËÑØbackÁ´Öğ¸ö»½ĞÑ
+				//å°†å®¹å™¨ç½®ç©ºï¼Œä»lastç«¯æ²¿backé“¾é€ä¸ªå”¤é†’
 				CurrStatus=InterlockedCompareExchange((SYNCSTATUS*)ConditionVariable,0,OldStatus);
 				if (OldStatus==CurrStatus)
 				{
