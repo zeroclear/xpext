@@ -71,6 +71,17 @@ advapi32.RegSetKeyValueA/W
 advapi32.RegDeleteKeyValueA/W  
 mpr.WNetRestoreConnectionA  
 运行时TLS动态分配槽的问题  
+Wow64DisableWow64FsRedirection  
+Wow64EnableWow64FsRedirection  
+Wow64RevertWow64FsRedirection  
+AddDllDirectory  
+RemoveDllDirectory  
+SetDefaultDllDirectories  
+LoadLibraryEx的LOAD_LIBRARY_SEARCH_USER_DIRS标记  
+ReOpenFile  
+CreateFile2(Win8+)  
+user32.SetProcessDPIAware  
+CompareStringEx  
 
 ### 暂时无法实现：
 CreateProcess应用AttributeList  
