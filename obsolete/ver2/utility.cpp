@@ -1,35 +1,35 @@
 
 #include "common.h"
 
-//×Ô¶¨ÒåµÄ±ãÀû¹¦ÄÜ
+//è‡ªå®šä¹‰çš„ä¾¿åˆ©åŠŸèƒ½
 
 /*
-ÔÚXPÏÂ£¬ÄÚºË»áµ÷ÓÃExpKeyedEventInitialization´´½¨KeyedEvent¶ÔÏó¡£
-Ã¿´Î½ø³ÌÆô¶¯Ê±£¬»áµ÷ÓÃRtlInitializeCriticalSectionAndSpinCount£¬
-¶ÔRtlCriticalSectionLock½øĞĞ³õÊ¼»¯£¬Õâ¸öº¯Êı»¹»áË³´øµ÷ÓÃNtOpenKeyedEvent£¬
-´ò¿ªKeyedEvent¶ÔÏóµÄ¾ä±ú¡£
+åœ¨XPä¸‹ï¼Œå†…æ ¸ä¼šè°ƒç”¨ExpKeyedEventInitializationåˆ›å»ºKeyedEventå¯¹è±¡ã€‚
+æ¯æ¬¡è¿›ç¨‹å¯åŠ¨æ—¶ï¼Œä¼šè°ƒç”¨RtlInitializeCriticalSectionAndSpinCountï¼Œ
+å¯¹RtlCriticalSectionLockè¿›è¡Œåˆå§‹åŒ–ï¼Œè¿™ä¸ªå‡½æ•°è¿˜ä¼šé¡ºå¸¦è°ƒç”¨NtOpenKeyedEventï¼Œ
+æ‰“å¼€KeyedEventå¯¹è±¡çš„å¥æŸ„ã€‚
 
-µ«ÊÇVistaÒÔºóµÄÏµÍ³¶ÔKeyedEvent×öÁË¸Ä½ø£¬NtWaitForKeyedEventºÍ
-NtReleaseKeyedEvent²»ÔÙĞèÒª¾ä±ú£¬Ö±½Ó´«µİNULL¾ÍÄÜÉúĞ§¡£Òò´Ë½ø³ÌÆô¶¯Ê±£¬
-²»ÔÙĞèÒª´ò¿ªKeyedEvent¶ÔÏóµÄ¾ä±ú¡£
+ä½†æ˜¯Vistaä»¥åçš„ç³»ç»Ÿå¯¹KeyedEventåšäº†æ”¹è¿›ï¼ŒNtWaitForKeyedEventå’Œ
+NtReleaseKeyedEventä¸å†éœ€è¦å¥æŸ„ï¼Œç›´æ¥ä¼ é€’NULLå°±èƒ½ç”Ÿæ•ˆã€‚å› æ­¤è¿›ç¨‹å¯åŠ¨æ—¶ï¼Œ
+ä¸å†éœ€è¦æ‰“å¼€KeyedEventå¯¹è±¡çš„å¥æŸ„ã€‚
 
 NTSTATUS ExpKeyedEventInitialization()
 {
 	...
 	HANDLE Handle;
 	UNICODE_STRING DestinationString;
-	//Ç°Ãæ±ØĞëÓĞ\\KernelObjects\\£¬·ñÔò·µ»ØSTATUS_OBJECT_PATH_SYNTAX_BAD
+	//å‰é¢å¿…é¡»æœ‰\\KernelObjects\\ï¼Œå¦åˆ™è¿”å›STATUS_OBJECT_PATH_SYNTAX_BAD
 	RtlInitUnicodeString(&DestinationString,L"\\KernelObjects\\CritSecOutOfMemoryEvent");
 	OBJECT_ATTRIBUTES oa;
 	oa.Length=0x18;
 	oa.RootDirectory=NULL;
 	oa.ObjectName=&DestinationString;
-	oa.Attributes=0x10;	//OBJ_PERMANENT£¬Èç¹ûÔÚring3£¬»á·µ»ØSTATUS_PRIVILEGE_NOT_HELD
+	oa.Attributes=0x10;	//OBJ_PERMANENTï¼Œå¦‚æœåœ¨ring3ï¼Œä¼šè¿”å›STATUS_PRIVILEGE_NOT_HELD
 	oa.SecurityDescriptor=NULL;
 	oa.SecurityQualityOfService=NULL;
 	NTSTATUS Error=ZwCreateKeyedEvent(&Handle,0xF0003,&oa,0);	//EVENT_ALL_ACCESS&(~SYNCHRONIZE)
 	if (NT_SUCCESS(Error))
-		Error=ZwClose(Handle);	//´ó¸ÅÊÇÓÀ¾Ã¶ÔÏóµÄ´æÔÚºÍÒıÓÃ¼ÆÊıÎŞ¹ØÁË
+		Error=ZwClose(Handle);	//å¤§æ¦‚æ˜¯æ°¸ä¹…å¯¹è±¡çš„å­˜åœ¨å’Œå¼•ç”¨è®¡æ•°æ— å…³äº†
 	return Error;
 }*/
 
