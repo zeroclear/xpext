@@ -39,7 +39,7 @@ DWORD WINAPI K32GetProcessIdOfThread(HANDLE Thread)
 
 void WINAPI K32DeleteProcThreadAttributeList(LPPROC_THREAD_ATTRIBUTE_LIST lpAttributeList)
 {
-	//原函数真的什么都没做
+	//脭颅潞炉脢媒脮忙碌脛脢虏脙麓露录脙禄脳枚
 	return ;
 }
 
