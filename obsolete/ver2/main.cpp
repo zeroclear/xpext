@@ -2,16 +2,16 @@
 #include "common.h"
 #pragma comment(lib,"E:\\WDK\\lib\\wxp\\i386\\ntdll.lib")
 
-//·¢²¼Ê±¼ÇµÃ×¢Ã÷ÏµÍ³dll°æ±¾£¬Ã¿¸ö°æ±¾µÄdllÆ«ÒÆ¶¼²»Ò»Ñù
+//å‘å¸ƒæ—¶è®°å¾—æ³¨æ˜ç³»ç»Ÿdllç‰ˆæœ¬ï¼Œæ¯ä¸ªç‰ˆæœ¬çš„dllåç§»éƒ½ä¸ä¸€æ ·
 #define BASE_NT		0x7C920000
 #define BASE_K32	0x7C800000
 
-//½ø³ÌÍË³öÊ±£¬½«´ËÖµÉèÎªTRUE£¬×èÖ¹ÍË³öÆÚ¼ä½øĞĞµÄ¸÷ÖÖĞÂ½¨ĞĞÎª
+//è¿›ç¨‹é€€å‡ºæ—¶ï¼Œå°†æ­¤å€¼è®¾ä¸ºTRUEï¼Œé˜»æ­¢é€€å‡ºæœŸé—´è¿›è¡Œçš„å„ç§æ–°å»ºè¡Œä¸º
 BYTE* LdrpShutdownInProgress;
-//ÓÉRtlCreateTagHeap´´½¨µÄ¶Ñ£¬ÓÃÀ´·ÖÅäÁÙÊ±Êı¾İ
-//Win7ÖĞ£¬´Ë±ê¼ÇÒÆÖÁKernelBaseGlobalData+0x2c´¦
+//ç”±RtlCreateTagHeapåˆ›å»ºçš„å †ï¼Œç”¨æ¥åˆ†é…ä¸´æ—¶æ•°æ®
+//Win7ä¸­ï¼Œæ­¤æ ‡è®°ç§»è‡³KernelBaseGlobalData+0x2cå¤„
 DWORD* BaseDllTag;
-//XPµÄKeyedEventĞèÒªÓÃµ½¾ä±ú£¬³öÓÚ¸÷ÖÖ¿¼ÂÇ£¬ÕâÀïÓÃÒ»¸öĞÂµÄ
+//XPçš„KeyedEventéœ€è¦ç”¨åˆ°å¥æŸ„ï¼Œå‡ºäºå„ç§è€ƒè™‘ï¼Œè¿™é‡Œç”¨ä¸€ä¸ªæ–°çš„
 HANDLE GlobalKeyedEventHandle;
 
 void XPEXT_InitDll()
