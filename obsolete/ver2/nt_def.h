@@ -491,7 +491,7 @@ typedef
 typedef struct _RTL_RELATIVE_NAME {
 	STRING RelativeName;
 	HANDLE ContainingDirectory;
-	PUNICODE_STRING CurrentDirectory;	//Win7ÓÉRtlpReferenceCurrentDirectory·µ»Ø
+	PUNICODE_STRING CurrentDirectory;	//Win7Ã“Ã‰RtlpReferenceCurrentDirectoryÂ·ÂµÂ»Ã˜
 } RTL_RELATIVE_NAME, *PRTL_RELATIVE_NAME;
 
 typedef enum _RTL_PATH_TYPE {
