@@ -82,6 +82,7 @@ ReOpenFile
 CreateFile2(Win8+)  
 user32.SetProcessDPIAware  
 CompareStringEx  
+PsSetCreateProcessNotifyRoutineEx  
 
 ### 暂时无法实现：
 CreateProcess应用ProcThreadAttribute  
