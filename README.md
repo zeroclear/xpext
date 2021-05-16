@@ -45,19 +45,19 @@ CreateSymbolicLinkW
 
 ### 即将完成：
 #### k32_miscellaneous.cpp
-GetErrorMode 
+GetErrorMode  
 #### k32_processthread.cpp
 InitializeProcThreadAttributeList  
 UpdateProcThreadAttribute  
 DeleteProcThreadAttributeList  
-
-### 分析中：
 FlsAlloc  
 FlsFree  
 FlsGetValue  
 FlsSetValue  
 IsThreadAFiber  
 ConvertThreadToFiberEx  
+
+### 分析中：
 ws2_32.inet_ntop  
 ws2_32.inet_pton  
 ws2_32.WSAPoll  
@@ -86,6 +86,7 @@ PsSetCreateProcessNotifyRoutineEx
 
 ### 暂时无法实现：
 CreateProcess应用ProcThreadAttribute  
+ThreadPool相关API  
 NtXXXKeyedEvent允许句柄传入NULL  
 IoConnectInterruptEx和MSIX  
 CreateRemoteThreadEx  
@@ -132,3 +133,4 @@ The procedure entry point XXX could not be located in the dynamic link library X
 [ReactOS](https://github.com/reactos/reactos)  
 [NTOSKRNL Emu_Extender](https://github.com/MovAX0xDEAD/NTOSKRNL_Emu)  
 [CreateProcessInternal](https://github.com/MeeSong/Reverse-Engineering)  
+[ExtendedXP-Core-Api-implementation](https://github.com/DibyaTheXPFan/ExtendedXP-Core-Api-implementation)  
