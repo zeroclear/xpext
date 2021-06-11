@@ -1,7 +1,7 @@
 ## xpext - Windows XP API补全计划
 ### 已完成：
 #### nk_criticalsection.cpp
-InitializeCriticalSectionEx  
+InitializeCriticalSectionEx（仅接口）  
 #### nt_srwlock.cpp
 InitializeSRWLock  
 AcquireSRWLockExclusive  
@@ -24,7 +24,14 @@ InitOnceExecuteOnce
 #### k32_processthread.cpp
 GetThreadId  
 GetProcessId  
-GetProcessIdOfThread
+GetProcessIdOfThread  
+SetThreadErrorMode（仅接口）  
+GetThreadErrorMode（仅接口）  
+QueryFullProcessImageNameA  
+QueryFullProcessImageNameW  
+InitializeProcThreadAttributeList（仅接口）  
+UpdateProcThreadAttribute（仅接口）  
+DeleteProcThreadAttributeList（仅接口）  
 #### k32_processor.cpp
 GetCurrentProcessorNumber  
 GetCurrentProcessorNumberEx  
@@ -42,22 +49,30 @@ GetFinalPathNameByHandleA
 GetFinalPathNameByHandleW  
 CreateSymbolicLinkA  
 CreateSymbolicLinkW  
-
-### 即将完成：
-#### k32_miscellaneous.cpp
-GetErrorMode  
-#### k32_processthread.cpp
-InitializeProcThreadAttributeList  
-UpdateProcThreadAttribute  
-DeleteProcThreadAttributeList  
+#### nk_fiber.cpp
+ConvertThreadToFiberEx  
+IsThreadAFiber  
+ConvertThreadToFiber（增强）  
+CreateFiberEx（增强）  
+CreateFiber（增强）  
+DeleteFiber（增强）  
+ConvertFiberToThread（增强）  
+SwitchToFiber（增强）  
 FlsAlloc  
 FlsFree  
 FlsGetValue  
 FlsSetValue  
-IsThreadAFiber  
-ConvertThreadToFiberEx  
+
+### 近期计划：
+GetSystemInfo  
+GetVersion  
+GetVersionEx  
+VerifyVersionInfoA/W  
+GetProductInfo  
+制作PE编辑工具  
 
 ### 分析中：
+GetErrorMode  
 ws2_32.inet_ntop  
 ws2_32.inet_pton  
 ws2_32.WSAPoll  
@@ -83,8 +98,11 @@ CreateFile2(Win8+)
 user32.SetProcessDPIAware  
 CompareStringEx  
 PsSetCreateProcessNotifyRoutineEx  
+shell32.SHGetKnownFolderPath  
 
 ### 暂时无法实现：
+QueryThreadCycleTime  
+QueryProcessCycleTime  
 CreateProcess应用ProcThreadAttribute  
 ThreadPool相关API  
 NtXXXKeyedEvent允许句柄传入NULL  
@@ -100,6 +118,11 @@ normaliz.dll
 SetLastError断点  
 
 ### 更新说明：
+ver4 2021.06.12  
+增加fiber相关API，以及一些其他API  
+内核模块尝试新功能  
+在study文件夹里给出一些代码中难以描述的信息  
+将废弃的代码打包成zip文件  
 ver3 2021.05.11  
 增加一些文件相关的API，修复ver2中BaseSetLastNTError的严重bug  
 由于Github展示代码的算法不完善，从ver3开始代码文件全部使用BOM+UTF8编码  
